@@ -1,7 +1,7 @@
 {
     "audio":{
         "backgroundMusic":{
-            "main": ""
+            "main": "music.wav"
         },
         "soundEffects": {
             "success": "",
@@ -9,12 +9,12 @@
             "puzzle_reveal": "",
             "hint_used": "",
             "timer_warning": "",
-            "flashlight": ""
+            "flashlight": "click.wav"
         },
         "volume": {
-            "master": 0,
-            "music": 0,
-            "effects": 0
+            "master": 1,
+            "music": 1,
+            "effects": 1
         }
 }
 }
