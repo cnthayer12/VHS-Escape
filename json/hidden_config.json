@@ -1,0 +1,22 @@
+{
+  "hiddenItems": [
+    {
+      "puzzle": {
+        "id": "puzzle-001",
+        "type": "trivia"
+      }
+    },
+    {
+      "puzzle": {
+        "id": "puzzle-002", 
+        "type": "riddle"
+      }
+    },
+    {
+      "puzzle": {
+        "id": "puzzle-003",
+        "type": "cipher"
+      }
+    }
+  ]
+}
