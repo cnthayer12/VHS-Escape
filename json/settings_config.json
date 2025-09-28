@@ -1,0 +1,25 @@
+{
+    "gameSettings": {
+        "difficulties": {
+        "EASY": {
+            "timeLimit": 0,
+            "maxHints": 10,
+            "hintCostMultiplier": 0,
+            "scoreMultiplier": 0
+         },
+        "MEDIUM": {
+            "timeLimit": 0,
+            "maxHints": 5,
+            "hintCostMultiplier": 0,
+            "scoreMultiplier": 0
+        },
+        "HARD":{
+            "timeLimit": 0,
+            "maxHints": 1,
+            "hintsCostMultiplier": 0,
+            "scoreMultiplier": 0
+        }
+
+    }
+}
+}
