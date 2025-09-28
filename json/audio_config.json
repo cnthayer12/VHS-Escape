@@ -1,0 +1,19 @@
+{
+    "audio":{
+        "backgroundMusic":{
+            "main": ""
+        },
+        "soundEffects": {
+            "success": "",
+            "error": "",
+            "puzzle_reveal": "",
+            "hint_used": "",
+            "timer_warning": ""
+        },
+        "volume": {
+            "master": 0,
+            "music": 0,
+            "effects": 0
+        }
+}
+}
