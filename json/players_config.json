@@ -1,0 +1,15 @@
+{
+    "players": [
+        {
+            "username": [],
+            "progress": {
+                "hintsUsed": 0,
+                "inventory": [],
+                "storedHints": [],
+                "strikes": 0,
+                "currentScore": 0
+            }
+                
+        }
+    ]
+}
