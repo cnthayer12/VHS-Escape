@@ -8,7 +8,8 @@
             "error": "",
             "puzzle_reveal": "",
             "hint_used": "",
-            "timer_warning": ""
+            "timer_warning": "",
+            "flashlight": ""
         },
         "volume": {
             "master": 0,

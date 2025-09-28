@@ -1,10 +1,10 @@
 {
   "items": [
     {
-      "name": "",
+      "name": "Flashlight",
       "description": "",
-      "location": "",
-      "sound": ""
+      "location": "Bag",
+      "sound": "click.wav"
     }
     ]
 }
