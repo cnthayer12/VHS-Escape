@@ -1,0 +1,22 @@
+{
+  "gameFacades": [
+    {
+      "facadeID": "facade_001",
+      "game": "550e8400-e29b-41d4-a716-446655440001",
+      "puzzleman": "manager_001",
+      "players": "players_singleton_001",
+      "currentState": "PLAYING",
+      "lastAction": "PUZZLE_STARTED",
+      "sessionStartTime": "2024-09-28T15:00:00.000Z"
+    },
+    {
+      "facadeID": "facade_002",
+      "game": "550e8400-e29b-41d4-a716-446655440002", 
+      "puzzleman": "manager_002",
+      "players": "players_singleton_002",
+      "currentState": "COMPLETED",
+      "lastAction": "GAME_WON",
+      "sessionStartTime": "2024-09-28T14:30:00.000Z"
+    }
+  ]
+}
