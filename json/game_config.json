@@ -5,7 +5,8 @@
     "score": 0,
     "isPaused": false,
     "isOver": false,
-    "story": "Escape room story",
+    "story": "",
     "startTime": null,
     "endTime": null
+    
 }
