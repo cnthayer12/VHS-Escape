@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "users": [
+    {
+      "id": null,
+      "displayName": null,
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+      "sessions": [
+        {
+          "gameID": null,
+          "roomID": null,
+          "difficulty": null,
+          "puzzles": [],
+          "completedCount": 0,
+          "score": 0,
+          "isPaused": false,
+          "isOver": false,
+          "startTime": null,
+          "endTime": null,
+          "facade": {
+            "facadeID": null,
+            "currentState": null,
+            "lastAction": null,
+            "sessionStartTime": null
+          }
+        }
+      ]
+    }
+  ]
+}
+
