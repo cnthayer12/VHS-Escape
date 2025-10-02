@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "users": [
     {
-      "id": null,
-      "displayName": null,
+      "id": 1,
+      "displayName": "Carleigh",
       "progress": {
         "hintsUsed": 0,
         "inventory": [],
@@ -11,6 +11,35 @@
         "strikes": 0,
         "currentScore": 0
       },
+      "id": 2,
+      "displayName": "Lukin",
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+      "id": 3,
+      "displayName": "Bianca",
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+      "id": 4,
+      "displayName": "Charlotte",
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+
+      
       "sessions": [
         {
           "gameID": null,
