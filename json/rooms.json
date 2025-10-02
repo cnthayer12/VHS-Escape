@@ -93,7 +93,7 @@
     {
       "roomID": "room_001",
       "title": "Mysterious Laboratory",
-      "story": "You wake up in a mysterious laboratory with no memory of how you got there. The doors are locked and you must solve puzzles to escape.",
+      "story": "",
       "puzzleManager": {
         "managerID": "manager_001",
         "puzzles": ["puzzle_001", "puzzle_002", "puzzle_003"],
@@ -110,7 +110,7 @@
     {
       "roomID": "room_002",
       "title": "Abandoned Space Station",
-      "story": "Welcome to the abandoned space station. Life support is failing and you have limited time to restore power and escape.",
+      "story": "",
       "puzzleManager": {
         "managerID": "manager_002",
         "puzzles": ["puzzle_001", "puzzle_002", "puzzle_003"],
