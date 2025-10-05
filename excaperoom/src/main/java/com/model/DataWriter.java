@@ -21,7 +21,7 @@ public class DataWriter {
 
         for (Player player : players) {
             JSONObject playerJSON = new JSONObject();
-            playerJSON.put("username", player.getUsername());
+            playerJSON.put("username", player.getDisplayName());
 
             JSONArray progressArray = new JSONArray();
             if (player.getProgress() != null) {
