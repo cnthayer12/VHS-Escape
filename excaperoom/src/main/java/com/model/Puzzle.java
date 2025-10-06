@@ -1,0 +1,49 @@
+package com.model;
+
+import java.io.File;
+import java.util.ArrayList;
+
+/**
+ * Puzzle class - BSTUB
+ */
+public class Puzzle {
+    private ArrayList<Hint> hints;
+    private File correctSound;
+    private File incorrectSound;
+    
+
+    public Puzzle() {
+        this.hints = new ArrayList<>();
+        this.correctSound = null;
+        this.incorrectSound = null;
+    }
+    
+    // Puzzle actions
+    public void startPuzzle() {
+        System.out.println("[STUB] Puzzle.startPuzzle() called");
+    }
+ 
+    public boolean completePuzzle() {
+        System.out.println("[STUB] Puzzle.completePuzzle() called");
+        return true;
+    }
+
+    public void skip() {
+        System.out.println("[STUB] Puzzle.skip() called");
+    }
+    
+    // Hints
+    public ArrayList<Hint> getHints() {
+        return hints;
+    }
+    
+    public void addHint(Hint hint) {
+        if (hint != null && hints != null) {
+            hints.add(hint);
+        }
+    }
+    
+    public void playSound(boolean correct) {
+        System.out.println("[STUB] Puzzle.playSound() called - correct: " + correct);
+    }
+}

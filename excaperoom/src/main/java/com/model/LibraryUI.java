@@ -57,7 +57,7 @@ public class LibraryUI {
         System.out.println("Player made incorrect choice - strike added");
         
         // continues to next puzzle
-        System.out.println("Player moves to next area...");
+        System.out.println("Player moves to next puzzle...");
         
         // save data
         if (!facade.saveProgress()) {
