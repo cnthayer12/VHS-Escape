@@ -20,16 +20,16 @@ public class Puzzle {
     
     // Puzzle actions
     public void startPuzzle() {
-        System.out.println("[STUB] Puzzle.startPuzzle() called");
+        System.out.println("STUB Puzzle.startPuzzle() called");
     }
  
     public boolean completePuzzle() {
-        System.out.println("[STUB] Puzzle.completePuzzle() called");
+        System.out.println("STUB Puzzle.completePuzzle() called");
         return true;
     }
 
     public void skip() {
-        System.out.println("[STUB] Puzzle.skip() called");
+        System.out.println("STUB Puzzle.skip() called");
     }
     
     // Hints
@@ -44,6 +44,6 @@ public class Puzzle {
     }
     
     public void playSound(boolean correct) {
-        System.out.println("[STUB] Puzzle.playSound() called - correct: " + correct);
+        System.out.println("STUB Puzzle.playSound() called - correct: " + correct);
     }
 }
