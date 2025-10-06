@@ -8,7 +8,7 @@ public class Player {
     private String displayName;
     private Progress progress;
 
-    public static class Progress {
+    public class Progress {
         private int hintsUsed;
         private ArrayList<String> inventory;
         private ArrayList<String> storedHints;
