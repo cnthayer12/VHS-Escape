@@ -35,7 +35,7 @@
     },
     "items": [
       {
-        "id": "item_flashlight",
+        "uuid": "70ee9e6b-c239-4631-9a9c-c41c894bfaf5",
         "name": "Flashlight",
         "description": "",
         "location": "Bag",
@@ -53,7 +53,7 @@
 
   "puzzles": [
     {
-      "puzzleID": "puzzle_001",
+      "puzzleID": "aad80841-18e1-4625-9337-572645bd149e",
       "puzzleType": "trivia",
       "triviaText": "What is the chemical formula for water?",
       "choices": ["H2O", "CO2", "NaCl", "O2"],
@@ -66,7 +66,7 @@
       "incorrectSound": "error.wav"
     },
     {
-      "puzzleID": "puzzle_002",
+      "puzzleID": "404a3eae-acea-476c-a442-36b9b9699892",
       "puzzleType": "riddle",
       "riddleText": "I have cities, but no houses dwell. I have mountains, but no trees as well. I have rivers, but no water flows. What am I?",
       "answer": "map",
@@ -77,7 +77,7 @@
       "incorrectSound": "error.wav"
     },
     {
-      "puzzleID": "puzzle_003",
+      "puzzleID": "6526b2e2-16de-4223-8a25-2f6e150996d6",
       "puzzleType": "cipher",
       "cipherText": "KHOOR",
       "combination": "HELLO",
@@ -91,38 +91,22 @@
 
   "rooms": [
     {
-      "roomID": "room_001",
-      "title": "Mysterious Laboratory",
+      "roomID": "66470120-f071-4cc7-b312-7e793e9bc973",
+      "title": "Mysterious 80s Room",
       "story": "",
       "puzzleManager": {
         "managerID": "manager_001",
-        "puzzles": ["puzzle_001", "puzzle_002", "puzzle_003"],
+        "puzzles": ["aad80841-18e1-4625-9337-572645bd149e", "404a3eae-acea-476c-a442-36b9b9699892", "6526b2e2-16de-4223-8a25-2f6e150996d6"],
         "activePuzzles": [],
         "completedPuzzles": [],
         "availableHints": 5
       },
       "hidden": [
-        { "puzzle": { "id": "puzzle-001", "type": "trivia" } },
-        { "puzzle": { "id": "puzzle-002", "type": "riddle" } },
-        { "puzzle": { "id": "puzzle-003", "type": "cipher" } }
-      ]
-    },
-    {
-      "roomID": "room_002",
-      "title": "Abandoned Space Station",
-      "story": "",
-      "puzzleManager": {
-        "managerID": "manager_002",
-        "puzzles": ["puzzle_001", "puzzle_002", "puzzle_003"],
-        "activePuzzles": [],
-        "completedPuzzles": [],
-        "availableHints": 2
-      },
-      "hidden": [
-        { "puzzle": { "id": "puzzle-001", "type": "trivia" } },
-        { "puzzle": { "id": "puzzle-002", "type": "riddle" } },
-        { "puzzle": { "id": "puzzle-003", "type": "cipher" } }
+        { "puzzle": { "id": "aad80841-18e1-4625-9337-572645bd149e", "type": "trivia" } },
+        { "puzzle": { "id": "404a3eae-acea-476c-a442-36b9b9699892", "type": "riddle" } },
+        { "puzzle": { "id": "6526b2e2-16de-4223-8a25-2f6e150996d6", "type": "cipher" } }
       ]
     }
+
   ]
 }

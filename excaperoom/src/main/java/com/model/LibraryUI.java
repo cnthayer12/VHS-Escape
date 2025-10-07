@@ -11,12 +11,12 @@ public class LibraryUI {
     }
     
     public void run() {
-        scenario1();
-        scenario2();
+        startUp();
+        loadPlayer();
     }
-    
+    // well named method for each thing "startUp" "loadPlayer" "playGame" "saveGame" add scanner and based on what user says call methods in facade
 // Scenario 1: New Player Starting Game
-    public void scenario1() {
+    public void startUp() {
         System.out.println("\n--- Scenario 1: New Player Starting Game ---");
         
         if (!facade.startGame()) {
@@ -37,7 +37,7 @@ public class LibraryUI {
     }
     
 // Scenario 2: Continuing Player
-    public void scenario2() {
+    public void loadPlayer() {
         System.out.println("\n--- Scenario 2: Continuing Player ---");
         
         if (!facade.getInstance("player2")) {
