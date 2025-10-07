@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "users": [
     {
-      "id": 1,
+      "uuid": "0c84e4ca-e25d-4f21-a409-c78a8543556a",
       "displayName": "Carleigh",
       "progress": {
         "hintsUsed": 0,
@@ -11,35 +11,6 @@
         "strikes": 0,
         "currentScore": 0
       },
-      "id": 2,
-      "displayName": "Lukin",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "strikes": 0,
-        "currentScore": 0
-      },
-      "id": 3,
-      "displayName": "Bianca",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "strikes": 0,
-        "currentScore": 0
-      },
-      "id": 4,
-      "displayName": "Charlotte",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "strikes": 0,
-        "currentScore": 0
-      },
-
-      
       "sessions": [
         {
           "gameID": null,
@@ -60,7 +31,42 @@
           }
         }
       ]
+    },
+    {
+      "uuid": "9a7411d6-45a7-4964-aefd-43f79b6a6fe7",
+      "displayName": "Lukin",
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+      "sessions": []
+    },
+    {
+      "uuid": "17731615-a3ae-49a9-a77e-a578166e01da",
+      "displayName": "Bianca",
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+      "sessions": []
+    },
+    {
+      "uuid": "045cb7de-25af-4bde-a0b6-f4aa91517154",
+      "displayName": "Charlotte",
+      "progress": {
+        "hintsUsed": 0,
+        "inventory": [],
+        "storedHints": [],
+        "strikes": 0,
+        "currentScore": 0
+      },
+      "sessions": []
     }
   ]
 }
-

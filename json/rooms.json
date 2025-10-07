@@ -35,7 +35,7 @@
     },
     "items": [
       {
-        "id": "item_flashlight",
+        "uuid": "70ee9e6b-c239-4631-9a9c-c41c894bfaf5",
         "name": "Flashlight",
         "description": "",
         "location": "Bag",
