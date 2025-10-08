@@ -1,8 +1,6 @@
 package com.model;
 
 import java.util.ArrayList;
-
-import com.model.Player.Progress;
 /**
  * EscapeGameFacade - STUB version
  */
@@ -125,9 +123,9 @@ public class EscapeGameFacade {
      * Set game difficulty - STUB
      * @param difficulty the difficulty level
      */
-    public void setDifficulty(Difficulty difficulty) {
-        System.out.println("STUB EscapeGameFacade.setDifficulty() called: " + difficulty);
-    }
+    //public void setDifficulty(Difficulty difficulty) {
+        //System.out.println("STUB EscapeGameFacade.setDifficulty() called: " + difficulty);
+    //}
 
     /**
      * Get current game progress percentage - STUB
@@ -139,9 +137,9 @@ public class EscapeGameFacade {
     }
 
     public boolean createPlayer() {
-        System.out.println("STUB EscapeGameFacade.createPlayer() called: " + username);
-        Player newPlayer = new Player(username);
-        players.setCurrentPlayer(newPlayer);
+        //System.out.println("STUB EscapeGameFacade.createPlayer() called: " + username);
+        //Player newPlayer = new Player(username);
+        //players.setCurrentPlayers(newPlayer);
         return true;
     }
 
