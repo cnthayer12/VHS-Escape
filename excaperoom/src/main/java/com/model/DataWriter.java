@@ -50,7 +50,7 @@ public class DataWriter {
                         if (progress.getStoredHints() != null) {
                             for (Hint hint : progress.getStoredHints()) {
                                 if (hint != null) {
-                                    hintsArray.add(hint.getID().toString());
+                                    hintsArray.add(hint.getId().toString());
                                 }
                             }
                         }

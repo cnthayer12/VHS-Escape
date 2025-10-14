@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class DataWriterTest {
 
-private ArrayList<Player> players;
+    private ArrayList<Player> players;
     private static final String TEST_PLAYERS_FILE = "players.json";
 
     public static void main(String[] args) {
@@ -24,9 +24,9 @@ private ArrayList<Player> players;
     
     public void setUp() {
         players = new ArrayList<>();
-    
     }
- public void tearDown() {
+    
+    public void tearDown() {
         File file = new File(TEST_PLAYERS_FILE);
         if (file.exists()) {
             file.delete();
@@ -55,10 +55,13 @@ private ArrayList<Player> players;
         setUp();
         System.out.println("Test 2: Save empty player list");
         
-        // TODO: Test saving an empty ArrayList
-       
+        boolean result = DataWriter.savePlayers(players);
         
-        System.out.println("  TODO: Implement this test\n");
+        if (result) {
+            System.out.println("  PASSED: Empty list saved successfully\n");
+        } else {
+            System.out.println("  FAILED: Empty list should return true\n");
+        }
         
         tearDown();
     }
@@ -67,10 +70,17 @@ private ArrayList<Player> players;
         setUp();
         System.out.println("Test 3: Save single player");
         
-        // TODO: Create a player with username only
-       
+        ArrayList<Progress> emptyProgress = new ArrayList<>();
+        Player player = new Player("testUser1", emptyProgress);
+        players.add(player);
+        boolean result = DataWriter.savePlayers(players);
         
-        System.out.println("  TODO: Implement this test\n");
+        File file = new File(TEST_PLAYERS_FILE);
+        if (result && file.exists()) {
+            System.out.println("  PASSED: Single player saved successfully\n");
+        } else {
+            System.out.println("  FAILED: Could not save single player\n");
+        }
         
         tearDown();
     }
@@ -79,12 +89,21 @@ private ArrayList<Player> players;
         setUp();
         System.out.println("Test 4: Save multiple players");
         
-        // TODO: Create 2-3 test players
-      
+        Player player1 = new Player("user1", new ArrayList<>());
+        Player player2 = new Player("user2", new ArrayList<>());
+        Player player3 = new Player("user3", new ArrayList<>());
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
         
-        // Check if result is true and file exists
+        boolean result = DataWriter.savePlayers(players);
+        File file = new File(TEST_PLAYERS_FILE);
         
-        System.out.println("  TODO: Implement this test\n");
+        if (result && file.exists()) {
+            System.out.println("  PASSED: Multiple players saved successfully\n");
+        } else {
+            System.out.println("  FAILED: Could not save multiple players\n");
+        }
         
         tearDown();
     }
@@ -93,15 +112,23 @@ private ArrayList<Player> players;
         setUp();
         System.out.println("Test 5: Save player with progress");
         
-        // TODO: Create a player
-       
+        ArrayList<Progress> progressList = new ArrayList<>();
         
-        System.out.println("  TODO: Implement this test\n");
+        // Create progress with test data (adjust based on your Progress constructor)
+        // Progress progress = new Progress(...);
+        // progressList.add(progress);
+        
+        Player player = new Player("progressUser", progressList);
+        players.add(player);
+        boolean result = DataWriter.savePlayers(players);
+        File file = new File(TEST_PLAYERS_FILE);
+        
+        if (result && file.exists()) {
+            System.out.println("  PASSED: Player with progress saved successfully\n");
+        } else {
+            System.out.println("  FAILED: Could not save player with progress\n");
+        }
         
         tearDown();
     }
-
-    // Add more test methods as needed:
-    
-    
 }
