@@ -114,9 +114,13 @@ public class DataWriterTest {
         
         ArrayList<Progress> progressList = new ArrayList<>();
         
-        // Create progress with test data (adjust based on your Progress constructor)
-        // Progress progress = new Progress(...);
-        // progressList.add(progress);
+        // Create test inventory and hints
+        ArrayList<Item> inventory = new ArrayList<>();
+        ArrayList<Hint> storedHints = new ArrayList<>();
+        
+        // Create progress with test data
+        Progress progress = new Progress(2, inventory, storedHints, 1, 150);
+        progressList.add(progress);
         
         Player player = new Player("progressUser", progressList);
         players.add(player);
