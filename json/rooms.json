@@ -86,6 +86,193 @@
       ],
       "correctSound": "success.wav",
       "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "6526b2e2-16de-4223-8a25-2f6e150996d6",
+      "puzzleType": "trivia",
+      "prompt": "What movie made everyone afraid to go back in the water (its sequels haunted the 80s)?",
+      "combination": "JAWS",
+      "hints": [
+        { "id": "hint_t_001", "text": "The original was released in 1975; sequels came later.", "used": false, "cost": 10 },
+        { "id": "hint_t_002", "text": "Directed by Steven Spielberg.", "used": false, "cost": 25 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "a08f9b34-f1d6-4c2b-9b5a-2a03c0f7b1d1",
+      "puzzleType": "trivia",
+      "prompt": "Which 1985 film featured a time-traveling DeLorean?",
+      "combination": "BACK TO THE FUTURE",
+      "hints": [
+        { "id": "hint_t_003", "text": "Marty McFly and Doc Brown star in it.", "used": false, "cost": 10 },
+        { "id": "hint_t_004", "text": "It famously uses 88 mph to trigger time travel.", "used": false, "cost": 25 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "d9a1c3b7-7e5f-4b6a-b71f-3f0b9a2f0c11",
+      "puzzleType": "trivia",
+      "prompt": "What 1980s video game featured a yellow circle eating dots and ghosts?",
+      "combination": "PAC-MAN",
+      "hints": [
+        { "id": "hint_t_005", "text": "Arcade classic with four colorful ghosts.", "used": false, "cost": 5 },
+        { "id": "hint_t_006", "text": "The protagonist's name is sometimes hyphenated.", "used": false, "cost": 15 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "7b2f5d44-91f6-4aaf-9531-6d7a0e8c21b3",
+      "puzzleType": "trivia",
+      "prompt": "Which pop icon’s single sequin glove became an iconic 80s fashion symbol?",
+      "combination": "MICHAEL JACKSON",
+      "hints": [
+        { "id": "hint_t_007", "text": "Moonwalk, Billie Jean, Thriller.", "used": false, "cost": 10 },
+        { "id": "hint_t_008", "text": "Often called the King of Pop.", "used": false, "cost": 25 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "c12e04a1-2e7b-4d9a-9fe5-f4a9a0b72a8a",
+      "puzzleType": "trivia",
+      "prompt": "Who you gonna call?",
+      "combination": "GHOSTBUSTERS",
+      "hints": [
+        { "id": "hint_t_009", "text": "Theme song by Ray Parker Jr.", "used": false, "cost": 5 },
+        { "id": "hint_t_010", "text": "The team drives the Ecto-1.", "used": false, "cost": 20 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "f7a6b83c-e3d9-4bda-8d1a-a2d9f5c6e4f2",
+      "puzzleType": "trivia",
+      "prompt": "Which artist released the album titled 'Thriller' that dominated the 1980s?",
+      "combination": "MICHAEL JACKSON",
+      "hints": [
+        { "id": "hint_t_011", "text": "The album features 'Billie Jean' and 'Beat It'.", "used": false, "cost": 10 },
+        { "id": "hint_t_012", "text": "Its music video is one of the most famous of all time.", "used": false, "cost": 25 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+
+    {
+      "puzzleID": "21c4a8ea-5d7a-47f9-9bda-6b2f3c8a6fde",
+      "puzzleType": "riddle",
+      "prompt": "I’m neon bright, I’m worn at night, I hide your eyes from blinding light. On every pop star, I look tight. What am I?",
+      "combination": "SUNGLASSES",
+      "hints": [
+        { "id": "hint_r_001", "text": "Often worn on stage by rock stars.", "used": false, "cost": 5 },
+        { "id": "hint_r_002", "text": "They protect from UV — but also look cool.", "used": false, "cost": 15 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "5f8a9d77-0c3b-4a2e-8df9-4b62e2b6c9aa",
+      "puzzleType": "riddle",
+      "prompt": "My shell is grey, I take a cartridge, I bring plumbers, hedgehogs, and heartbreak to your living room. What am I?",
+      "combination": "NES",
+      "hints": [
+        { "id": "hint_r_003", "text": "Nintendo Entertainment System — 8-bit console.", "used": false, "cost": 10 },
+        { "id": "hint_r_004", "text": "Think Mario and Zelda.", "used": false, "cost": 20 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "8d3b2f90-6e4f-4b3a-9a1c-2c9e5b7f3b11",
+      "puzzleType": "riddle",
+      "prompt": "I can’t be touched, yet I’m seen on the wall, With rabbit ears, I bring you them all. What am I?",
+      "combination": "TV ANTENNA",
+      "hints": [
+        { "id": "hint_r_005", "text": "Often called 'rabbit ears'.", "used": false, "cost": 5 },
+        { "id": "hint_r_006", "text": "Pre-cable-era way to get broadcasts.", "used": false, "cost": 15 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "b6f1e0c2-3a7b-49f4-b2ea-9f0c4d2e6c33",
+      "puzzleType": "riddle",
+      "prompt": "You’ll find me on your shoulder or clipped to your jeans. I spin magnetic tape but play no movies. With orange foam and a click, I bring music to your walk. What am I?",
+      "combination": "WALKMAN",
+      "hints": [
+        { "id": "hint_r_007", "text": "Sony made the most famous ones.", "used": false, "cost": 5 },
+        { "id": "hint_r_008", "text": "Portable cassette player popular in the 80s.", "used": false, "cost": 20 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+
+    {
+      "puzzleID": "3a7e9b21-4c5d-4aee-9f1b-d4e2c9a7b5f8",
+      "puzzleType": "cipher",
+      "cipherText": "Wklv lv khdyl qrw gld orylqj.",
+      "combination": "THIS IS HEAVY NOT DA LOVING",
+      "meta": { "method": "Caesar", "shift": 3, "note": "Back to the Future reference" },
+      "hints": [
+        { "id": "hint_c_001", "text": "Shift each letter backward by 3 to decode.", "used": false, "cost": 25 },
+        { "id": "hint_c_002", "text": "Think 'Marty' and 'Doc' when you see the clue.", "used": false, "cost": 10 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "9e2d6c44-2b8f-46de-b7a0-1a7f4b3c8aa1",
+      "puzzleType": "cipher",
+      "prompt": "Each number is the position in the alphabet of the first letter of an iconic 80s artist/band. Decode: 13-10-3-19",
+      "combination": "MICHAEL JACKSON",
+      "meta": { "method": "number-to-letter (initials)", "explanation": "13=M, 10=J, 3=C, 19=S -> Identify artist from initials MJCS (choose the best match)" },
+      "hints": [
+        { "id": "hint_c_003", "text": "13 = M, 10 = J, 3 = C, 19 = S (A=1 B=2 ...)", "used": false, "cost": 15 },
+        { "id": "hint_c_004", "text": "Think of the biggest pop star with 'M' and 'J'.", "used": false, "cost": 10 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "2f1c8b90-5e2a-4f3d-bd6a-8b1a7a9c4d22",
+      "puzzleType": "lyrics_guess",
+      "prompt": "Emoji lyrics: 👀👀👀 + ❤️❤️❤️ = 🎶❓",
+      "combination": "TOTAL ECLIPSE OF THE HEART",
+      "meta": { "method": "emoji-to-song", "note": "Bonnie Tyler 80s hit" },
+      "hints": [
+        { "id": "hint_l_001", "text": "The song title includes a celestial event.", "used": false, "cost": 10 },
+        { "id": "hint_l_002", "text": "Famous 80s power ballad by Bonnie Tyler.", "used": false, "cost": 25 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "44a7e6d3-9c1f-4b2a-88de-3e9b7f2c5a77",
+      "puzzleType": "anagram",
+      "cipherText": "I HAD TO FLY BACK",
+      "combination": "BACK TO THE FUTURE",
+      "meta": { "method": "anagram", "note": "Unscramble to get an 80s movie title" },
+      "hints": [
+        { "id": "hint_a_001", "text": "Contains the words 'Back' and 'Future' scrambled.", "used": false, "cost": 20 },
+        { "id": "hint_a_002", "text": "Time-traveling DeLorean is the star prop.", "used": false, "cost": 10 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
+    },
+    {
+      "puzzleID": "6c0b9f1d-8b7a-46d3-a9e4-5a3c2d7e1f90",
+      "puzzleType": "acrostic",
+      "prompt": "The tracklist hides a clue (take the first letter of each title): 1) Take On Me 2) Billie Jean 3) Eye of the Tiger 4) Every Breath You Take 5) Footloose",
+      "combination": "BEEF",
+      "meta": { "method": "first-letters-acrostic", "note": "Can be swapped to spell messages or team names" },
+      "hints": [
+        { "id": "hint_ac_001", "text": "Use the first letter of each song title in order.", "used": false, "cost": 5 },
+        { "id": "hint_ac_002", "text": "The sequence spells a four-letter English word.", "used": false, "cost": 15 }
+      ],
+      "correctSound": "success.wav",
+      "incorrectSound": "error.wav"
     }
   ],
 
