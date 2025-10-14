@@ -6,51 +6,15 @@ import java.util.UUID;
 public class Player {
     private UUID id;
     private String displayName;
-    private Progress progress;
+    private ArrayList<Progress> progress;
 
-    public class Progress {
-        private int hintsUsed;
-        private ArrayList<String> inventory;
-        private ArrayList<String> storedHints;
-        private int strikes;
-        private int currentScore;
-
-        public Progress(int hintsUsed,ArrayList<String> inventory, ArrayList<String> storedHints, int strikes, int currentScore) {
-            this.hintsUsed = hintsUsed;
-            this.inventory = inventory;
-            this.storedHints = storedHints;
-            this.strikes = strikes;
-            this.currentScore = currentScore;
-        }
-
-        public int getHintsUsed() {
-            return hintsUsed;
-        }
-
-        public ArrayList<String> getInventory() {
-            return inventory;
-        }
-
-        public ArrayList<String> getStoredHints() {
-            return storedHints;
-        }
-
-        public int getStrikes() {
-            return strikes;
-        }
-
-        public int getCurrentScore() {
-            return currentScore;
-        }
-    }
-
-    public Player(String displayName, Progress progress) {
+    public Player(String displayName, ArrayList<Progress> progress) {
         this.id = UUID.randomUUID();
         this.displayName = displayName;
         this.progress = progress;
     }
 
-    public Player(UUID id, String displayName, Progress progress) {
+    public Player(UUID id, String displayName, ArrayList<Progress> progress) {
         this.id = id;
         this.displayName = displayName;
         this.progress = progress;
@@ -68,11 +32,11 @@ public class Player {
         this.displayName = displayName;
     }
 
-    public Progress getProgress() {
+    public ArrayList<Progress> getProgress() {
         return progress;
     }
 
-    public void setProgress(Progress progress) {
-        this.progress = progress;
+    public ArrayList<Progress> setProgress(ArrayList<Progress> progress) {
+        return progress;
     }
 }
