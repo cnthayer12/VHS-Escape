@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Progress {
 
     private int hintsUsed;
-    private ArrayList<String> inventory;
-    private ArrayList<String> storedHints;
+    private ArrayList<Item> inventory;
+    private ArrayList<Hint> storedHints;
     private int strikes;
     private int currentScore;
 
-    public Progress(int hintsUsed,ArrayList<String> inventory, ArrayList<String> storedHints, int strikes, int currentScore) {
+    public Progress(int hintsUsed,ArrayList<Item> inventory, ArrayList<Hint> storedHints, int strikes, int currentScore) {
         this.hintsUsed = hintsUsed;
         this.inventory = inventory;
         this.storedHints = storedHints;
@@ -22,11 +22,11 @@ public class Progress {
         return hintsUsed;
     }
 
-    public ArrayList<String> getInventory() {
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
-    public ArrayList<String> getStoredHints() {
+    public ArrayList<Hint> getStoredHints() {
         return storedHints;
     }
 
