@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class DataWriterTest {
 
     private ArrayList<Player> players;
-    private static final String TEST_PLAYERS_FILE = "players.json";
+    private static final String TEST_PLAYERS_FILE = "json/players.json";
 
     public static void main(String[] args) {
         DataWriterTest tester = new DataWriterTest();
@@ -18,6 +18,7 @@ public class DataWriterTest {
         tester.testSavePlayersSinglePlayer();
         tester.testSavePlayersMultiplePlayers();
         tester.testSavePlayerWithProgress();
+        tester.testSavePlayerWithHints();
         
         System.out.println("\nAll tests completed!");
     }  
@@ -27,13 +28,10 @@ public class DataWriterTest {
     }
     
     public void tearDown() {
-        File file = new File(TEST_PLAYERS_FILE);
-        if (file.exists()) {
-            file.delete();
-        }
         if (players != null) {
             players.clear();
         }
+        // Note: We don't delete the file to allow inspection
     }
 
     public void testSavePlayersNull() {
@@ -114,8 +112,12 @@ public class DataWriterTest {
         
         ArrayList<Progress> progressList = new ArrayList<>();
         
-        // Create test inventory and hints
+        // Create test inventory (empty Item objects since Item class is empty)
         ArrayList<Item> inventory = new ArrayList<>();
+        inventory.add(new Item());
+        inventory.add(new Item());
+        
+        // Create empty hints list
         ArrayList<Hint> storedHints = new ArrayList<>();
         
         // Create progress with test data
@@ -129,8 +131,49 @@ public class DataWriterTest {
         
         if (result && file.exists()) {
             System.out.println("  PASSED: Player with progress saved successfully\n");
+            System.out.println("  Player has " + progress.getHintsUsed() + " hints used");
+            System.out.println("  Player has " + progress.getStrikes() + " strikes");
+            System.out.println("  Player has score of " + progress.getCurrentScore());
         } else {
             System.out.println("  FAILED: Could not save player with progress\n");
+        }
+        
+        tearDown();
+    }
+
+    public void testSavePlayerWithHints() {
+        setUp();
+        System.out.println("Test 6: Save player with stored hints");
+        
+        ArrayList<Progress> progressList = new ArrayList<>();
+        
+        // Create test inventory
+        ArrayList<Item> inventory = new ArrayList<>();
+        
+        // Create stored hints
+        ArrayList<Hint> storedHints = new ArrayList<>();
+        Hint hint1 = new Hint("This is a helpful hint", 10);
+        Hint hint2 = new Hint("Another clue", 15);
+        hint1.markUsed(); // Mark first hint as used
+        storedHints.add(hint1);
+        storedHints.add(hint2);
+        
+        // Create progress with hints
+        Progress progress = new Progress(1, inventory, storedHints, 0, 100);
+        progressList.add(progress);
+        
+        Player player = new Player("hintUser", progressList);
+        players.add(player);
+        boolean result = DataWriter.savePlayers(players);
+        File file = new File(TEST_PLAYERS_FILE);
+        
+        if (result && file.exists()) {
+            System.out.println("  PASSED: Player with hints saved successfully\n");
+            System.out.println("  Player has " + storedHints.size() + " stored hints");
+            System.out.println("  First hint is used: " + hint1.isUsed());
+            System.out.println("  Second hint is used: " + hint2.isUsed());
+        } else {
+            System.out.println("  FAILED: Could not save player with hints\n");
         }
         
         tearDown();
