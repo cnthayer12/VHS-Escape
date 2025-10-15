@@ -15,13 +15,17 @@ public class Player {
     }
 
     public Player(UUID id, String displayName, ArrayList<Progress> progress) {
-        this.id = id;
+        this.id = id == null ? UUID.randomUUID() : id;
         this.displayName = displayName;
         this.progress = progress;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getDisplayName() {
@@ -36,7 +40,16 @@ public class Player {
         return progress;
     }
 
-    public ArrayList<Progress> setProgress(ArrayList<Progress> progress) {
-        return progress;
+    public void setProgress(ArrayList<Progress> progress) {
+        this.progress = progress;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", displayName='" + displayName + '\'' +
+                ", progress=" + progress +
+                '}';
     }
 }

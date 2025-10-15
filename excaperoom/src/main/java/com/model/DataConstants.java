@@ -8,5 +8,5 @@ public abstract class DataConstants {
     protected static final String USER_INVENTORY = "inventory";
     protected static final String USER_STORED_HINTS = "storedHints";
     protected static final String USER_STRIKES = "strikes";
-    protected static final String USER_CURRENT_SCORE = "strikes";
+    protected static final String USER_CURRENT_SCORE = "currentScore";
 }
