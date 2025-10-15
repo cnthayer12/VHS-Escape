@@ -20,15 +20,23 @@ public class Puzzle {
     
     // Puzzle actions
     public void startPuzzle() {
+        PuzzlesManager.getInstance().setCurrentPuzzle(this);
+        Game.getInstance().resume();
+        EscapeGameFacade.getInstance().saveProgress();
         System.out.println("STUB Puzzle.startPuzzle() called");
     }
  
     public boolean completePuzzle() {
+        playSound(true);
+        EscapeGameFacade.getInstance().saveProgress();
+        EscapeGameFacade.getInstance().nextPuzzle();
         System.out.println("STUB Puzzle.completePuzzle() called");
         return true;
     }
 
     public void skip() {
+        EscapeGameFacade.getInstance().nextPuzzle();
+        EscapeGameFacade.getInstance().saveProgress();
         System.out.println("STUB Puzzle.skip() called");
     }
     
