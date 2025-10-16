@@ -7,9 +7,9 @@ public class Room {
     private String title;
     private String story;
     private PuzzlesManager puzzleManager;
-    private ArrayList<HiddenPuzzle> hidden;
+    private ArrayList<ItemPuzzle> hidden;
 
-    public Room(String roomID, String title, String story, PuzzlesManager puzzleManager, ArrayList<HiddenPuzzle> hidden) {
+    public Room(String roomID, String title, String story, PuzzlesManager puzzleManager, ArrayList<ItemPuzzle> hidden) {
         this.roomID = roomID;
         this.title = title;
         this.story = story;
@@ -49,11 +49,11 @@ public class Room {
         this.puzzleManager = puzzleManager;
     }
 
-    public ArrayList<HiddenPuzzle> getHidden() {
+    public ArrayList<ItemPuzzle> getHidden() {
         return hidden;
     }
 
-    public void setHidden(ArrayList<HiddenPuzzle> hidden) {
+    public void setHidden(ArrayList<ItemPuzzle> hidden) {
         this.hidden = hidden;
     }
 }

@@ -1,10 +1,10 @@
 package com.model;
 
-public class HiddenPuzzle {
+public class ItemPuzzle {
     private String id;
     private String type;
 
-    public HiddenPuzzle(String id, String type) {
+    public ItemPuzzle(String id, String type) {
         this.id = id;
         this.type = type;
     }
