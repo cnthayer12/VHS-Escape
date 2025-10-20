@@ -131,11 +131,11 @@ public class EscapeGameFacade {
     public boolean submitItemClick(int itemIndex) {
         Puzzle current = puzzleman.getCurrentPuzzle();
         
-        if (current == null || !(current instanceof PointAndClick)) {
+        if (current == null || !(current instanceof PixelHunt)) {
             return false;
         }
         
-        return ((PointAndClick) current).clickItem(itemIndex);
+        return ((PixelHunt) current).clickItem(itemIndex);
     }
 */
     public double getProgressPercent() {
