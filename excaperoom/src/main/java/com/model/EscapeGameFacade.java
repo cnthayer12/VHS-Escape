@@ -1,84 +1,85 @@
 package com.model;
 
 import java.util.ArrayList;
-/**
- * EscapeGameFacade - STUB version
- */
+
 public class EscapeGameFacade {
-    //Instance variables from UML
     private Game game;
     private PuzzlesManager puzzleman;
     private Players players;
+    private int strikes;
     private static EscapeGameFacade instance;
     
-    // Constructor - null for now
-    public EscapeGameFacade() {
+    private EscapeGameFacade() {
         this.game = Game.getInstance();
         this.puzzleman = PuzzlesManager.getInstance();
         this.players = Players.getInstance();
+        this.strikes = 0;
     }
     
-    /**
-     * Starts the game
-     * @return true if game started successfully
-     */
-    public boolean startGame() {
-        System.out.println("STUB startGame() called");
-        return true; 
-    }
-    
-    /**
-     * Gets the singleton instance 
-     * @return the singleton instance
-     */
     public static EscapeGameFacade getInstance() {
-        System.out.println("STUB getInstance() called");
         if (instance == null) {
             instance = new EscapeGameFacade();
         }
         return instance;
     }
     
-    /**
-     * Saves current progress 
-     * @return true if save was successful
-     */
-    public boolean saveProgress() {
-        System.out.println("STUB EscapeGameFacade.saveProgress() called");
-        //return DataWriter.saveAll(players.getPlayers(), new ArrayList<Progress>());
+    public boolean startGame() {
+        if (game == null) {
+            return false;
+        }
+        
+        if (puzzleman.getPuzzles().isEmpty()) {
+            System.err.println("No puzzles loaded");
+            return false;
+        }
+        
+        puzzleman.setCurrentPuzzle(puzzleman.getPuzzles().get(0));
+        this.strikes = 0;
         return true;
     }
     
-
+    public boolean saveProgress() {
+        if (players == null || game == null) {
+            return false;
+        }
+        
+        ArrayList<Player> currentPlayers = players.getPlayers();
+        return DataWriter.savePlayers(currentPlayers) && DataWriter.savePuzzlesState(puzzleman);
+    }
+    
     public boolean loadProgress() {
-        System.out.println("STUB loadProgress() called");
         ArrayList<Player> loadedPlayers = DataLoader.getPlayers();
-        return loadedPlayers != null;
+        
+        if (loadedPlayers == null) {
+            return false;
+        }
+        
+        for (Player player : loadedPlayers) {
+            players.addPlayer(player);
+        }
+        
+        return true;
     }
 
     public void pauseGame() {
-        System.out.println("STUB pauseGame() called");
         if (game != null) {
             game.pause();
         }
     }
 
     public void resumeGame() {
-        System.out.println("STUB resumeGame() called");
         if (game != null) {
             game.resume();
         }
     }       
 
     public void endGame() {
-        System.out.println("STUB endGame() called");
         if (game != null) {
             game.exitMain();
         }
     }
     
     public boolean startPuzzle() {
-        System.out.println("STUB EscapeGameFacade.startPuzzle() called");
         Puzzle current = puzzleman.getCurrentPuzzle();
         if (current != null) {
             current.startPuzzle();
@@ -88,7 +89,6 @@ public class EscapeGameFacade {
     }   
     
     public boolean completePuzzle() {
-        System.out.println("STUB EscapeGameFacade.completePuzzle() called");
         Puzzle current = puzzleman.getCurrentPuzzle();
         if (current != null) {
             return current.completePuzzle();
@@ -97,7 +97,6 @@ public class EscapeGameFacade {
     }
 
     public void skipPuzzle() {
-        System.out.println("STUB EscapeGameFacade.skipPuzzle() called");
         Puzzle current = puzzleman.getCurrentPuzzle();
         if (current != null) {
             current.skip();
@@ -105,57 +104,69 @@ public class EscapeGameFacade {
     }
 
     public boolean nextPuzzle() {
-        System.out.println("[STUB] EscapeGameFacade.nextPuzzle() called");
-        return game != null && game.nextPuzzle();
+        if (game == null) {
+            return false;
+        }
+        return game.nextPuzzle();
     }
 
-    /**
-     * Submit answer for current puzzle - STUB
-     * @param answer the player's answer
-     * @return true if answer is correct
-     */
     public boolean submitAnswer(String answer) {
-        System.out.println("STUB EscapeGameFacade.submitAnswer() called: " + answer);
-        return true;
+        Puzzle current = puzzleman.getCurrentPuzzle();
+        
+        if (current == null || answer == null) {
+            return false;
+        }
+        
+        if (current instanceof Trivia) {
+            return ((Trivia) current).checkAnswer(answer);
+        } else if (current instanceof Riddle) {
+            return ((Riddle) current).checkAnswer(answer);
+        } else if (current instanceof Cipher) {
+            return ((Cipher) current).checkAnswer(answer);
+        }
+        
+        return false;
     }
-
-    /**
-     * Set game difficulty - STUB
-     * @param difficulty the difficulty level
-     */
-    //public void setDifficulty(Difficulty difficulty) {
-        //System.out.println("STUB EscapeGameFacade.setDifficulty() called: " + difficulty);
-    //}
-
-    /**
-     * Get current game progress percentage - STUB
-     * @return progress as percentage (0.0 to 1.0)
-     */
+/* 
+    public boolean submitItemClick(int itemIndex) {
+        Puzzle current = puzzleman.getCurrentPuzzle();
+        
+        if (current == null || !(current instanceof PointAndClick)) {
+            return false;
+        }
+        
+        return ((PointAndClick) current).clickItem(itemIndex);
+    }
+*/
     public double getProgressPercent() {
-        System.out.println("STUB EscapeGameFacade.getProgressPercent() called");
-        return game != null ? game.progressPercent() : 0.0;
+        if (game == null) {
+            return 0.0;
+        }
+        return game.progressPercent();
     }
 
-    public boolean createPlayer() {
-        //System.out.println("STUB EscapeGameFacade.createPlayer() called: " + username);
-        //Player newPlayer = new Player(username);
-        //players.setCurrentPlayers(newPlayer);
+    public boolean createPlayer(String username) {
+        if (username == null || username.trim().isEmpty()) {
+            return false;
+        }
+        
+        ArrayList<Progress> initialProgress = new ArrayList<>();
+        initialProgress.add(new Progress(0, new ArrayList<Item>(), new ArrayList<Hint>(), 0, 0));
+        
+        Player newPlayer = new Player(username, initialProgress);
+        players.addPlayer(newPlayer);
+        this.strikes = 0;
+        
         return true;
     }
 
     public void displayStory() {
-        System.out.println("STUB EscapeGameFacade.displayStory() called");
         if (game != null) {
-        game.displayStory();
+            game.displayStory();
         }
     }
 
-    /**
-     * Get available hints for current puzzle - STUB
-     * @return list of available hints
-     */
     public ArrayList<Hint> getAvailableHints() {
-        System.out.println("STUB EscapeGameFacade.getAvailableHints() called");
         Puzzle current = puzzleman.getCurrentPuzzle();
         if (current != null) {
             return current.getHints();
@@ -163,56 +174,87 @@ public class EscapeGameFacade {
         return new ArrayList<>();
     }
 
-    /**
-     * Get number of hints used - STUB
-     * @return number of hints used
-     */
-    public int getHintsUsed() {
-        System.out.println("STUB EscapeGameFacade.getHintsUsed() called");
-        return 0;
+    public Hint revealHint(int hintIndex) {
+        ArrayList<Hint> hints = getAvailableHints();
+        
+        if (hintIndex >= 0 && hintIndex < hints.size()) {
+            Hint hint = hints.get(hintIndex);
+            if (!hint.isUsed()) {
+                hint.markUsed();
+                return hint;
+            }
+        }
+        
+        return null;
     }
 
-    /**
-     * Reveal a hidden item - STUB
-     * @param hiddenItem the hidden item to reveal
-     * @return the revealed item
-     */
+    public int getHintsUsed() {
+        ArrayList<Hint> hints = getAvailableHints();
+        int count = 0;
+        
+        for (Hint hint : hints) {
+            if (hint.isUsed()) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+
     public Item revealHiddenItem(HiddenItem hiddenItem) {
-        System.out.println("STUB EscapeGameFacade.revealHiddenItem() called");
         if (hiddenItem != null) {
             return hiddenItem.revealItem();
         }
         return null;
     }
 
-    /**
-     * Get number of strikes - STUB
-     * @return number of strikes (wrong answers)
-     */
     public int getStrikes() {
-        System.out.println("STUB EscapeGameFacade.getStrikes() called");
-        return 0;
+        return strikes;
     }
 
-    /**
-     * Add a strike (wrong answer penalty) - STUB
-     */
     public void addStrike() {
-        System.out.println("STUB EscapeGameFacade.addStrike() called");
+        strikes++;
+        saveProgress();
     }
 
-    /**
-     * Update score - STUB
-     * @param points points to add
-     */
+    public void resetStrikes() {
+        strikes = 0;
+    }
+
     public void updateScore(int points) {
-        System.out.println("[STUB] EscapeGameFacade.updateScore() called: " + points);
         if (game != null) {
             game.setScore(game.getScore() + points);
+            saveProgress();
         }
     }
 
-    public boolean getInstance(String string) {
-        throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    public int getScore() {
+        if (game != null) {
+            return game.getScore();
+        }
+        return 0;
+    }
+
+    public Puzzle getCurrentPuzzle() {
+        return puzzleman.getCurrentPuzzle();
+    }
+
+    public ArrayList<Puzzle> getAllPuzzles() {
+        return puzzleman.getPuzzles();
+    }
+
+    public int getTotalPuzzles() {
+        return puzzleman.getPuzzles().size();
+    }
+
+    public int getCurrentPuzzleIndex() {
+        ArrayList<Puzzle> puzzles = puzzleman.getPuzzles();
+        Puzzle current = puzzleman.getCurrentPuzzle();
+        
+        if (current != null) {
+            return puzzles.indexOf(current);
+        }
+        
+        return -1;
     }
 }
