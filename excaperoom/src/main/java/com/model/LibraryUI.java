@@ -7,7 +7,7 @@ public class LibraryUI {
     private EscapeGameFacade facade;
     
     public LibraryUI() {
-        facade = new EscapeGameFacade();
+        facade = EscapeGameFacade.getInstance();
     }
     
     public void run() {
@@ -40,7 +40,7 @@ public class LibraryUI {
     public void loadPlayer() {
         System.out.println("\n--- Scenario 2: Continuing Player ---");
         
-        if (!facade.getInstance("player2")) {
+        if (!facade.loadProgress()) {
             System.out.println("Failed to get player instance for player2");
             return;
         }
