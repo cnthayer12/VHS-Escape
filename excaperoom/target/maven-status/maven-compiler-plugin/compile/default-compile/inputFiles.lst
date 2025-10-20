@@ -1,6 +1,4 @@
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Database.java
-C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\HiddenPuzzle.java
-C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataLoaderTest.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataWriter.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Players.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Item.java
@@ -10,8 +8,10 @@ C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Game.
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataLoader.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\EscapeGameFacade.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Progress.java
+C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\ItemPuzzle.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\module-info.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Room.java
+C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataLoaderQuickTest_NoItem.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\HiddenItem.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Player.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Rooms.java
