@@ -32,7 +32,7 @@ public class Game {
     private Instant pauseStartTime;
     
     private static Game instance;
- 
+
     public enum Difficulty {
         EASY(EASY_TIME_LIMIT),
         MEDIUM(MEDIUM_TIME_LIMIT),
@@ -58,7 +58,7 @@ public class Game {
         this.currentPuzzleIndex = 0;
         this.completedCount = 0;
         this.story = "Welcome to the VHS Escape Room! You've discovered a mysterious VHS tape that transports you into a retro world. Solve the puzzles to escape before time runs out!";
-        this.difficulty = Difficulty.EASY; 
+        this.difficulty = Difficulty.EASY;
         this.pausedDuration = 0;
     }
 
@@ -68,7 +68,7 @@ public class Game {
         }
         return instance;
     }
-    
+
     public void initializeGame(Player player, Difficulty difficulty) {
         this.currentPlayer = player;
         this.difficulty = difficulty;
@@ -79,27 +79,33 @@ public class Game {
         this.completedCount = 0;
         this.currentPuzzleIndex = 0;
         this.pausedDuration = 0;
-        
+
         this.puzzles = PuzzlesManager.getInstance().getPuzzles();
         
-        if (player.getProgress() == null || player.getProgress().isEmpty()) {
-            Progress newProgress = new Progress(0, new ArrayList<>(), new ArrayList<>(), 0, BASE_SCORE);
+        if (player.getProgress() != null && !player.getProgress().isEmpty()) {
+            this.progress = player.getProgress().get(0);
+        } else {
             ArrayList<Progress> progressList = new ArrayList<>();
-            progressList.add(newProgress);
+            progressList.add(new Progress(0, new ArrayList<>(), new ArrayList<>(), 0, BASE_SCORE));
             player.setProgress(progressList);
+            this.progress = progressList.get(0);
         }
-        this.progress = player.getProgress().get(0);
     }
 
     public int calculateScore() {
         int finalScore = BASE_SCORE;
-        
+
         finalScore += (completedCount * PUZZLE_COMPLETION_BONUS);
 
         if (progress != null) {
             finalScore -= (progress.getHintsUsed() * HINT_PENALTY);
         }
-
+        
+        EscapeGameFacade facade = EscapeGameFacade.getInstance();
+        if (facade != null) {
+            finalScore -= (facade.getStrikes() * 25); // 25 points per strike
+        }
+        
         if (isOver && completedCount == puzzles.size()) {
             long elapsedSeconds = getElapsedTime();
             long remainingSeconds = difficulty.getTimeLimit() - elapsedSeconds;
@@ -107,13 +113,11 @@ public class Game {
                 finalScore += (int)(remainingSeconds * TIME_BONUS_MULTIPLIER);
             }
         }
-
+        
+        //score not negative
         finalScore = Math.max(0, finalScore);
         
         this.score = finalScore;
-        if (progress != null) {
-        }
-        
         return finalScore;
     }
     
@@ -138,17 +142,16 @@ public class Game {
         long remaining = difficulty.getTimeLimit() - elapsed;
         return Math.max(0, remaining);
     }
-    
+
     public boolean isTimeUp() {
         return getRemainingTime() <= 0;
     }
-    
-    // delete
+  
     public void deleteGame() {
         if (currentPlayer != null && !isOver) {
             EscapeGameFacade.getInstance().saveProgress();
         }
-        
+
         instance = null;
     }
 
@@ -158,7 +161,7 @@ public class Game {
             pauseStartTime = Instant.now();
         }
     }
-    
+
     public void resume() {
         if (isPaused) {
             if (pauseStartTime != null) {
@@ -168,17 +171,23 @@ public class Game {
             isPaused = false;
         }
     }
-  
+ 
     public double progressPercent() {
         if (puzzles == null || puzzles.isEmpty()) {
             return 0.0;
         }
         return (completedCount * 100.0) / puzzles.size();
     }
-
+    
     public boolean nextPuzzle() {
+        if (puzzles == null || puzzles.isEmpty()) {
+            return false;
+        }
+        
         if (currentPuzzleIndex < puzzles.size() - 1) {
             currentPuzzleIndex++;
+            
+            PuzzlesManager.getInstance().setCurrentPuzzle(puzzles.get(currentPuzzleIndex));
             return true;
         } else {
             endGame(true);
@@ -187,7 +196,7 @@ public class Game {
     }
     
     public Puzzle getCurrentPuzzle() {
-        if (puzzles != null && currentPuzzleIndex < puzzles.size()) {
+        if (puzzles != null && currentPuzzleIndex >= 0 && currentPuzzleIndex < puzzles.size()) {
             return puzzles.get(currentPuzzleIndex);
         }
         return null;
@@ -196,36 +205,35 @@ public class Game {
     public void completePuzzle() {
         completedCount++;
         calculateScore();
-        
 
         if (isTimeUp()) {
             endGame(false);
         }
     }
-    
+ 
     private void endGame(boolean successful) {
         isOver = true;
         endTime = Instant.now();
         calculateScore();
         EscapeGameFacade.getInstance().saveProgress();
     }
-    
+ 
     public void exitMain() {
         if (!isOver) {
             EscapeGameFacade.getInstance().saveProgress();
         }
-        
+
         pause();
         
         System.out.println("Exiting to main menu...");
     }
-    
+   
     public void displayStory() {
         System.out.println("=".repeat(60));
         System.out.println(story);
         System.out.println("=".repeat(60));
     }
-    
+
     public String getGameID() {
         return gameID;
     }
