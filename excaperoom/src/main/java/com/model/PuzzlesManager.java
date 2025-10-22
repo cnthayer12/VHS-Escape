@@ -16,7 +16,6 @@ public class PuzzlesManager {
     }
 
     public static PuzzlesManager getInstance() {
-        System.out.println("STUB PuzzlesManager.getInstance() called");
         if (instance == null) {
             instance = new PuzzlesManager();
         }
@@ -25,7 +24,9 @@ public class PuzzlesManager {
     
     //Correct sound
     public void playSound(boolean correct) {
-        System.out.println("STUB PuzzlesManager.playSound() called - correct: " + correct);
+         if (currentPuzzle != null) {
+            currentPuzzle.playSound(correct);
+        }
     }
     
     // get current puzzle

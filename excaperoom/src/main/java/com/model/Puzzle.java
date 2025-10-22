@@ -3,9 +3,7 @@ package com.model;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Puzzle class - BSTUB
- */
+
 public class Puzzle {
     private ArrayList<Hint> hints;
     private File correctSound;
@@ -23,21 +21,18 @@ public class Puzzle {
         PuzzlesManager.getInstance().setCurrentPuzzle(this);
         Game.getInstance().resume();
         EscapeGameFacade.getInstance().saveProgress();
-        System.out.println("STUB Puzzle.startPuzzle() called");
     }
  
     public boolean completePuzzle() {
         playSound(true);
         EscapeGameFacade.getInstance().saveProgress();
         EscapeGameFacade.getInstance().nextPuzzle();
-        System.out.println("STUB Puzzle.completePuzzle() called");
         return true;
     }
 
     public void skip() {
         EscapeGameFacade.getInstance().nextPuzzle();
         EscapeGameFacade.getInstance().saveProgress();
-        System.out.println("STUB Puzzle.skip() called");
     }
     
     // Hints
@@ -52,6 +47,6 @@ public class Puzzle {
     }
     
     public void playSound(boolean correct) {
-        System.out.println("STUB Puzzle.playSound() called - correct: " + correct);
+     System.out.println("STUB Puzzle.playSound() called - correct: " + correct);
     }
 }
