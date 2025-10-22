@@ -2,9 +2,6 @@ package com.model;
 
 import java.util.ArrayList;
 
-/**
- * PuzzlesManager class - STUB
- */
 public class PuzzlesManager {
     private ArrayList<Puzzle> puzzles;
     private Puzzle currentPuzzle;
