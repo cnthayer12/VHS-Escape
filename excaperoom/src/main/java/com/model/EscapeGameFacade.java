@@ -27,9 +27,6 @@ public class EscapeGameFacade {
         game.initializeGame(player, difficulty);
     }
     
-    public void saveProgress() {
-        players.savePlayerProgress(game.getCurrentPlayer());
-    }
     
     public void loadProgress() {
         players.loadProgress();
