@@ -60,15 +60,18 @@ public class Progress {
     }
 
     public void addCompletedPuzzle(Puzzle puzzle) {
-        completedPuzzles.add(puzzle);
+        if(puzzle != null && completedPuzzles != null)
+            completedPuzzles.add(puzzle);
     }
     
     public void addItem(Item item) {
-        inventory.add(item);
+        if(item != null && inventory != null)
+            inventory.add(item);
     }
 
     public void addHint(Hint hint) {
-        storedHints.add(hint);
+        if(hint != null && storedHints != null)
+            storedHints.add(hint);
     }
 
     public void setCompletedPuzzles(ArrayList<Puzzle> completedPuzzles) {
