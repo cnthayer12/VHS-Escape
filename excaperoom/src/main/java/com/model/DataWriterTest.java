@@ -121,7 +121,7 @@ public class DataWriterTest {
         ArrayList<Hint> storedHints = new ArrayList<>();
         
         // Create progress with test data
-        Progress progress = new Progress(2, inventory, storedHints, 1, 150);
+        Progress progress = new Progress(inventory, storedHints, new ArrayList<>(), null, 1, 150);
         progressList.add(progress);
         
         Player player = new Player("progressUser", progressList);
@@ -159,7 +159,7 @@ public class DataWriterTest {
         storedHints.add(hint2);
         
         // Create progress with hints
-        Progress progress = new Progress(1, inventory, storedHints, 0, 100);
+        Progress progress = new Progress(inventory, storedHints, new ArrayList<>(), null, 0, 100);
         progressList.add(progress);
         
         Player player = new Player("hintUser", progressList);
