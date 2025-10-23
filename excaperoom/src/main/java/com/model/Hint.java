@@ -7,6 +7,7 @@ public class Hint {
     private String text;
     private boolean used;
     private int cost;
+    private Puzzle puzzle;
     
     /**
      * Constructor
@@ -16,6 +17,7 @@ public class Hint {
         this.text = "";
         this.used = false;
         this.cost = 10;
+        this.puzzle = null;
     }
     
     /**
@@ -26,8 +28,25 @@ public class Hint {
         this.text = text;
         this.used = false;
         this.cost = cost;
+        this.puzzle = null;
+    }
+
+    public Hint(String text, int cost, Puzzle puzzle) {
+        this.id = UUID.randomUUID();
+        this.text = text;
+        this.used = false;
+        this.cost = cost;
+        this.puzzle = puzzle;
     }
     
+    public void setPuzzle(Puzzle puzzle) {
+        this.puzzle = puzzle;
+    }
+
+    public Puzzle getPuzzle() {
+        return puzzle;
+    }
+
     public String revealHint() {
         if (!used) {
             used = true;

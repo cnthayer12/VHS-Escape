@@ -45,9 +45,9 @@ public class EscapeGameFacade {
     }
     
     public void startPuzzle() {
-        PuzzlesManager.startCurrentPuzzle();
-    }   
-    
+        PuzzlesManager.startPuzzle();
+    }
+
     public void completePuzzle() {
         game.completePuzzle();
     }
@@ -69,7 +69,7 @@ public class EscapeGameFacade {
     }
 
     public void createPlayer(String username) {
-        players.createPlayer(username);
+        players.createAccount(username);
     }
 
     public void displayStory() {
@@ -80,8 +80,8 @@ public class EscapeGameFacade {
         return PuzzlesManager.getAvailableHints();
     }
 
-    public Hint revealHint(int hintIndex) {
-        return PuzzlesManager.revealHint(hintIndex);
+    public Hint revealHint() {
+        return PuzzlesManager.revealHint();
     }
 
     public int getHintsUsed() {

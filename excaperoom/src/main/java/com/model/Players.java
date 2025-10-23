@@ -24,6 +24,10 @@ public class Players {
         return players;
     }
 
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void setPlayers(ArrayList<Player> players) {
         Players.players = players;
     }
@@ -87,7 +91,7 @@ public class Players {
                 return;
             }
         }
-        Progress progressInstance = new Progress(0, new ArrayList<Item>(), new ArrayList<Hint>(), 0, 0);
+        Progress progressInstance = new Progress();
         ArrayList<Progress> progress = new ArrayList<Progress>();
         progress.add(progressInstance);
         Player newPlayer = new Player(displayName, progress);

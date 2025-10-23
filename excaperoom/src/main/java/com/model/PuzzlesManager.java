@@ -44,4 +44,52 @@ public class PuzzlesManager {
             puzzles.add(puzzle);
         }
     }
+
+    public ArrayList<Hint> getAvailableHints() {
+        if(currentPuzzle != null)
+            return currentPuzzle.getHints();
+        return null;
+    }
+
+    public int getHintsUsed() {
+        if(currentPuzzle != null)
+        {
+            Progress progress = Players.getCurrentPlayer().getProgress().get(Players.getCurrentPlayer().getProgress().size()-1);
+            return progress.getHintsUsed();
+        }
+        return -1;
+    }
+
+    public Hint revealHint() {
+        if(currentPuzzle != null)
+        {
+            Progress progress = Players.getCurrentPlayer().getProgress().get(Players.getCurrentPlayer().getProgress().size()-1);
+            ArrayList<Hint> storedHints = progress.getStoredHints();
+            if(storedHints.size() == currentPuzzle.getHints().size()) {
+                System.out.println("No hints remaining on this puzzle!");
+                return null;
+            }
+            progress.addHint(currentPuzzle.getHints().get(storedHints.size()));
+            return currentPuzzle.getHints().get(storedHints.size());
+        }
+        return null;
+    }
+
+    public void skipCurrentPuzzle() {
+        if(currentPuzzle != null)
+        {
+            currentPuzzle.completePuzzle();
+            Progress progress = Players.getCurrentPlayer().getProgress().get(Players.getCurrentPlayer().getProgress().size()-1);
+            progress.setStrikes(progress.getStrikes()+1);
+        }
+    }
+
+    public boolean submitAnswer(String answer) {
+        return currentPuzzle.checkAnswer(answer);
+    }
+
+    public void startPuzzle() {
+        if(currentPuzzle != null)
+            currentPuzzle.startPuzzle();
+    }
 }
