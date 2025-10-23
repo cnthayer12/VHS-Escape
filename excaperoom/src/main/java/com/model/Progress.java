@@ -7,15 +7,28 @@ public class Progress {
     private int hintsUsed;
     private ArrayList<Item> inventory;
     private ArrayList<Hint> storedHints;
+    private ArrayList<Puzzle> completedPuzzles;
+    private Puzzle currentPuzzle;
     private int strikes;
     private int currentScore;
 
-    public Progress(int hintsUsed,ArrayList<Item> inventory, ArrayList<Hint> storedHints, int strikes, int currentScore) {
+    public Progress(int hintsUsed,ArrayList<Item> inventory, ArrayList<Hint> storedHints, ArrayList<Puzzle> completedPuzzles, Puzzle currentPuzzle, int strikes, int currentScore) {
         this.hintsUsed = hintsUsed;
         this.inventory = inventory;
         this.storedHints = storedHints;
+        this.completedPuzzles = completedPuzzles;
+        this.currentPuzzle = currentPuzzle;
         this.strikes = strikes;
         this.currentScore = currentScore;
+    }
+    public Progress() {
+        hintsUsed = 0;
+        inventory = new ArrayList<>();
+        storedHints = new ArrayList<>();
+        completedPuzzles = new ArrayList<>();
+        currentPuzzle = null;
+        strikes = 0;
+        currentScore = 0;
     }
 
     public int getHintsUsed() {
@@ -36,6 +49,54 @@ public class Progress {
 
     public int getCurrentScore() {
         return currentScore;
+    }
+
+    public Puzzle getCurrentPuzzle() {
+        return currentPuzzle;
+    }
+
+    public ArrayList<Puzzle> getCompletedPuzzles() {
+        return completedPuzzles;
+    }
+
+    public void addCompletedPuzzle(Puzzle puzzle) {
+        completedPuzzles.add(puzzle);
+    }
+    
+    public void addItem(Item item) {
+        inventory.add(item);
+    }
+
+    public void addHint(Hint hint) {
+        storedHints.add(hint);
+    }
+
+    public void setCompletedPuzzles(ArrayList<Puzzle> completedPuzzles) {
+        this.completedPuzzles = completedPuzzles;
+    }
+    
+    public void setInventory(ArrayList<Item> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setStoredHints(ArrayList<Hint> storedHints) {
+        this.storedHints = storedHints;
+    }
+
+    public void setScore(int score) {
+        currentScore = score;
+    }
+
+    public void setStrikes(int strikes) {
+        this.strikes = strikes;
+    }
+
+    public void setCurrentPuzzle(Puzzle puzzle) {
+        currentPuzzle = puzzle;
+    }
+
+    public void setHintsUsed(int hintsUsed) {
+        this.hintsUsed = hintsUsed;
     }
 }
 

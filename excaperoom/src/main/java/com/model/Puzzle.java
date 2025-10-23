@@ -2,18 +2,21 @@ package com.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class Puzzle {
     private ArrayList<Hint> hints;
     private File correctSound;
     private File incorrectSound;
+    private UUID puzzleID;
     
 
     public Puzzle() {
         this.hints = new ArrayList<>();
         this.correctSound = null;
         this.incorrectSound = null;
+        this.puzzleID = UUID.randomUUID();
     }
     
     // Puzzle actions
@@ -44,6 +47,14 @@ public class Puzzle {
         if (hint != null && hints != null) {
             hints.add(hint);
         }
+    }
+
+    public UUID getID() {
+        return puzzleID;
+    }
+
+    public void setID(UUID puzzleID) {
+        this.puzzleID = puzzleID;
     }
     
     public void playSound(boolean correct) {

@@ -8,6 +8,8 @@
         "hintsUsed": 0,
         "inventory": [],
         "storedHints": [],
+        "completedPuzzles": [],
+        "currentPuzzle": null,
         "strikes": 0,
         "currentScore": 0
       },
@@ -39,6 +41,8 @@
         "hintsUsed": 0,
         "inventory": [],
         "storedHints": [],
+        "completedPuzzles": [],
+        "currentPuzzle": null,
         "strikes": 0,
         "currentScore": 0
       },
@@ -51,6 +55,8 @@
         "hintsUsed": 0,
         "inventory": [],
         "storedHints": [],
+        "completedPuzzles": [],
+        "currentPuzzle": null,
         "strikes": 0,
         "currentScore": 0
       },
@@ -63,6 +69,8 @@
         "hintsUsed": 0,
         "inventory": [],
         "storedHints": [],
+        "completedPuzzles": [],
+        "currentPuzzle": null,
         "strikes": 0,
         "currentScore": 0
       },
