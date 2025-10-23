@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class EscapeGameFacade {
     private Game game;
-    private PuzzlesManager puzzleman;
+    private PuzzlesManager PuzzlesManager;
     private Players players;
     private static EscapeGameFacade instance;
     private int strikes;
     
     private EscapeGameFacade() {
         this.game = Game.getInstance();
-        this.puzzleman = PuzzlesManager.getInstance();
+        this.PuzzlesManager = PuzzlesManager.getInstance();
         this.players = Players.getInstance();
         this.strikes = 0;
     }
@@ -45,7 +45,7 @@ public class EscapeGameFacade {
     }
     
     public void startPuzzle() {
-        puzzleman.startCurrentPuzzle();
+        PuzzlesManager.startCurrentPuzzle();
     }   
     
     public void completePuzzle() {
@@ -53,7 +53,7 @@ public class EscapeGameFacade {
     }
 
     public void skipPuzzle() {
-        puzzleman.skipCurrentPuzzle();
+        PuzzlesManager.skipCurrentPuzzle();
     }
 
     public boolean nextPuzzle() {
@@ -61,7 +61,7 @@ public class EscapeGameFacade {
     }
 
     public boolean submitAnswer(String answer) {
-        return puzzleman.submitAnswer(answer);
+        return PuzzlesManager.submitAnswer(answer);
     }
 
     public double getProgressPercent() {
@@ -77,15 +77,15 @@ public class EscapeGameFacade {
     }
 
     public ArrayList<Hint> getAvailableHints() {
-        return puzzleman.getAvailableHints();
+        return PuzzlesManager.getAvailableHints();
     }
 
     public Hint revealHint(int hintIndex) {
-        return puzzleman.revealHint(hintIndex);
+        return PuzzlesManager.revealHint(hintIndex);
     }
 
     public int getHintsUsed() {
-        return puzzleman.getHintsUsed();
+        return PuzzlesManager.getHintsUsed();
     }
 
     public Item revealHiddenItem(HiddenItem hiddenItem) {
@@ -113,18 +113,23 @@ public class EscapeGameFacade {
     }
 
     public Puzzle getCurrentPuzzle() {
-        return puzzleman.getCurrentPuzzle();
+        return PuzzlesManager.getCurrentPuzzle();
     }
 
     public ArrayList<Puzzle> getAllPuzzles() {
-        return puzzleman.getPuzzles();
+        return PuzzlesManager.getPuzzles();
     }
 
     public int getTotalPuzzles() {
-        return puzzleman.getTotalPuzzlesCount();
+        return PuzzlesManager.getTotalPuzzlesCount();
     }
 
     public int getCurrentPuzzleIndex() {
-        return puzzleman.getCurrentPuzzleIndex();
+        return PuzzlesManager.getCurrentPuzzleIndex();
     }
+
+    public void saveProgress() {
+        players.saveProgress();
+    }
+
 }
