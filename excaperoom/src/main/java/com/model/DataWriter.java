@@ -3,14 +3,12 @@ package com.model;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
 public class DataWriter extends DataConstants {
-
-    private static final String PUZZLES_STATE_FILE = "json/puzzles_state.json";
-
     public static boolean savePlayers(ArrayList<Player> players) {
         if (players == null) {
             return false;
