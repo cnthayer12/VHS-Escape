@@ -83,7 +83,7 @@ public class Game {
             this.progress = player.getProgress().get(0);
         } else {
             ArrayList<Progress> progressList = new ArrayList<>();
-            progressList.add(new Progress(0, new ArrayList<>(), new ArrayList<>(), 0, BASE_SCORE));
+            progressList.add(new Progress(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null, 0, BASE_SCORE));
             player.setProgress(progressList);
             this.progress = progressList.get(0);
         }

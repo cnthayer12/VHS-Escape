@@ -68,8 +68,8 @@ public class EscapeGameFacade {
         return game.progressPercent();
     }
 
-    public void createPlayer(String username) {
-        players.createAccount(username);
+    public void createPlayer(String username, String pass) {
+        players.createAccount(username, pass);
     }
 
     public void displayStory() {
@@ -86,10 +86,6 @@ public class EscapeGameFacade {
 
     public int getHintsUsed() {
         return PuzzlesManager.getHintsUsed();
-    }
-
-    public Item revealHiddenItem(HiddenItem hiddenItem) {
-        return hiddenItem.revealItem();
     }
 
     public int getStrikes() {
