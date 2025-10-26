@@ -42,4 +42,9 @@ public class Trivia extends Puzzle {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Trivia: " + triviaText;
+    }
 }

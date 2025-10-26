@@ -50,4 +50,11 @@ public class MultipleChoice extends Puzzle {
         }
     }
 
+    @Override
+    public String toString() {
+        String returnString = "";
+        for(String option : options)
+            returnString += option + "\n";
+        return "Multiple Choice:\n" + returnString;
+    }
 }

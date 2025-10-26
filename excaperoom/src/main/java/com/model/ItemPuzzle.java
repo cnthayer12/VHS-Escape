@@ -24,4 +24,9 @@ public class ItemPuzzle {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "A puzzle unlocked with an item";
+    }
 }

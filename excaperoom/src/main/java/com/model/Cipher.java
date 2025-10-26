@@ -42,4 +42,9 @@ public class Cipher extends Puzzle {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Cipher: " + cipherText;
+    }
 }

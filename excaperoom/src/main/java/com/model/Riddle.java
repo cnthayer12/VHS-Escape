@@ -42,4 +42,9 @@ public class Riddle extends Puzzle {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Riddle: " + riddleText;
+    }
 }

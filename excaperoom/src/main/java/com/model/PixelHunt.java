@@ -54,4 +54,8 @@ public class PixelHunt extends Puzzle {
         System.out.println("PixelHunt Puzzle started. Click around the screen to find the hidden spot!");
     }
     
+    @Override
+    public String toString() {
+        return "A PixelHunt puzzle";
+    }
 }

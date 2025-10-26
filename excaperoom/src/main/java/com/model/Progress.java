@@ -113,5 +113,27 @@ public class Progress {
     public void setCurrentPuzzle(Puzzle puzzle) {
         currentPuzzle = puzzle;
     }
+
+    public String toString() {
+        return "Percent Complete: " + calculatePercent() + "\nQuestions Answered and Hints Used: " + getPuzzlesInfo();
+    }
+
+    public double calculatePercent() {
+        final int PUZZLECOUNT = 3;
+        return completedPuzzles.size() / (double) PUZZLECOUNT;
+    }
+
+    public String getPuzzlesInfo() {
+        String returnString = "";
+        for(Puzzle puzzle : completedPuzzles) {
+            returnString += puzzle;
+            for(Hint hint : storedHints) {
+                if(hint.getPuzzle().equals(puzzle))
+                    returnString += "\n     Hint used: " + hint;
+            }
+            returnString += "\n"; 
+        }
+        return returnString;
+    }
 }
 
