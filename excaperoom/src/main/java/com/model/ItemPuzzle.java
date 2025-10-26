@@ -4,7 +4,7 @@ public class ItemPuzzle extends Puzzle {
     private String requiredItemName;
     private String puzzleType;
 
-    public ItemPuzzle(String id, String type) {
+    public ItemPuzzle() {
         super();
         this.puzzleType = type;
         this.requiredItemName = "";
