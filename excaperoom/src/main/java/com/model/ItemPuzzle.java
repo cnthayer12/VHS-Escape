@@ -6,8 +6,15 @@ public class ItemPuzzle extends Puzzle {
 
     public ItemPuzzle() {
         super();
-        this.puzzleType = type;
+        this.puzzleType = "";
         this.requiredItemName = "";
+        type = "ItemPuzzle";
+    }
+
+    public ItemPuzzle(String puzzleType, String requiredItemName) {
+        super();
+        this.puzzleType = puzzleType;
+        this.requiredItemName = requiredItemName;
         type = "ItemPuzzle";
     }
 
@@ -23,8 +30,8 @@ public class ItemPuzzle extends Puzzle {
         return puzzleType;
     }
 
-    public void setPuzzleType(String type) {
-        this.puzzleType = type;
+    public void setPuzzleType(String puzzleType) {
+        this.puzzleType = puzzleType;
     }
 
     @Override
