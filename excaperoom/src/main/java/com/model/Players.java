@@ -110,4 +110,30 @@ public class Players {
     }
     return false;
   }
+
+  public int getStrikes() {
+    Player currentPlayer = Players.getCurrentPlayer();
+    if (currentPlayer != null && currentPlayer.getProgress() != null && !currentPlayer.getProgress().isEmpty()) {
+        return currentPlayer.getProgress().get(0).getStrikes();
+    }
+    return 0;
+}
+  public void addStrike() {
+    Player currentPlayer = Players.getCurrentPlayer();
+    if (currentPlayer != null && currentPlayer.getProgress() != null && !currentPlayer.getProgress().isEmpty()) {
+        Progress progress = currentPlayer.getProgress().get(0);
+        int currentStrikes = progress.getStrikes();
+        progress.setStrikes(currentStrikes + 1);
+    }
+ }
+  
+  public void resetStrikes() {
+    Player currentPlayer = Players.getCurrentPlayer();
+    if (currentPlayer != null && currentPlayer.getProgress() != null && !currentPlayer.getProgress().isEmpty()) {
+        currentPlayer.getProgress().get(0).setStrikes(0);
+    }
+}
+  public void saveProgress() {
+      DataWriter.saveAll(players);
+  }
 }

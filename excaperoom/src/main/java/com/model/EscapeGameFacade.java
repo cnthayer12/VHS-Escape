@@ -42,7 +42,7 @@ public class EscapeGameFacade {
     }
     
     public void startPuzzle() {
-        puzzlesManager.startPuzzle();
+        puzzlesManager.startCurrentPuzzle();
     }
 
     public void completePuzzle() {
