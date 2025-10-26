@@ -141,6 +141,10 @@ public class EscapeGameFacade {
     public ArrayList<LeaderboardEntry> getLeaderboard() {
          return Leaderboard.getInstance().getAllEntries();
     }
+    public void addItem(Item item) {
+        players.addItem(item);
+    }
+
     public void generateCompletionCertificate() {
         players.generateCertificate(game.getDifficulty(), game.getScore());
     }

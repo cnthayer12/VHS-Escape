@@ -169,6 +169,13 @@ public class Players {
     }
 }
 
+public void addItem(Item item) {
+    if(currentPlayer != null) {
+        Progress progress = currentPlayer.getProgress().get(currentPlayer.getProgress().size()-1);
+        progress.addItem(item);
+    }
+}
+
 }
 
 
