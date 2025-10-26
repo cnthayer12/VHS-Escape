@@ -2,36 +2,18 @@ package com.model;
 import java.util.ArrayList;
 
 public class Test {
+    static EscapeGameFacade facade = EscapeGameFacade.getInstance();
     public static void main(String[] args){
-        Players players = Players.getInstance();
-        ArrayList<Player> playerList = DataLoader.getPlayers();
-        players.setPlayers(playerList);
-        System.out.println("Login scenario, success:");
-        players.login("Lukin", "Lukin");
-
-        System.out.println("\nLogin scenario, unsuccessful (already logged in):");
-        players.login("Bob", "Bob");
-
-        System.out.println("\nLogout scenario, successful:");
-        players.logout();
-
-        System.out.println("\nLogin scenario, unsuccessful (invalid username/pw):");
-        players.login("Bob", "Bob");
-
-        System.out.println("\nLogout scenario, unsuccessful (already logged out):");
-        players.logout();
-        
-        System.out.println("\nCreate account scenario, unsuccessful (account exists already):");
-        players.createAccount("Lukin", "Lukin");
-
-        System.out.println("\nCreate account scenario, successful:");
-        players.createAccount("Bob", "Bob");
-
-        System.out.println("\nCreate account scenario, unsuccessful (already logged in):");
-        players.createAccount("Phil", "Phil");
-
-        System.out.println("\nLogout scenario, successful:");
-        players.logout();
-
+        facade.loadProgress();
+        facade.login("Lukin", "1234");
+        Player currentPlayer = Players.getCurrentPlayer();
+        Progress progress = new Progress();
+        progress.setStrikes(2);
+        progress.setScore(500);
+        progress.addItem(new Item("Test Item", "item for testing", "Kitchen", null));
+        ArrayList<Progress> progresses = new ArrayList<>();
+        progresses.add(progress);
+        currentPlayer.setProgress(progresses);
+        facade.logout();
     }
 }
