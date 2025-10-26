@@ -1,6 +1,6 @@
 Intro: 
 Welcome to the VHS Escape Room! You've discovered a mysterious 
-VHS tape that transports you into a retro world. Solve the puzzles in order to esacape before you are stuck
+VHS tape that transports you into a retro world. Solve the puzzles in order to escape before you are stuck
 in the tape forever!! Good Luck!!
 
 

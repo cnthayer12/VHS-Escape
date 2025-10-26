@@ -220,11 +220,12 @@ public class DataWriter {
                 global = new JSONObject();
                 roomsDoc.put("global", global);
             }
-            JSONArray existingPuzzles = (JSONArray) global.get("puzzles");
+            JSONArray existingPuzzles = (JSONArray) roomsDoc.get("puzzles");
             if (existingPuzzles == null) {
                 existingPuzzles = new JSONArray();
-                global.put("puzzles", existingPuzzles);
+                roomsDoc.put("puzzles", existingPuzzles);
             }
+
 
             // Build set of existing puzzleIDs
             Set<String> existingIds = new HashSet<>();
