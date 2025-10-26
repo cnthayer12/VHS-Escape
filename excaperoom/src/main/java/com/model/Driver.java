@@ -23,6 +23,28 @@ public class Driver {
         System.out.println("\nLeni logs into her account...");
         facade.login("lerivers", "password1234");
 
+        System.out.println("Logging out of Leni's and logging into lrivers's to show data consistency...");
+        facade.logout();
+        facade.login("lrivers", "password1234");
+        Player currentPlayer = Players.getCurrentPlayer();
+        Progress progress = new Progress();
+        progress.setStrikes(2);
+        progress.setScore(500);
+        progress.addItem(new Item("Test Item", "item for testing", "Kitchen", null));
+
+        Puzzle puzzle = facade.getAllPuzzles().get(0);
+        progress.addCompletedPuzzle(puzzle);
+        ArrayList<Progress> progresses = new ArrayList<>();
+        progresses.add(progress);
+        currentPlayer.setProgress(progresses);
+        System.out.println("Changes made to lrivers's stats, logging out and logging back in to check.");
+        facade.logout();
+        facade.login("lrivers", "password1234");
+        facade.checkProgress();
+        System.out.println("Back to Leni...");
+        facade.logout();
+        facade.login("lerivers", "password1234");
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nAvailable Escape Rooms:");
         System.out.println("1. VHS Escape");
