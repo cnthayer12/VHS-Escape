@@ -1,5 +1,8 @@
 package com.model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -140,4 +143,28 @@ public class Players {
   public void saveProgress() {
       DataWriter.savePlayers(players);
   }
+
+
+  public void generateCertificate(Game.Difficulty difficulty, int score) {
+    Player player = getCurrentPlayer();
+    Progress progress = player.getProgress().get(0);
+
+    String content = "🎓 VHS Escape Completion Certificate 🎓\n\n"
+        + "Player: " + player.getDisplayName() + "\n"
+        + "Game: VHS Escape\n"
+        + "Difficulty: " + difficulty + "\n"
+        + "Hints Used: " + progress.getHintsUsed() + "\n"
+        + "Final Score: " + score + "\n\n"
+        + "🏆 You escaped the tape and unlocked the final mystery!\n"
+        + "Thanks for playing — your courage and curiosity are unmatched.\n";
+
+    try {
+        Files.write(Paths.get("certificate_" + player.getDisplayName() + ".txt"), content.getBytes());
+    } catch (IOException e) {
+        System.out.println("Error saving certificate: " + e.getMessage());
+    }
 }
+
+}
+
+
