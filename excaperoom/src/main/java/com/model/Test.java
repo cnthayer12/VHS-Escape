@@ -7,28 +7,28 @@ public class Test {
         ArrayList<Player> playerList = DataLoader.getPlayers();
         players.setPlayers(playerList);
         System.out.println("Login scenario, success:");
-        players.login("Lukin");
+        players.login("Lukin", "Lukin");
 
         System.out.println("\nLogin scenario, unsuccessful (already logged in):");
-        players.login("Bob");
+        players.login("Bob", "Bob");
 
         System.out.println("\nLogout scenario, successful:");
         players.logout();
 
-        System.out.println("\nLogin scenario, unsuccessful (account doesn't exist):");
-        players.login("Bob");
+        System.out.println("\nLogin scenario, unsuccessful (invalid username/pw):");
+        players.login("Bob", "Bob");
 
         System.out.println("\nLogout scenario, unsuccessful (already logged out):");
         players.logout();
         
         System.out.println("\nCreate account scenario, unsuccessful (account exists already):");
-        players.createAccount("Lukin");
+        players.createAccount("Lukin", "Lukin");
 
         System.out.println("\nCreate account scenario, successful:");
-        players.createAccount("Bob");
+        players.createAccount("Bob", "Bob");
 
         System.out.println("\nCreate account scenario, unsuccessful (already logged in):");
-        players.createAccount("Phil");
+        players.createAccount("Phil", "Phil");
 
         System.out.println("\nLogout scenario, successful:");
         players.logout();

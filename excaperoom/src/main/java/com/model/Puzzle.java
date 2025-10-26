@@ -49,6 +49,10 @@ public class Puzzle {
         }
     }
 
+    public void setHints(ArrayList<Hint> hints) {
+        this.hints = hints;
+    }
+
     public UUID getID() {
         return puzzleID;
     }
@@ -59,5 +63,9 @@ public class Puzzle {
     
     public void playSound(boolean correct) {
      System.out.println("STUB Puzzle.playSound() called - correct: " + correct);
+    }
+
+    public boolean checkAnswer(String answer) {
+        return false;
     }
 }

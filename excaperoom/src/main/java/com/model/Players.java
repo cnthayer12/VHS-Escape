@@ -24,6 +24,10 @@ public class Players {
         return players;
     }
 
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void setPlayers(ArrayList<Player> players) {
         Players.players = players;
     }
@@ -50,7 +54,7 @@ public class Players {
         return false;
     }
 
-    public void login(String display) {
+    public void login(String display, String pass) {
         if(currentPlayer != null)
         {
             System.out.println("Could not log in, already logged in.");
@@ -58,14 +62,15 @@ public class Players {
         }
         for(int i = 0; i < players.size(); i++){
             Player search = players.get(i);
-            if(search.getDisplayName().equals(display)){
+            if(search.getDisplayName().equals(display) && search.checkPassword(pass)){
                 currentPlayer = search;
                 System.out.println("Successfully logged in!");
                 return;
             }
         }
-        System.out.println("Could not log in, user does not exist.");
+        System.out.println("Could not log in, invalid username or password.");
     }
+
 
     public void logout() {
         if(currentPlayer != null) {
@@ -76,7 +81,7 @@ public class Players {
         }
     }
 
-    public void createAccount(String displayName) {
+    public void createAccount(String displayName, String pass) {
         if(currentPlayer != null) {
             System.out.println("Could not create account, a user is already logged in.");
             return;
@@ -87,12 +92,12 @@ public class Players {
                 return;
             }
         }
-        Progress progressInstance = new Progress(0, new ArrayList<Item>(), new ArrayList<Hint>(), 0, 0);
-        ArrayList<Progress> progress = new ArrayList<Progress>();
+        Progress progressInstance = new Progress();
+        ArrayList<Progress> progress = new ArrayList<>();
         progress.add(progressInstance);
-        Player newPlayer = new Player(displayName, progress);
+        Player newPlayer = new Player(displayName, progress, pass);
         players.add(newPlayer);
         System.out.println("Account created successfully! Logging in now.");
-        Players.getInstance().login(displayName);
+        Players.getInstance().login(displayName, pass);
     }
 }

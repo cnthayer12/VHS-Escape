@@ -26,6 +26,7 @@ public class Riddle extends Puzzle {
         this.correctAnswer = correctAnswer;
     }
 
+    @Override
     public boolean checkAnswer(String userAnswer) {
         if (userAnswer == null || userAnswer.trim().isEmpty()) {
             playSound(false);

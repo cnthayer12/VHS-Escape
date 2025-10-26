@@ -12,8 +12,8 @@ public class Progress {
     private int strikes;
     private int currentScore;
 
-    public Progress(int hintsUsed,ArrayList<Item> inventory, ArrayList<Hint> storedHints, ArrayList<Puzzle> completedPuzzles, Puzzle currentPuzzle, int strikes, int currentScore) {
-        this.hintsUsed = hintsUsed;
+    public Progress(ArrayList<Item> inventory, ArrayList<Hint> storedHints, ArrayList<Puzzle> completedPuzzles, Puzzle currentPuzzle, int strikes, int currentScore) {
+        this.hintsUsed = storedHints.size();
         this.inventory = inventory;
         this.storedHints = storedHints;
         this.completedPuzzles = completedPuzzles;
@@ -70,8 +70,10 @@ public class Progress {
     }
 
     public void addHint(Hint hint) {
-        if(hint != null && storedHints != null)
+        if(hint != null && storedHints != null) {
             storedHints.add(hint);
+            hintsUsed++;
+        }
     }
 
     public void setCompletedPuzzles(ArrayList<Puzzle> completedPuzzles) {
@@ -84,6 +86,7 @@ public class Progress {
 
     public void setStoredHints(ArrayList<Hint> storedHints) {
         this.storedHints = storedHints;
+        hintsUsed = storedHints.size();
     }
 
     public void setScore(int score) {
@@ -96,10 +99,6 @@ public class Progress {
 
     public void setCurrentPuzzle(Puzzle puzzle) {
         currentPuzzle = puzzle;
-    }
-
-    public void setHintsUsed(int hintsUsed) {
-        this.hintsUsed = hintsUsed;
     }
 }
 

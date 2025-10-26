@@ -45,9 +45,9 @@ public class EscapeGameFacade {
     }
     
     public void startPuzzle() {
-        PuzzlesManager.startCurrentPuzzle();
-    }   
-    
+        PuzzlesManager.startPuzzle();
+    }
+
     public void completePuzzle() {
         game.completePuzzle();
     }
@@ -68,8 +68,8 @@ public class EscapeGameFacade {
         return game.progressPercent();
     }
 
-    public void createPlayer(String username) {
-        players.createPlayer(username);
+    public void createPlayer(String username, String pass) {
+        players.createAccount(username, pass);
     }
 
     public void displayStory() {
@@ -80,16 +80,12 @@ public class EscapeGameFacade {
         return PuzzlesManager.getAvailableHints();
     }
 
-    public Hint revealHint(int hintIndex) {
-        return PuzzlesManager.revealHint(hintIndex);
+    public Hint revealHint() {
+        return PuzzlesManager.revealHint();
     }
 
     public int getHintsUsed() {
         return PuzzlesManager.getHintsUsed();
-    }
-
-    public Item revealHiddenItem(HiddenItem hiddenItem) {
-        return hiddenItem.revealItem();
     }
 
     public int getStrikes() {
