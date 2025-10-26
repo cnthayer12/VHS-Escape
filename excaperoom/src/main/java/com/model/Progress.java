@@ -31,6 +31,19 @@ public class Progress {
         currentScore = 0;
     }
 
+     public static Progress loadProgress(Player player) {
+        if (player == null) {
+            return null;
+        }
+        
+        ArrayList<Progress> progressList = player.getProgress();
+        if (progressList == null || progressList.isEmpty()) {
+            return null;
+        }
+        
+        return progressList.get(progressList.size() - 1);
+    }
+
     public int getHintsUsed() {
         return hintsUsed;
     }

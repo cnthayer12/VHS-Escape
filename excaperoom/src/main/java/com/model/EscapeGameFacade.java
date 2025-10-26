@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 public class EscapeGameFacade {
     private Game game;
-    private PuzzlesManager PuzzlesManager;
+    private PuzzlesManager puzzlesManager;
     private Players players;
     private static EscapeGameFacade instance;
-    private int strikes;
     
     private EscapeGameFacade() {
         this.game = Game.getInstance();
-        this.PuzzlesManager = PuzzlesManager.getInstance();
+        this.puzzlesManager = PuzzlesManager.getInstance();
         this.players = Players.getInstance();
-        this.strikes = 0;
     }
     
     public static EscapeGameFacade getInstance() {
@@ -27,9 +25,8 @@ public class EscapeGameFacade {
         game.initializeGame(player, difficulty);
     }
     
-    
-    public void loadProgress() {
-        players.loadProgress();
+    public boolean loadProgress() {
+        return players.loadProgress();
     }
 
     public void pauseGame() {
@@ -45,7 +42,7 @@ public class EscapeGameFacade {
     }
     
     public void startPuzzle() {
-        PuzzlesManager.startPuzzle();
+        puzzlesManager.startPuzzle();
     }
 
     public void completePuzzle() {
@@ -53,7 +50,7 @@ public class EscapeGameFacade {
     }
 
     public void skipPuzzle() {
-        PuzzlesManager.skipCurrentPuzzle();
+        puzzlesManager.skipCurrentPuzzle();
     }
 
     public boolean nextPuzzle() {
@@ -61,7 +58,7 @@ public class EscapeGameFacade {
     }
 
     public boolean submitAnswer(String answer) {
-        return PuzzlesManager.submitAnswer(answer);
+        return puzzlesManager.submitAnswer(answer);
     }
 
     public double getProgressPercent() {
@@ -77,31 +74,31 @@ public class EscapeGameFacade {
     }
 
     public ArrayList<Hint> getAvailableHints() {
-        return PuzzlesManager.getAvailableHints();
+        return puzzlesManager.getAvailableHints();
     }
 
     public Hint revealHint() {
-        return PuzzlesManager.revealHint();
+        return puzzlesManager.revealHint();
     }
 
     public int getHintsUsed() {
-        return PuzzlesManager.getHintsUsed();
+        return puzzlesManager.getHintsUsed();
     }
 
     public int getStrikes() {
-        return strikes;
+        return players.getStrikes();
     }
 
     public void addStrike() {
-        strikes++;
+        players.addStrike();
     }
 
     public void resetStrikes() {
-        strikes = 0;
+        players.resetStrikes();
     }
 
     public void updateScore(int points) {
-        game.setScore(game.getScore() + points);
+        game.updateScore(points);
     }
 
     public int getScore() {
@@ -109,23 +106,22 @@ public class EscapeGameFacade {
     }
 
     public Puzzle getCurrentPuzzle() {
-        return PuzzlesManager.getCurrentPuzzle();
+        return puzzlesManager.getCurrentPuzzle();
     }
 
     public ArrayList<Puzzle> getAllPuzzles() {
-        return PuzzlesManager.getPuzzles();
+        return puzzlesManager.getPuzzles();
     }
 
     public int getTotalPuzzles() {
-        return PuzzlesManager.getTotalPuzzlesCount();
+        return puzzlesManager.getTotalPuzzlesCount();
     }
 
     public int getCurrentPuzzleIndex() {
-        return PuzzlesManager.getCurrentPuzzleIndex();
+        return game.getCurrentPuzzleIndex();
     }
 
     public void saveProgress() {
         players.saveProgress();
     }
-
 }

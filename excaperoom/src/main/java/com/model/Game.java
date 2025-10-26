@@ -1,5 +1,5 @@
 package com.model;
-
+ 
 import java.time.Instant;
 import java.time.Duration;
 import java.util.ArrayList;

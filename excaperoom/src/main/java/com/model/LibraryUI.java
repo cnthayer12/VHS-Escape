@@ -31,9 +31,6 @@ public class LibraryUI {
                     playGame();
                     break;
                 case "4":
-                    saveGame();
-                    break;
-                case "5":
                     running = false;
                     System.out.println("\nExiting VHS Escape Room. Goodbye!");
                     break;
@@ -46,19 +43,20 @@ public class LibraryUI {
     }
 
     private void displayWelcome() {
-        System.out.println("Welcome to the VHS Escape Room!");
+        System.out.println("           Welcome to the VHS Escape Room!");
+        System.out.println("=".repeat(60) + "\n");
     }
- 
+    
     private void displayMainMenu() {
         System.out.println("\n--- MAIN MENU ---");
         System.out.println("1. Start New Game");
         System.out.println("2. Load Player");
         System.out.println("3. Play Game");
-        System.out.println("4. Save Progress");
+        System.out.println("4. View Leaderboard");
         System.out.println("5. Exit");
         System.out.print("\nEnter choice: ");
     }
-  
+    
     private void startNewGame() {
         System.out.println("\n--- START NEW GAME ---");
         
@@ -70,10 +68,7 @@ public class LibraryUI {
             return;
         }
 
-        if (!facade.createPlayer(playerName)) {
-            System.out.println("✗ Failed to create player");
-            return;
-        }
+        facade.createPlayer(playerName, playerName);
         System.out.println("✓ Player created: " + playerName);
 
         System.out.println("\nSelect Difficulty:");
@@ -99,10 +94,10 @@ public class LibraryUI {
                 System.out.println("Invalid choice. Using Medium difficulty.");
                 difficulty = Game.Difficulty.MEDIUM;
         }
-    
+
         Players players = Players.getInstance();
         Player newPlayer = null;
-        for (Player p : Players.getPlayers()) {
+        for (Player p : players.getPlayers()) {
             if (p.getDisplayName().equals(playerName)) {
                 newPlayer = p;
                 break;
@@ -113,19 +108,14 @@ public class LibraryUI {
             System.out.println("✗ Error: Could not find created player");
             return;
         }
-
-        Game game = Game.getInstance();
-        game.initializeGame(newPlayer, difficulty);
-
-        if (facade.startGame()) {
-            System.out.println("✓ Game started successfully!");
-            game.displayStory();
-            System.out.println("\nDifficulty: " + difficulty);
-            System.out.println("Time Limit: " + (difficulty.getTimeLimit() / 60) + " minutes");
-            System.out.println("Starting Score: " + game.getScore());
-        } else {
-            System.out.println("✗ Failed to start game");
-        }
+  
+        facade.startGame(newPlayer, difficulty);
+        System.out.println("✓ Game started successfully!");
+        
+        facade.displayStory();
+        System.out.println("\nDifficulty: " + difficulty);
+        System.out.println("Time Limit: " + (difficulty.getTimeLimit() / 60) + " minutes");
+        System.out.println("Starting Score: " + facade.getScore());
     }
 
     private void loadPlayer() {
@@ -138,70 +128,63 @@ public class LibraryUI {
             System.out.println("Invalid name.");
             return;
         }
+        
 
-        if (facade.loadProgress()) {
-            System.out.println("✓ Progress loaded from file");
-            
+        facade.loadProgress();
+        System.out.println("✓ Progress loaded from file");
 
-            Players players = Players.getInstance();
-            Player loadedPlayer = null;
-            
-            for (Player p : Players.getPlayers()) {
-                if (p.getDisplayName().equals(playerName)) {
-                    loadedPlayer = p;
-                    break;
-                }
+        Players players = Players.getInstance();
+        Player loadedPlayer = null;
+        
+        for (Player p : players.getPlayers()) {
+            if (p.getDisplayName().equals(playerName)) {
+                loadedPlayer = p;
+                break;
             }
-            
-            if (loadedPlayer == null) {
-                System.out.println("✗ Player '" + playerName + "' not found in loaded data");
-                return;
-            }
-            
-            System.out.println("✓ Player '" + playerName + "' found");
+        }
+        
+        if (loadedPlayer == null) {
+            System.out.println("✗ Player '" + playerName + "' not found in loaded data");
+            return;
+        }
+        
+        System.out.println("✓ Player '" + playerName + "' found");
 
-            System.out.println("\nSelect Difficulty:");
-            System.out.println("1. Easy (30 minutes)");
-            System.out.println("2. Medium (20 minutes)");
-            System.out.println("3. Hard (15 minutes)");
-            System.out.print("Enter choice: ");
-            
-            String diffChoice = scanner.nextLine().trim();
-            Game.Difficulty difficulty;
-            
-            switch (diffChoice) {
-                case "1":
-                    difficulty = Game.Difficulty.EASY;
-                    break;
-                case "2":
-                    difficulty = Game.Difficulty.MEDIUM;
-                    break;
-                case "3":
-                    difficulty = Game.Difficulty.HARD;
-                    break;
-                default:
-                    difficulty = Game.Difficulty.MEDIUM;
-            }
-
-            Game game = Game.getInstance();
-            game.initializeGame(loadedPlayer, difficulty);
-            
-            if (facade.startGame()) {
-                System.out.println("✓ Game resumed with saved progress");
-
-                if (loadedPlayer.getProgress() != null && !loadedPlayer.getProgress().isEmpty()) {
-                    Progress progress = loadedPlayer.getProgress().get(0);
-                    System.out.println("\nLoaded Progress:");
-                    System.out.println("- Hints Used: " + progress.getHintsUsed());
-                    System.out.println("- Strikes: " + progress.getStrikes());
-                    System.out.println("- Previous Score: " + progress.getCurrentScore());
-                }
-            }
-        } else {
-            System.out.println("✗ Failed to load progress");
+        System.out.println("\nSelect Difficulty:");
+        System.out.println("1. Easy (30 minutes)");
+        System.out.println("2. Medium (20 minutes)");
+        System.out.println("3. Hard (15 minutes)");
+        System.out.print("Enter choice: ");
+        
+        String diffChoice = scanner.nextLine().trim();
+        Game.Difficulty difficulty;
+        
+        switch (diffChoice) {
+            case "1":
+                difficulty = Game.Difficulty.EASY;
+                break;
+            case "2":
+                difficulty = Game.Difficulty.MEDIUM;
+                break;
+            case "3":
+                difficulty = Game.Difficulty.HARD;
+                break;
+            default:
+                difficulty = Game.Difficulty.MEDIUM;
+        }
+        
+        facade.startGame(loadedPlayer, difficulty);
+        System.out.println("✓ Game resumed with saved progress");
+        
+        if (loadedPlayer.getProgress() != null && !loadedPlayer.getProgress().isEmpty()) {
+            Progress progress = loadedPlayer.getProgress().get(0);
+            System.out.println("\nLoaded Progress:");
+            System.out.println("- Hints Used: " + progress.getHintsUsed());
+            System.out.println("- Strikes: " + progress.getStrikes());
+            System.out.println("- Previous Score: " + progress.getCurrentScore());
         }
     }
-
+    
     private void playGame() {
         System.out.println("\n--- PLAY GAME ---");
         
@@ -224,13 +207,13 @@ public class LibraryUI {
             System.out.println("No puzzle available.");
             return;
         }
- 
+        
         System.out.println("\nCurrent Status:");
         System.out.println("- Player: " + game.getCurrentPlayer().getDisplayName());
         System.out.println("- Time Remaining: " + formatTime(game.getRemainingTime()));
-        System.out.println("- Progress: " + String.format("%.1f%%", game.progressPercent()));
-        System.out.println("- Score: " + game.getScore());
-        System.out.println("- Puzzle: " + (game.getCurrentPuzzleIndex() + 1) + "/" + facade.getTotalPuzzles());
+        System.out.println("- Progress: " + String.format("%.1f%%", facade.getProgressPercent()));
+        System.out.println("- Score: " + facade.getScore());
+        System.out.println("- Puzzle: " + (facade.getCurrentPuzzleIndex() + 1) + "/" + facade.getTotalPuzzles());
         System.out.println("- Strikes: " + facade.getStrikes());
         
         System.out.println("\n1. Solve Puzzle");
@@ -255,16 +238,14 @@ public class LibraryUI {
                 }
                 
                 if (correct) {
-                    if (facade.completePuzzle()) {
-                        System.out.println("✓ Puzzle completed!");
-                        game.completePuzzle();
-                        
-                        if (!facade.nextPuzzle()) {
-                            System.out.println("\n🎉 All puzzles completed! Game Over!");
-                            displayFinalScore();
-                        } else {
-                            System.out.println("Moving to next puzzle...");
-                        }
+                    facade.completePuzzle();
+                    System.out.println("✓ Puzzle completed!");
+                    
+                    if (!facade.nextPuzzle()) {
+                        System.out.println("\n🎉 All puzzles completed! Game Over!");
+                        displayFinalScore();
+                    } else {
+                        System.out.println("Moving to next puzzle...");
                     }
                 } else {
                     System.out.println("✗ Incorrect answer!");
@@ -274,10 +255,11 @@ public class LibraryUI {
                 break;
                 
             case "2":
+
                 System.out.println("\nAvailable Hints:");
                 ArrayList<Hint> hints = facade.getAvailableHints();
                 
-                if (hints.isEmpty()) {
+                if (hints == null || hints.isEmpty()) {
                     System.out.println("No hints available for this puzzle.");
                 } else {
                     for (int i = 0; i < hints.size(); i++) {
@@ -290,7 +272,7 @@ public class LibraryUI {
                     try {
                         int hintNum = Integer.parseInt(scanner.nextLine().trim());
                         if (hintNum > 0 && hintNum <= hints.size()) {
-                            Hint hint = facade.revealHint(hintNum - 1);
+                            Hint hint = facade.revealHint();
                             if (hint != null) {
                                 System.out.println("\nHint: " + hint.getText());
                                 System.out.println("Score penalty applied: -" + hint.getCost());
@@ -328,16 +310,6 @@ public class LibraryUI {
         }
     }
 
-    private void saveGame() {
-        System.out.println("\n--- SAVE PROGRESS ---");
-        
-        if (facade.saveProgress()) {
-            System.out.println("✓ Progress saved successfully");
-        } else {
-            System.out.println("✗ Failed to save progress");
-        }
-    }
-
     private void displayFinalScore() {
         Game game = Game.getInstance();
         
@@ -349,20 +321,15 @@ public class LibraryUI {
         System.out.println("Final Score: " + game.calculateScore());
         System.out.println("Time Taken: " + formatTime(game.getElapsedTime()));
         System.out.println("Strikes: " + facade.getStrikes());
-        if (game.getProgress() != null) {
-            System.out.println("Hints Used: " + game.getProgress().getHintsUsed());
-        }
+        System.out.println("Hints Used: " + facade.getHintsUsed());
         System.out.println("=".repeat(60));
-
-        facade.saveProgress();
     }
- 
+
     private String formatTime(long seconds) {
         long minutes = seconds / 60;
         long secs = seconds % 60;
         return String.format("%02d:%02d", minutes, secs);
     }
-    
     public static void main(String[] args) {
         LibraryUI ui = new LibraryUI();
         ui.run();
