@@ -1,8 +1,8 @@
 package com.model;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,6 +60,8 @@ public class Driver {
         }
 
         facade.saveProgress();
+
+        
         scanner.close();
     }
 }

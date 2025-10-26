@@ -63,6 +63,7 @@ public class Player {
         return password.equals(this.password);
     }
 
+
     @Override
     public String toString() {
         return "Player{" +
