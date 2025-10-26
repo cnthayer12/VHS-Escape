@@ -55,6 +55,10 @@ public class Player {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public Boolean checkPassword(String password) {
         return password.equals(this.password);
     }
