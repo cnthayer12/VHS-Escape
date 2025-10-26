@@ -114,6 +114,7 @@ public class Progress {
         currentPuzzle = puzzle;
     }
 
+    @Override
     public String toString() {
         return "Percent Complete: " + calculatePercent() + "\nQuestions Answered and Hints Used: " + getPuzzlesInfo();
     }
