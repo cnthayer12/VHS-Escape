@@ -1,15 +1,23 @@
 package com.model;
 
+import java.io.File;
+import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+/**
+ * DataLoaderTester (enhanced)
+ */
 public class DataLoaderTester {
 
-    // Known accounts from your players.json
+    // Known accounts from your players.json (adjust if needed)
     private static final String[] EXPECTED_UUIDS = new String[] {
         "0c84e4ca-e25d-4f21-a409-c78a8543556a", // Carleigh
         "9a7411d6-45a7-4964-aefd-43f79b6a6fe7", // Lukin
@@ -120,6 +128,33 @@ public class DataLoaderTester {
             } catch (Throwable t) {
                 System.out.println("\nWarning: invoking DataLoader.loadPuzzles() threw an exception (non-fatal):");
                 t.printStackTrace(System.out);
+            }
+
+            // NEW: verify that the raw players.json file contains wrapper { schemaVersion: 1, users: [...] }
+            File pf = new File("json/players.json");
+            if (!pf.exists()) {
+                System.err.println("FAIL: json/players.json not found for wrapper verification.");
+                System.exit(2);
+            }
+            try (FileReader fr = new FileReader(pf)) {
+                JSONParser parser = new JSONParser();
+                Object parsed = parser.parse(fr);
+                if (!(parsed instanceof JSONObject)) {
+                    System.err.println("FAIL: players.json root is not an object; expected wrapper with schemaVersion/users.");
+                    System.exit(2);
+                }
+                JSONObject root = (JSONObject) parsed;
+                Object sv = root.get("schemaVersion");
+                if (sv == null) {
+                    System.err.println("FAIL: players.json missing schemaVersion.");
+                    System.exit(2);
+                }
+                Object users = root.get("users");
+                if (!(users instanceof JSONArray)) {
+                    System.err.println("FAIL: players.json missing users array.");
+                    System.exit(2);
+                }
+                System.out.println("\nPASS: players.json wrapper verified (schemaVersion present and users array found).");
             }
 
             System.out.println("\nPASS: All 4 expected accounts parsed successfully.");

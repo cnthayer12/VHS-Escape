@@ -138,6 +138,6 @@ public class Players {
     }
 }
   public void saveProgress() {
-      DataWriter.saveAll(players);
+      DataWriter.savePlayers(players);
   }
 }

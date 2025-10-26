@@ -1,0 +1,4 @@
+--patch-module
+com.excape=_
+--add-reads
+com.excape=ALL-UNNAMED
