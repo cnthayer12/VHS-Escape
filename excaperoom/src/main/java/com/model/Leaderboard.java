@@ -32,20 +32,28 @@ public class Leaderboard {
         public long getTimeTaken() { return timeTaken; }
         public Game.Difficulty getDifficulty() { return difficulty; }
         public String getTimestamp() { return timestamp; }
+        
+        @Override
+        public String toString() {
+            long minutes = timeTaken / 60;
+            long seconds = timeTaken % 60;
+            return String.format("%s - Score: %d | Puzzles: %d | Time: %02d:%02d | Difficulty: %s",
+                               playerName, score, puzzlesCompleted, minutes, seconds, difficulty);
+        }
     }
  
     private Leaderboard() {
         this.entries = new ArrayList<>();
         loadLeaderboard();
     }
-    
+ 
     public static Leaderboard getInstance() {
         if (instance == null) {
             instance = new Leaderboard();
         }
         return instance;
     }
-  
+ 
     public void addScore(String playerName, int score, int puzzlesCompleted, 
                         long timeTaken, Game.Difficulty difficulty) {
         LeaderboardEntry entry = new LeaderboardEntry(playerName, score, puzzlesCompleted, 
@@ -67,7 +75,7 @@ public class Leaderboard {
             game.getDifficulty()
         );
     }
-    
+
     private void sortLeaderboard() {
         Collections.sort(entries, new Comparator<LeaderboardEntry>() {
             @Override
@@ -76,12 +84,11 @@ public class Leaderboard {
                 if (scoreCompare != 0) {
                     return scoreCompare;
                 }
-
+ 
                 return Long.compare(e1.getTimeTaken(), e2.getTimeTaken());
             }
         });
     }
-    
 
     public ArrayList<LeaderboardEntry> getTopEntries(int n) {
         ArrayList<LeaderboardEntry> topEntries = new ArrayList<>();
@@ -109,7 +116,7 @@ public class Leaderboard {
         
         return filtered;
     }
-   
+
     public LeaderboardEntry getPlayerBestScore(String playerName) {
         LeaderboardEntry best = null;
         
@@ -163,7 +170,7 @@ public class Leaderboard {
         for (int i = 0; i < topEntries.size(); i++) {
             LeaderboardEntry entry = topEntries.get(i);
             String rankDisplay = (i + 1) + ".";
-            
+
             if (i == 0) rankDisplay = "🥇 1.";
             else if (i == 1) rankDisplay = "🥈 2.";
             else if (i == 2) rankDisplay = "🥉 3.";
@@ -216,8 +223,7 @@ public class Leaderboard {
         
         System.out.println("=".repeat(80));
     }
-    
- 
+  
     private String formatTime(long seconds) {
         long minutes = seconds / 60;
         long secs = seconds % 60;
@@ -253,7 +259,6 @@ public class Leaderboard {
     public void clearLeaderboard() {
         entries.clear();
     }
-    
 
     public int size() {
         return entries.size();
