@@ -1,0 +1,11 @@
+Intro: 
+Welcome to the VHS Escape Room! You've discovered a mysterious 
+VHS tape that transports you into a retro world. Solve the puzzles in order to esacape before you are stuck
+in the tape forever!! Good Luck!!
+
+
+Outro (won): Congratulations!!!! You completed all the puzzles and escaped the VHS tape before you were stuck 
+in the story forever! 
+
+
+Outro (lost): 
