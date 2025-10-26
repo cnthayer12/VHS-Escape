@@ -11,11 +11,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
+
     @SuppressWarnings("unchecked")
     public static ArrayList<Player> getPlayers() {
         ArrayList<Player> players = new ArrayList<Player>();
 
-        try (FileReader reader = new FileReader(USER_FILE_NAME)) {
+        File f = new File(USER_FILE_NAME);
+        if (!f.exists()) {
+            return players;
+        }
+
+        try (FileReader reader = new FileReader(f)) {
             Object parsed = new JSONParser().parse(reader);
 
             // normalize to a JSONArray called peopleJSON
@@ -25,7 +31,22 @@ public class DataLoader extends DataConstants {
             } else if (parsed instanceof JSONObject) {
                 JSONObject root = (JSONObject) parsed;
 
-                // FIRST: accept "users" (your uploaded file uses this)
+                // NEW: check schemaVersion if present
+                try {
+                    Object sv = root.get("schemaVersion");
+                    if (sv != null) {
+                        int svn = -1;
+                        try {
+                            if (sv instanceof Number) svn = ((Number) sv).intValue();
+                            else svn = Integer.parseInt(sv.toString());
+                        } catch (Exception ignore) {}
+                        if (svn != -1 && svn != 1) {
+                            System.out.println("Warning: players.json schemaVersion=" + svn + " (expected 1). Proceeding to parse 'users'/'players'.");
+                        }
+                    }
+                } catch (Throwable ignore) {}
+
+                // FIRST: accept "users" (preferred wrapper)
                 Object maybeUsers = root.get("users");
                 if (maybeUsers instanceof JSONArray) {
                     peopleJSON = (JSONArray) maybeUsers;
@@ -93,60 +114,62 @@ public class DataLoader extends DataConstants {
 
                 // inventory: parse into Item objects (accept simple string or object)
                 ArrayList<Item> inventory = new ArrayList<>();
-                Object invObj = personJSON.get(USER_INVENTORY);
-                if (invObj instanceof JSONArray) {
-                    JSONArray invArr = (JSONArray) invObj;
-                    for (Object it : invArr) {
-                        if (it instanceof JSONObject) {
-                            JSONObject itemObj = (JSONObject) it;
-                            Item item = new Item();
-                            if (itemObj.get("name") != null) item.setName(itemObj.get("name").toString());
-                            if (itemObj.get("description") != null) item.setDescription(itemObj.get("description").toString());
-                            if (itemObj.get("location") != null) item.setLocation(itemObj.get("location").toString());
-                            inventory.add(item);
-                        } else if (it != null) {
-                            Item item = new Item();
-                            item.setName(it.toString());
-                            inventory.add(item);
-                        }
-                    }
-                }
-                progress.setInventory(inventory);
 
-                // storedHints
-                ArrayList<Hint> storedHints = new ArrayList<>();
-                Object shObj = personJSON.get(USER_STORED_HINTS);
-                if (shObj instanceof JSONArray) {
-                    JSONArray shArr = (JSONArray) shObj;
-                    for (Object h : shArr) {
-                        if (h instanceof JSONObject) {
-                            JSONObject hJ = (JSONObject) h;
-                            Hint hint = new Hint();
-                            if (hJ.get("text") != null) hint.setText(hJ.get("text").toString());
-                            if (hJ.get("cost") != null) {
-                                try { hint.setCost(((Long) hJ.get("cost")).intValue()); } catch (Exception e) {}
+                try {
+                    Object progObj = personJSON.get("progress");
+                    if (progObj instanceof JSONObject) {
+                        JSONObject progJ = (JSONObject) progObj;
+
+                        // inventory
+                        try {
+                            Object inv = progJ.get(USER_INVENTORY);
+                            if (inv instanceof JSONArray) {
+                                JSONArray invA = (JSONArray) inv;
+                                for (Object itRaw : invA) {
+                                    if (itRaw instanceof JSONObject) {
+                                        JSONObject itJ = (JSONObject) itRaw;
+                                        Item it = new Item();
+                                        try { if (itJ.get("name") != null) it.setName(itJ.get("name").toString()); } catch (Throwable ignore) {}
+                                        try { if (itJ.get("description") != null) it.setDescription(itJ.get("description").toString()); } catch (Throwable ignore) {}
+                                        try { if (itJ.get("location") != null) it.setLocation(itJ.get("location").toString()); } catch (Throwable ignore) {}
+                                        inventory.add(it);
+                                    }
+                                }
                             }
-                            storedHints.add(hint);
-                        } else if (h != null) {
-                            Hint hint = new Hint();
-                            hint.setText(h.toString());
-                            storedHints.add(hint);
-                        }
+                        } catch (Throwable ignored) {}
+                        progress.setInventory(inventory);
+
+                        // storedHints
+                        ArrayList<Hint> stored = new ArrayList<>();
+                        try {
+                            Object sh = progJ.get(USER_STORED_HINTS);
+                            if (sh instanceof JSONArray) {
+                                for (Object hj : (JSONArray) sh) {
+                                    if (!(hj instanceof JSONObject)) continue;
+                                    JSONObject hjo = (JSONObject) hj;
+                                    Hint hint = new Hint();
+                                    try { if (hjo.get("text") != null) hint.setText(hjo.get("text").toString()); } catch (Throwable ignore) {}
+                                    try { if (hjo.get("cost") != null) hint.setCost(((Long) hjo.get("cost")).intValue()); } catch (Throwable ignore) {}
+                                    try {
+                                        if (hjo.get("used") != null) {
+                                            Method setUsed = hint.getClass().getMethod("setUsed", boolean.class);
+                                            setUsed.invoke(hint, ((Boolean) hjo.get("used")).booleanValue());
+                                        }
+                                    } catch (Throwable ignore) {}
+                                    stored.add(hint);
+                                }
+                            }
+                        } catch (Throwable ignored) {}
+                        progress.setStoredHints(stored);
+
+                        // strikes / score
+                        try { if (progJ.get(USER_STRIKES) != null) progress.setStrikes(((Long) progJ.get(USER_STRIKES)).intValue()); } catch (Exception ignored) {}
+                        try { if (progJ.get(USER_CURRENT_SCORE) != null) progress.setScore(((Long) progJ.get(USER_CURRENT_SCORE)).intValue()); } catch (Exception ignored) {}
+
+                        // currentPuzzle and completedPuzzles left empty (loader does not instantiate puzzles here)
+                        // completed puzzles could be read if needed (but the original loader leaves them out)
                     }
-                }
-                progress.setStoredHints(storedHints);
-
-                if (personJSON.get(USER_STRIKES) != null) {
-                    try {
-                        progress.setStrikes(((Long) personJSON.get(USER_STRIKES)).intValue());
-                    } catch (Exception e) {}
-                }
-
-                if (personJSON.get(USER_CURRENT_SCORE) != null) {
-                    try {
-                        progress.setScore(((Long) personJSON.get(USER_CURRENT_SCORE)).intValue());
-                    } catch (Exception e) {}
-                }
+                } catch (Throwable ignored) {}
 
                 ArrayList<Progress> progressList = new ArrayList<>();
                 progressList.add(progress);
@@ -206,7 +229,7 @@ public class DataLoader extends DataConstants {
 
                 Puzzle puzzle = new Puzzle();
 
-                // set ID if present
+                // set ID if present (support "id" or "uuid")
                 if (pj.get("id") != null) {
                     try { puzzle.setID(UUID.fromString(pj.get("id").toString())); } catch (Exception ignored) {}
                 } else if (pj.get("uuid") != null) {
@@ -221,10 +244,8 @@ public class DataLoader extends DataConstants {
                         if (h instanceof JSONObject) {
                             JSONObject hj = (JSONObject) h;
                             Hint hint = new Hint();
-                            if (hj.get("text") != null) hint.setText(hj.get("text").toString());
-                            if (hj.get("cost") != null) {
-                                try { hint.setCost(((Long) hj.get("cost")).intValue()); } catch (Exception ignored) {}
-                            }
+                            try { if (hj.get("text") != null) hint.setText(hj.get("text").toString()); } catch (Throwable ignore) {}
+                            try { if (hj.get("cost") != null) hint.setCost(((Long) hj.get("cost")).intValue()); } catch (Throwable ignore) {}
                             if (hj.get("used") != null) {
                                 try {
                                     Method setUsed = hint.getClass().getMethod("setUsed", boolean.class);
@@ -237,21 +258,19 @@ public class DataLoader extends DataConstants {
                 }
                 try { puzzle.getClass().getMethod("setHints", java.util.List.class).invoke(puzzle, hints); }
                 catch (Exception ignore) {
-                    // setHints does not exist: try to add via other setters if available
+                    // setHints does not exist: try to add via addHint(Hint)
                     try {
                         Method addHint = puzzle.getClass().getMethod("addHint", Hint.class);
                         for (Hint hh : hints) addHint.invoke(puzzle, hh);
                     } catch (Exception ignore2) { /* unable to populate hints */ }
                 }
 
-                // other puzzle metadata can be read here if needed
-
+                // other puzzle metadata can be read here if needed (prompt, combination, meta fields etc.)
                 loaded.add(puzzle);
 
-                // attempt to register puzzle with PuzzlesManager
+                // attempt to register puzzle with PuzzlesManager if available
                 try {
                     PuzzlesManager pm = PuzzlesManager.getInstance();
-                    // try addPuzzle(Puzzle)
                     try {
                         Method addM = pm.getClass().getMethod("addPuzzle", Puzzle.class);
                         addM.invoke(pm, puzzle);

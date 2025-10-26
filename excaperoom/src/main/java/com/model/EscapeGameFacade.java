@@ -67,10 +67,17 @@ public class EscapeGameFacade {
 
     public void createPlayer(String username, String pass) {
         players.createAccount(username, pass);
+        saveProgress();
     }
 
     public void login(String username, String pass) {
         players.login(username, pass);
+        saveProgress();
+    }
+
+    public void logout() {
+        players.logout();
+        saveProgress();
     }
 
     public void displayStory() {
