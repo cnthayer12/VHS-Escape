@@ -145,4 +145,8 @@ public class EscapeGameFacade {
         players.generateCertificate(game.getDifficulty(), game.getScore());
     }
 
+    public void checkProgress() {
+        players.checkProgress();
+    }
+
 }

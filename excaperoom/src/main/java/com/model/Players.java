@@ -144,6 +144,10 @@ public class Players {
       DataWriter.savePlayers(players);
   }
 
+  public void checkProgress() {
+    System.out.println(currentPlayer.getProgress().get(currentPlayer.getProgress().size()-1));
+  }
+
 
   public void generateCertificate(Game.Difficulty difficulty, int score) {
     Player player = getCurrentPlayer();
