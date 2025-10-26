@@ -10,6 +10,10 @@ public class Driver {
 
     public static void main(String[] args) {
         facade.loadProgress();
+        
+        // Pre-populate leaderboard with existing players for final scenario
+        setupLeaderboard();
+        
         System.out.println("Welcome to VHS Escape!");
         System.out.println("Creating a new account for Leni Rivers (display name: lrivers) with the password password1234, lrivers is an account that already exists for her brother though!");
         facade.createPlayer("lrivers", "password1234");
@@ -53,6 +57,7 @@ public class Driver {
             System.out.println("\n--- Intro ---");
             System.out.println(intro);
             Speak.speak(intro);
+            facade.displayStory(); // Display game story through facade
 
             // Create three puzzles BEFORE starting the game
             Riddle riddle = new Riddle();
@@ -74,7 +79,7 @@ public class Driver {
             lockedBox.setRequiredItemName("Key");
             lockedBox.addHint(new Hint("The lock looks old… maybe a key would help.", 10, lockedBox));
 
-            // Add puzzles to PuzzlesManager
+            // Add puzzles through the facade (this adds to PuzzlesManager)
             PuzzlesManager manager = PuzzlesManager.getInstance();
             manager.addPuzzle(cipher);
             manager.addPuzzle(riddle);
@@ -82,6 +87,11 @@ public class Driver {
 
             // Start game through facade
             facade.startGame(Players.getInstance().getCurrentPlayer(), Game.Difficulty.MEDIUM);
+            
+            // Set the first puzzle as current
+            if (manager.getPuzzles() != null && !manager.getPuzzles().isEmpty()) {
+                manager.setCurrentPuzzle(manager.getPuzzles().get(0));
+            }
 
             // Acquire items through facade
             Item flashlight = new Item("Flashlight", "Illuminates the answer", "Found in the room", null);
@@ -93,60 +103,57 @@ public class Driver {
             System.out.println("Items acquired: Flashlight, Vintage VHS Tape, and Key\n");
 
             int totalPuzzlesSolved = 0;
-            // Use the actual count of puzzles we added
-            int totalPuzzles = 3;
-            
-            System.out.println("DEBUG: Total puzzles = " + totalPuzzles);
+            int totalPuzzles = facade.getTotalPuzzles();
 
-            // ========== PUZZLE 1: CIPHER ==========
+            // Solve puzzles in a non-linear order 
             System.out.println("=== Puzzle 1: Cipher ===");
-            System.out.println("Cipher Text: " + cipher.getCipherText());
-            
-            boolean cipherSolved = false;
-            int attempts = 0;
-            
-            while (attempts < 3 && !cipherSolved) {
-                System.out.print("Enter your answer (" + (3 - attempts) + " tries left): ");
-                String cipherAnswer = scanner.nextLine().trim();
+            facade.startPuzzle(); // Start through facade
+            Puzzle currentPuzzle = facade.getCurrentPuzzle();
+            if (currentPuzzle instanceof Cipher) {
+                Cipher cipherPuzzle = (Cipher) currentPuzzle;
+                System.out.println("Cipher Text: " + cipherPuzzle.getCipherText());
+                
+                boolean cipherSolved = false;
+                int attempts = 0;
+                
+                while (attempts < 3 && !cipherSolved) {
+                    System.out.print("Enter your answer (" + (3 - attempts) + " tries left): ");
+                    String cipherAnswer = scanner.nextLine().trim();
 
-                // Submit answer through facade
-                if (facade.submitAnswer(cipherAnswer)) {
-                    System.out.println("Correct!\n");
-                    cipherSolved = true;
-                    facade.completePuzzle(); // Complete through facade
-                    totalPuzzlesSolved++;
-                } else {
-                    attempts++;
-                    facade.addStrike(); // Add strike through facade
-                    System.out.println("Incorrect.");
+                    // Submit answer through facade
+                    if (facade.submitAnswer(cipherAnswer)) {
+                        System.out.println("Correct!\n");
+                        cipherSolved = true;
+                        facade.completePuzzle(); // Complete through facade
+                        totalPuzzlesSolved++;
+                    } else {
+                        attempts++;
+                        facade.addStrike(); // Add strike through facade
+                        System.out.println("Incorrect.");
 
-                    // Offer hints - check current puzzle's hints directly
-                    ArrayList<Hint> availableHints = cipher.getHints();
-                    int usedCount = 0;
-                    for (Hint h : availableHints) {
-                        if (h.isUsed()) usedCount++;
-                    }
-                    
-                    if (attempts == 1 && usedCount < availableHints.size()) {
-                        System.out.print("Would you like to use your first hint? (yes/no): ");
-                        if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
-                            Hint usedHint = facade.revealHint(); // Reveal through facade
-                            if (usedHint != null) {
-                                System.out.println("Hint: " + usedHint.getText());
+                        // Offer hints through facade
+                        ArrayList<Hint> availableHints = facade.getAvailableHints();
+                        if (attempts == 1 && availableHints.size() > 0) {
+                            System.out.print("Would you like to use your first hint? (yes/no): ");
+                            if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                                Hint usedHint = facade.revealHint(); // Reveal through facade
+                                if (usedHint != null) {
+                                    System.out.println("Hint: " + usedHint.getText());
+                                }
+                            }
+                        } else if (attempts == 2 && availableHints.size() > 1) {
+                            System.out.print("Would you like to use your second hint? (yes/no): ");
+                            if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                                Hint usedHint = facade.revealHint(); // Reveal through facade
+                                if (usedHint != null) {
+                                    System.out.println("Hint: " + usedHint.getText());
+                                }
                             }
                         }
-                    } else if (attempts == 2 && usedCount < availableHints.size()) {
-                        System.out.print("Would you like to use your second hint? (yes/no): ");
-                        if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
-                            Hint usedHint = facade.revealHint(); // Reveal through facade
-                            if (usedHint != null) {
-                                System.out.println("Hint: " + usedHint.getText());
-                            }
+                        
+                        if (attempts == 3) {
+                            System.out.println("Out of tries! The correct answer was: " + cipherPuzzle.getCorrectAnswer() + "\n");
                         }
-                    }
-                    
-                    if (attempts == 3) {
-                        System.out.println("Out of tries! The correct answer was: " + cipher.getCorrectAnswer() + "\n");
                     }
                 }
             }
@@ -154,55 +161,54 @@ public class Driver {
             facade.nextPuzzle(); // Move to next puzzle through facade
             facade.resetStrikes(); // Reset strikes through facade
 
-            // ========== PUZZLE 2: RIDDLE ==========
             System.out.println("=== Puzzle 2: Riddle ===");
-            System.out.println("Riddle: " + riddle.getRiddleText());
+            facade.startPuzzle(); // Start through facade
+            currentPuzzle = facade.getCurrentPuzzle();
+            if (currentPuzzle instanceof Riddle) {
+                Riddle riddlePuzzle = (Riddle) currentPuzzle;
+                System.out.println("Riddle: " + riddlePuzzle.getRiddleText());
 
-            boolean riddleSolved = false;
-            int riddleAttempts = 0;
+                boolean riddleSolved = false;
+                int riddleAttempts = 0;
 
-            while (riddleAttempts < 3 && !riddleSolved) {
-                System.out.print("Enter your answer (" + (3 - riddleAttempts) + " tries left): ");
-                String riddleAnswer = scanner.nextLine().trim();
+                while (riddleAttempts < 3 && !riddleSolved) {
+                    System.out.print("Enter your answer (" + (3 - riddleAttempts) + " tries left): ");
+                    String riddleAnswer = scanner.nextLine().trim();
 
-                // Submit answer through facade
-                if (facade.submitAnswer(riddleAnswer)) {
-                    System.out.println("Correct!\n");
-                    riddleSolved = true;
-                    facade.completePuzzle(); // Complete through facade
-                    totalPuzzlesSolved++;
-                } else {
-                    riddleAttempts++;
-                    facade.addStrike(); // Add strike through facade
-                    System.out.println("Incorrect.");
+                    // Submit answer through facade
+                    if (facade.submitAnswer(riddleAnswer)) {
+                        System.out.println("Correct!\n");
+                        riddleSolved = true;
+                        facade.completePuzzle(); // Complete through facade
+                        totalPuzzlesSolved++;
+                    } else {
+                        riddleAttempts++;
+                        facade.addStrike(); // Add strike through facade
+                        System.out.println("Incorrect.");
 
-                    // Offer hints - check current puzzle's hints directly
-                    ArrayList<Hint> availableHints = riddle.getHints();
-                    int usedCount = 0;
-                    for (Hint h : availableHints) {
-                        if (h.isUsed()) usedCount++;
-                    }
-                    
-                    if (riddleAttempts == 1 && usedCount < availableHints.size()) {
-                        System.out.print("Would you like to use your first hint? (yes/no): ");
-                        if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
-                            Hint usedHint = facade.revealHint();
-                            if (usedHint != null) {
-                                System.out.println("Hint: " + usedHint.getText());
+                        // Offer hints through facade
+                        ArrayList<Hint> availableHints = facade.getAvailableHints();
+                        if (riddleAttempts == 1 && availableHints.size() > 0) {
+                            System.out.print("Would you like to use your first hint? (yes/no): ");
+                            if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                                Hint usedHint = facade.revealHint();
+                                if (usedHint != null) {
+                                    System.out.println("Hint: " + usedHint.getText());
+                                }
+                            }
+                        } else if (riddleAttempts == 2 && availableHints.size() > 1) {
+                            System.out.print("Would you like to use your second hint? (yes/no): ");
+                            if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                                Hint usedHint = facade.revealHint();
+                                if (usedHint != null) {
+                                    System.out.println("Hint: " + usedHint.getText());
+                                }
                             }
                         }
-                    } else if (riddleAttempts == 2 && usedCount < availableHints.size()) {
-                        System.out.print("Would you like to use your second hint? (yes/no): ");
-                        if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
-                            Hint usedHint = facade.revealHint();
-                            if (usedHint != null) {
-                                System.out.println("Hint: " + usedHint.getText());
-                            }
+                        
+                        if (riddleAttempts == 3) {
+                            System.out.println("Out of tries! The correct answer was: " + riddlePuzzle.getCorrectAnswer() + "\n");
                         }
-                    }
-                    
-                    if (riddleAttempts == 3) {
-                        System.out.println("Out of tries! The correct answer was: " + riddle.getCorrectAnswer() + "\n");
                     }
                 }
             }
@@ -210,20 +216,23 @@ public class Driver {
             facade.nextPuzzle(); // Move to next puzzle through facade
             facade.resetStrikes(); // Reset strikes through facade
 
-            // ========== PUZZLE 3: ITEM PUZZLE ==========
             System.out.println("=== Puzzle 3: Item Puzzle (Locked Box) ===");
-            System.out.println("A locked box sits before you. You need the right item to open it.");
-            System.out.print("Do you want to try to open it? (yes/no): ");
-            
-            if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
-                // Submit answer through facade (ItemPuzzle checks inventory automatically)
-                if (facade.submitAnswer("")) {
-                    System.out.println("You used the Key! The box opens with a satisfying click.\n");
-                    facade.completePuzzle(); // Complete through facade
-                    totalPuzzlesSolved++;
-                } else {
-                    System.out.println("You don't have the required item (Key) to open this box.\n");
-                    facade.addStrike(); // Add strike through facade
+            facade.startPuzzle(); // Start through facade
+            currentPuzzle = facade.getCurrentPuzzle();
+            if (currentPuzzle instanceof ItemPuzzle) {
+                System.out.println("A locked box sits before you. You need the right item to open it.");
+                System.out.print("Do you want to try to open it? (yes/no): ");
+                
+                if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+                    // Submit answer through facade (ItemPuzzle checks inventory automatically)
+                    if (facade.submitAnswer("")) {
+                        System.out.println("You used the Key! The box opens with a satisfying click.\n");
+                        facade.completePuzzle(); // Complete through facade
+                        totalPuzzlesSolved++;
+                    } else {
+                        System.out.println("You don't have the required item (Key) to open this box.\n");
+                        facade.addStrike(); // Add strike through facade
+                    }
                 }
             }
 
@@ -283,7 +292,6 @@ public class Driver {
             } else {
                 finalOutro = outroLost;
                 System.out.println("⏰ Time's up or too many failures. You didn't escape this time.");
-                System.out.println("Puzzles Solved: " + totalPuzzlesSolved + "/" + totalPuzzles);
                 System.out.println("Final Score: " + finalScore);
             }
 
@@ -305,8 +313,6 @@ public class Driver {
                     Leaderboard.LeaderboardEntry entry = leaderboard.get(i);
                     System.out.println((i + 1) + ". " + entry);
                 }
-            } else {
-                System.out.println("No leaderboard entries yet!");
             }
 
         } else {
