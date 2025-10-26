@@ -72,9 +72,10 @@ public class EscapeGameFacade {
         saveProgress();
     }
 
-    public void login(String username, String pass) {
+    public boolean login(String username, String pass) {
         players.login(username, pass);
         saveProgress();
+        return false;
     }
 
     public void logout() {

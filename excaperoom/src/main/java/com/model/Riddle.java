@@ -1,3 +1,4 @@
+// Riddle.java
 package com.model;
 
 public class Riddle extends Puzzle {
@@ -9,6 +10,12 @@ public class Riddle extends Puzzle {
         this.riddleText = "";
         this.correctAnswer = "";
         this.type = "Riddle";
+    }
+
+    public Riddle(String riddleText, String correctAnswer) {
+        super();
+        this.riddleText = riddleText;
+        this.correctAnswer = correctAnswer;
     }
 
     public String getRiddleText() {
@@ -28,20 +35,11 @@ public class Riddle extends Puzzle {
     }
 
     @Override
-    public boolean checkAnswer(String userAnswer) {
-        if (userAnswer == null || userAnswer.trim().isEmpty()) {
-            playSound(false);
+    public boolean checkAnswer(String answer) {
+        if (answer == null || correctAnswer == null) {
             return false;
         }
-
-        if (userAnswer.trim().equalsIgnoreCase(correctAnswer.trim())) {
-            playSound(true);
-            completePuzzle();
-            return true;
-        } else {
-            playSound(false);
-            return false;
-        }
+        return answer.trim().equalsIgnoreCase(correctAnswer.trim());
     }
 
     @Override
