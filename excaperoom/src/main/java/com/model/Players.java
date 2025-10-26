@@ -100,4 +100,14 @@ public class Players {
         System.out.println("Account created successfully! Logging in now.");
         Players.getInstance().login(displayName, pass);
     }
+
+    public boolean loadProgress() {
+    ArrayList<Player> loadedPlayers = DataLoader.getPlayers();
+    if (loadedPlayers != null) {
+        players = loadedPlayers;
+        DataLoader.loadPuzzles();
+        return true;
+    }
+    return false;
+  }
 }
