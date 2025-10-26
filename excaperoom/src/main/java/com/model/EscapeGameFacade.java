@@ -98,7 +98,7 @@ public class EscapeGameFacade {
     }
 
     public void updateScore(int points) {
-        game.updateScore(points);
+        game.setScore(points);
     }
 
     public int getScore() {
