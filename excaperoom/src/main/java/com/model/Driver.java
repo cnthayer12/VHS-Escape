@@ -10,11 +10,6 @@ public class Driver {
 
     public static void main(String[] args) {
         facade.loadProgress();
-        
-        // IMPORTANT: Clear any loaded puzzles from the save file
-        // We want to use only our 3 new puzzles
-        PuzzlesManager.getInstance().getPuzzles().clear();
-        
         System.out.println("Welcome to VHS Escape!");
         System.out.println("Creating a new account for Leni Rivers (display name: lrivers) with the password password1234, lrivers is an account that already exists for her brother though!");
         facade.createPlayer("lrivers", "password1234");
@@ -87,9 +82,6 @@ public class Driver {
 
             // Start game through facade
             facade.startGame(Players.getInstance().getCurrentPlayer(), Game.Difficulty.MEDIUM);
-            
-            // Set first puzzle as current
-            manager.setCurrentPuzzle(cipher);
 
             // Acquire items through facade
             Item flashlight = new Item("Flashlight", "Illuminates the answer", "Found in the room", null);
@@ -243,10 +235,51 @@ public class Driver {
             String finalOutro;
             if (totalPuzzlesSolved == totalPuzzles) {
                 finalOutro = outroWon;
-                System.out.println("🎉 You escaped! All puzzles solved!");
+                
+                // ========== FINISHING THE GAME SCENARIO ==========
+                System.out.println("\n🎉 ═══════════════════════════════════════════════════ 🎉");
+                System.out.println("               YOU ESCAPED THE VHS ROOM!");
+                System.out.println("🎉 ═══════════════════════════════════════════════════ 🎉\n");
+                
+                // Leni logs back in (simulate for scenario)
+                System.out.println("🔐 Leni logs back in to see her final results...\n");
+                
+                // Calculate and display final score
+                Game game = Game.getInstance();
+                finalScore = game.calculateScore();
+                
+                System.out.println("📊 FINAL STATISTICS:");
+                System.out.println("─".repeat(60));
+                System.out.println("Game Name: VHS Escape Room");
+                System.out.println("Puzzles Solved: " + totalPuzzlesSolved + "/" + totalPuzzles);
                 System.out.println("Final Score: " + finalScore);
+                System.out.println("Difficulty: " + game.getDifficulty());
                 System.out.println("Hints Used: " + facade.getHintsUsed());
                 System.out.println("Strikes: " + facade.getStrikes());
+                System.out.println("─".repeat(60));
+                
+                // Add to leaderboard
+                Leaderboard.getInstance().addCurrentGameScore(game);
+                
+                // Display leaderboard with at least 3 other people
+                System.out.println("\n╔════════════════════════════════════════════════════════════╗");
+                System.out.println("║                    🏆 LEADERBOARD 🏆                       ║");
+                System.out.println("╚════════════════════════════════════════════════════════════╝\n");
+                
+                Leaderboard.getInstance().displayLeaderboard(10);
+                
+                // Show player's rank
+                int rank = Leaderboard.getInstance().getPlayerRank(Players.getInstance().getCurrentPlayer().getDisplayName());
+                if (rank > 0) {
+                    System.out.println("\n🎯 Leni's Rank: #" + rank + " out of " + 
+                                     Leaderboard.getInstance().size() + " players");
+                }
+                
+                // Generate certificate of completion
+                System.out.println("\n📜 GENERATING CERTIFICATE OF COMPLETION...\n");
+                facade.generateCompletionCertificate();
+                System.out.println("✓ Certificate saved to file!");
+                
             } else {
                 finalOutro = outroLost;
                 System.out.println("⏰ Time's up or too many failures. You didn't escape this time.");
@@ -261,7 +294,6 @@ public class Driver {
 
             // Generate certificate if won (through facade)
             if (totalPuzzlesSolved == totalPuzzles) {
-                facade.generateCompletionCertificate();
                 System.out.println("\n📜 Completion certificate generated!");
             }
 
@@ -285,10 +317,16 @@ public class Driver {
         facade.saveProgress();
         scanner.close();
     }
-}
-
-
-
-
     
-
+    /**
+     * Pre-populate leaderboard with existing players
+     */
+    private static void setupLeaderboard() {
+        Leaderboard leaderboard = Leaderboard.getInstance();
+        
+        // Add at least 3 existing players to leaderboard
+        leaderboard.addScore("Sam", 1450, 10, 780, Game.Difficulty.HARD);
+        leaderboard.addScore("Pam", 1320, 10, 920, Game.Difficulty.MEDIUM);
+        leaderboard.addScore("Dan", 1200, 9, 650, Game.Difficulty.EASY);
+    }
+}
