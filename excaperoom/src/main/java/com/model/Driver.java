@@ -85,10 +85,14 @@ public class Driver {
         }
 
         facade.saveProgress();
+<<<<<<< HEAD
 
         
         scanner.close();
     }
+=======
+        }
+>>>>>>> 6f2465f574755591caf1f419b0b118d4b9ea1a35
 }
 
 

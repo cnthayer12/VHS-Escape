@@ -2,6 +2,8 @@ package com.model;
 
 import java.util.ArrayList;
 
+import com.model.Leaderboard.LeaderboardEntry;
+
 public class EscapeGameFacade {
     private Game game;
     private PuzzlesManager puzzlesManager;
@@ -135,4 +137,9 @@ public class EscapeGameFacade {
     public void saveProgress() {
         players.saveProgress();
     }
+
+    public ArrayList<LeaderboardEntry> getLeaderboard() {
+    return Leaderboard.getInstance().getAllEntries();
+}
+
 }
