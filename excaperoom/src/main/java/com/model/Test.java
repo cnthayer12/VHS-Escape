@@ -11,6 +11,7 @@ public class Test {
         progress.setStrikes(2);
         progress.setScore(500);
         progress.addItem(new Item("Test Item", "item for testing", "Kitchen", null));
+
         Puzzle puzzle = facade.getAllPuzzles().get(0);
         progress.addCompletedPuzzle(puzzle);
         ArrayList<Progress> progresses = new ArrayList<>();

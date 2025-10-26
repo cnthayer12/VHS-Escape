@@ -1,11 +1,5 @@
 package com.model;
 
-<<<<<<< HEAD
-public class ItemPuzzle extends Puzzle{
-
-    public ItemPuzzle() {
-        super();
-=======
 public class ItemPuzzle extends Puzzle {
     private String requiredItemName;
     private String puzzleType;
@@ -14,6 +8,7 @@ public class ItemPuzzle extends Puzzle {
         super();
         this.puzzleType = type;
         this.requiredItemName = "";
+        type = "ItemPuzzle";
     }
 
     public String getRequiredItemName() {
@@ -48,7 +43,6 @@ public class ItemPuzzle extends Puzzle {
             }
         }
         return false;
->>>>>>> 060f5f37ae567bd71bccbbe598e1ae01fec35893
     }
 
     @Override

@@ -10,9 +10,7 @@ public class Cipher extends Puzzle {
         super();
         this.cipherText = "";
         this.correctAnswer = "";
-<<<<<<< HEAD
         this.type = "Cipher";
-=======
         this.shift = 1; // default Caesar cipher shift
     }
 
@@ -21,7 +19,6 @@ public class Cipher extends Puzzle {
         this.cipherText = cipherText;
         this.correctAnswer = correctAnswer;
         this.shift = shift;
->>>>>>> 060f5f37ae567bd71bccbbe598e1ae01fec35893
     }
 
     public String getCipherText() {
