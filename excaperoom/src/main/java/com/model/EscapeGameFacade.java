@@ -15,7 +15,7 @@ public class EscapeGameFacade {
         this.puzzlesManager = PuzzlesManager.getInstance();
         this.players = Players.getInstance();
     }
-     
+    
     public static EscapeGameFacade getInstance() {
         if (instance == null) {
             instance = new EscapeGameFacade();
@@ -72,9 +72,10 @@ public class EscapeGameFacade {
         saveProgress();
     }
 
-    public void login(String username, String pass) {
+    public boolean login(String username, String pass) {
         players.login(username, pass);
         saveProgress();
+        return false;
     }
 
     public void logout() {
