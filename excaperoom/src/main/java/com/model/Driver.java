@@ -23,28 +23,6 @@ public class Driver {
         System.out.println("\nLeni logs into her account...");
         facade.login("lerivers", "password1234");
 
-        System.out.println("Logging out of Leni's and logging into lrivers's to show data consistency...");
-        facade.logout();
-        facade.login("lrivers", "password1234");
-        Player currentPlayer = Players.getCurrentPlayer();
-        Progress progress = new Progress();
-        progress.setStrikes(2);
-        progress.setScore(500);
-        progress.addItem(new Item("Test Item", "item for testing", "Kitchen", null));
-
-        Puzzle puzzle = facade.getAllPuzzles().get(0);
-        progress.addCompletedPuzzle(puzzle);
-        ArrayList<Progress> progresses = new ArrayList<>();
-        progresses.add(progress);
-        currentPlayer.setProgress(progresses);
-        System.out.println("Changes made to lrivers's stats, logging out and logging back in to check.");
-        facade.logout();
-        facade.login("lrivers", "password1234");
-        facade.checkProgress();
-        System.out.println("Back to Leni...");
-        facade.logout();
-        facade.login("lerivers", "password1234");
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nAvailable Escape Rooms:");
         System.out.println("1. VHS Escape");
@@ -103,6 +81,11 @@ public class Driver {
 
             // Add puzzles through the facade (this adds to PuzzlesManager)
             PuzzlesManager manager = PuzzlesManager.getInstance();
+            
+            // Clear any existing puzzles from JSON
+            manager.getPuzzles().clear();
+            
+            // Add our custom puzzles
             manager.addPuzzle(cipher);
             manager.addPuzzle(riddle);
             manager.addPuzzle(lockedBox);
@@ -353,8 +336,8 @@ public class Driver {
         Leaderboard leaderboard = Leaderboard.getInstance();
         
         // Add at least 3 existing players to leaderboard
-        leaderboard.addScore("Sam", 1450, 10, 780, Game.Difficulty.HARD);
-        leaderboard.addScore("Pam", 1320, 10, 920, Game.Difficulty.MEDIUM);
-        leaderboard.addScore("Dan", 1200, 9, 650, Game.Difficulty.EASY);
+        leaderboard.addScore("Alex Martinez", 1450, 10, 780, Game.Difficulty.HARD);
+        leaderboard.addScore("Sam Chen", 1320, 10, 920, Game.Difficulty.MEDIUM);
+        leaderboard.addScore("Jordan Lee", 1200, 9, 650, Game.Difficulty.EASY);
     }
 }

@@ -1,10 +1,14 @@
-🎓 VHS Escape Completion Certificate 🎓
+              VHS ESCAPE COMPLETION CERTIFICATE
 
-Player: lerivers
-Game: VHS Escape
-Difficulty: MEDIUM
-Hints Used: 4
-Final Score: 800
+------------------------------------------------------------
+ Player Name   : lerivers
+ Game Name     : VHS Escape
+ Difficulty    : MEDIUM
+ Hints Used    : 0
+ Final Score   : 1300
+------------------------------------------------------------
 
 🏆 You escaped the tape and unlocked the final mystery!
 Thanks for playing — your courage and curiosity are unmatched.
+
+============================================================
