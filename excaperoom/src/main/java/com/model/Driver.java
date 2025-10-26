@@ -85,8 +85,7 @@ public class Driver {
         }
 
         facade.saveProgress();
-        scanner.close();
-    }
+        }
 }
 
 
