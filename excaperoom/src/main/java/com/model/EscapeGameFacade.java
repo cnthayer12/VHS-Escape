@@ -139,7 +139,10 @@ public class EscapeGameFacade {
     }
 
     public ArrayList<LeaderboardEntry> getLeaderboard() {
-    return Leaderboard.getInstance().getAllEntries();
-}
+         return Leaderboard.getInstance().getAllEntries();
+    }
+    public void generateCompletionCertificate() {
+        players.generateCertificate(game.getDifficulty(), game.getScore());
+    }
 
 }
