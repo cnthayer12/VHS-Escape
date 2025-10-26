@@ -15,7 +15,7 @@ public class EscapeGameFacade {
         this.puzzlesManager = PuzzlesManager.getInstance();
         this.players = Players.getInstance();
     }
-    
+     
     public static EscapeGameFacade getInstance() {
         if (instance == null) {
             instance = new EscapeGameFacade();
