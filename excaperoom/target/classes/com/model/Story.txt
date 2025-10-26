@@ -8,4 +8,5 @@ Outro (won): Congratulations!!!! You completed all the puzzles and escaped the V
 in the story forever! 
 
 
-Outro (lost): 
+Outro (lost): Good try! You didn’t escape this time… but the game isn’t over. 
+Try again and see if you can beat the tape!
