@@ -332,7 +332,7 @@ public class LibraryUI {
         System.out.println("\n--- SAVE PROGRESS ---");
         
         if (facade.saveProgress()) {
-            System.out.println("✓ Progress saved successfully");
+            System.out.println("✓ Progress saved sucgit pucessfully");
         } else {
             System.out.println("✗ Failed to save progress");
         }
