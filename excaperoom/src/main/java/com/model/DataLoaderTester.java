@@ -1,9 +1,11 @@
 package com.model;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 
 public class DataLoaderTester {
 
@@ -75,6 +77,31 @@ public class DataLoaderTester {
                 System.exit(2);
             }
 
+            // New: password presence check (non-fatal). For each expected UUID, try to find Player and read password.
+            System.out.println("\n--- Password presence check for expected accounts (non-fatal) ---");
+            for (String expectedUuid : EXPECTED_UUIDS) {
+                Player matched = null;
+                for (Player p : players) {
+                    if (p.getId() != null && expectedUuid.equals(p.getId().toString())) {
+                        matched = p;
+                        break;
+                    }
+                }
+                if (matched == null) {
+                    System.out.println("  [WARN] expected uuid " + expectedUuid + " not present to check password.");
+                    continue;
+                }
+
+                String pw = readPasswordFromPlayer(matched);
+                if (pw == null) {
+                    System.out.println("  [WARN] uuid=" + expectedUuid + " displayName=" + safeString(matched.getDisplayName()) + " -> password: <null> (no getter/field found)");
+                } else if (pw.length() == 0) {
+                    System.out.println("  [WARN] uuid=" + expectedUuid + " displayName=" + safeString(matched.getDisplayName()) + " -> password is empty string");
+                } else {
+                    System.out.println("  [OK]   uuid=" + expectedUuid + " displayName=" + safeString(matched.getDisplayName()) + " -> password length=" + pw.length());
+                }
+            }
+
             // Non-fatal: try to call DataLoader.loadPuzzles() reflectively if present
             try {
                 Method loadPuzzlesM = DataLoader.class.getMethod("loadPuzzles");
@@ -103,5 +130,40 @@ public class DataLoaderTester {
             t.printStackTrace(System.err);
             System.exit(3);
         }
+    }
+
+    /**
+     * Try to obtain a password string from a Player instance.
+     * Prefer getPassword(); fall back to reflection on a 'password' field.
+     * Returns null if neither is available.
+     */
+    private static String readPasswordFromPlayer(Player p) {
+        if (p == null) return null;
+        try {
+            Method gp = p.getClass().getMethod("getPassword");
+            Object pw = gp.invoke(p);
+            if (pw != null) return pw.toString();
+        } catch (NoSuchMethodException nsme) {
+            // try reflective field access
+            try {
+                Field pf = p.getClass().getDeclaredField("password");
+                pf.setAccessible(true);
+                Object val = pf.get(p);
+                if (val != null) return val.toString();
+            } catch (Throwable ignored) {}
+        } catch (Throwable ignored) {}
+
+        // final attempt: try method named "password"
+        try {
+            Method pmethod = p.getClass().getMethod("password");
+            Object pw2 = pmethod.invoke(p);
+            if (pw2 != null) return pw2.toString();
+        } catch (Throwable ignored) {}
+
+        return null;
+    }
+
+    private static String safeString(String s) {
+        return s == null ? "<null>" : s;
     }
 }

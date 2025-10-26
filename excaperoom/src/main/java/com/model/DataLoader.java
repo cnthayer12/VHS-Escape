@@ -68,7 +68,25 @@ public class DataLoader extends DataConstants {
                 }
 
                 String displayName = personJSON.get(USER_NAME) == null ? "" : personJSON.get(USER_NAME).toString();
-                String password = personJSON.get("password") == null ? "" : personJSON.get("password").toString();
+
+                // Prefer top-level password. If missing, fall back to progress.password (legacy).
+                String password = "";
+                try {
+                    Object pwTop = personJSON.get("password");
+                    if (pwTop != null) password = pwTop.toString();
+                } catch (Throwable ignored) {}
+
+                if (password == null || password.length() == 0) {
+                    // fallback: check inside progress object (legacy shape some files had)
+                    try {
+                        Object progRaw = personJSON.get("progress");
+                        if (progRaw instanceof JSONObject) {
+                            JSONObject progJ = (JSONObject) progRaw;
+                            Object pwProg = progJ.get("password");
+                            if (pwProg != null) password = pwProg.toString();
+                        }
+                    } catch (Throwable ignored) {}
+                }
 
                 // Build Progress object (use no-arg constructor and setters for robustness)
                 Progress progress = new Progress();

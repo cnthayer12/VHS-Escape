@@ -1,84 +1,58 @@
-{
-  "schemaVersion": 1,
-  "users": [
-    {
-      "uuid": "0c84e4ca-e25d-4f21-a409-c78a8543556a",
-      "displayName": "Carleigh",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "completedPuzzles": [],
-        "currentPuzzle": null,
-        "strikes": 0,
-        "currentScore": 0,
-        "password": "Carleigh"
-      },
-      "sessions": [
-        {
-          "gameID": null,
-          "roomID": null,
-          "difficulty": null,
-          "puzzles": [],
-          "completedCount": 0,
-          "score": 0,
-          "isPaused": false,
-          "isOver": false,
-          "startTime": null,
-          "endTime": null,
-          "facade": {
-            "facadeID": null,
-            "currentState": null,
-            "lastAction": null,
-            "sessionStartTime": null
-          }
-        }
-      ]
+[
+  {
+    "password": "",
+    "displayName": "Carleigh",
+    "progress": {
+      "currentScore": 0,
+      "strikes": 0,
+      "completedPuzzles": [],
+      "hintsUsed": 0,
+      "inventory": [],
+      "storedHints": [],
+      "currentPuzzle": null
     },
-    {
-      "uuid": "9a7411d6-45a7-4964-aefd-43f79b6a6fe7",
-      "displayName": "Lukin",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "completedPuzzles": [],
-        "currentPuzzle": null,
-        "strikes": 0,
-        "currentScore": 0,
-        "password": "Lukin"
-      },
-      "sessions": []
+    "uuid": "0c84e4ca-e25d-4f21-a409-c78a8543556a"
+  },
+  {
+    "password": "",
+    "displayName": "Lukin",
+    "progress": {
+      "currentScore": 0,
+      "strikes": 0,
+      "completedPuzzles": [],
+      "hintsUsed": 0,
+      "inventory": [],
+      "storedHints": [],
+      "currentPuzzle": null
     },
-    {
-      "uuid": "17731615-a3ae-49a9-a77e-a578166e01da",
-      "displayName": "Bianca",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "completedPuzzles": [],
-        "currentPuzzle": null,
-        "strikes": 0,
-        "currentScore": 0,
-        "password": "Bianca"
-      },
-      "sessions": []
+    "uuid": "9a7411d6-45a7-4964-aefd-43f79b6a6fe7"
+  },
+  {
+    "password": "",
+    "displayName": "Bianca",
+    "progress": {
+      "currentScore": 0,
+      "strikes": 0,
+      "completedPuzzles": [],
+      "hintsUsed": 0,
+      "inventory": [],
+      "storedHints": [],
+      "currentPuzzle": null
     },
-    {
-      "uuid": "045cb7de-25af-4bde-a0b6-f4aa91517154",
-      "displayName": "Charlotte",
-      "progress": {
-        "hintsUsed": 0,
-        "inventory": [],
-        "storedHints": [],
-        "completedPuzzles": [],
-        "currentPuzzle": null,
-        "strikes": 0,
-        "currentScore": 0,
-        "password": "Charlotte"
-      },
-      "sessions": []
-    }
-  ]
-}
+    "uuid": "17731615-a3ae-49a9-a77e-a578166e01da"
+  },
+  {
+    "password": "",
+    "displayName": "Charlotte",
+    "progress": {
+      "currentScore": 0,
+      "strikes": 0,
+      "completedPuzzles": [],
+      "hintsUsed": 0,
+      "inventory": [],
+      "storedHints": [],
+      "currentPuzzle": null
+    },
+    "uuid": "045cb7de-25af-4bde-a0b6-f4aa91517154"
+  }
+]
