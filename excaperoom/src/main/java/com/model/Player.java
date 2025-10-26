@@ -48,6 +48,10 @@ public class Player {
     }
 
     public void setPassword(String password) {
+        if(password.equals("")) {
+            System.out.println("Password cannot be empty");
+            return;
+        }
         this.password = password;
     }
 

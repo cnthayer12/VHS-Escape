@@ -86,6 +86,10 @@ public class Players {
             System.out.println("Could not create account, a user is already logged in.");
             return;
         }
+        if(pass.equals("")) {
+            System.out.println("Could not create account, password cannot be empty.");
+            return;
+        }
         for(Player player : players) {
             if(player.getDisplayName().equals(displayName)) {
                 System.out.println("Could not create account, one with this name already exists.");

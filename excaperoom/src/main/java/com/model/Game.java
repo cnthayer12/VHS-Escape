@@ -1,7 +1,7 @@
 package com.model;
  
-import java.time.Instant;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -110,6 +110,7 @@ public class Game {
         finalScore = Math.max(0, finalScore);
         
         this.score = finalScore;
+        EscapeGameFacade.getInstance().updateScore(finalScore);
         return finalScore;
     }
     
@@ -222,6 +223,7 @@ public class Game {
     
     public void setScore(int score) {
         this.score = score;
+        EscapeGameFacade.getInstance().updateScore(score);
     }
     
     public boolean isOver() {
