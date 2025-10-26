@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
@@ -199,6 +203,86 @@ public class DataLoader extends DataConstants {
         return players;
     }
 
+    /**
+     * Helper: attempt to call a setter on target object.
+     * Tries the declared setter name with argument type matching value when possible.
+     * Returns true if a setter was invoked.
+     */
+    private static boolean trySet(Object target, String setterName, Object value) {
+        if (target == null || setterName == null || value == null) return false;
+        Class<?> cls = target.getClass();
+        try {
+            // direct match first
+            Method m = null;
+            for (Method mm : cls.getMethods()) {
+                if (mm.getName().equals(setterName) && mm.getParameterCount() == 1) {
+                    m = mm;
+                    break;
+                }
+            }
+            if (m == null) {
+                return false;
+            }
+            Class<?> param = m.getParameterTypes()[0];
+            Object arg = convertArg(param, value);
+            if (arg == null && value != null) {
+                // if conversion failed, try passing the raw string (if param is String)
+                if (param == String.class) arg = value.toString();
+                else return false;
+            }
+            m.invoke(target, arg);
+            return true;
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
+    /**
+     * Convert value (primitive wrapper / String / JSONArray / JSONObject / Number) to an instance of param class when possible.
+     */
+    private static Object convertArg(Class<?> param, Object value) {
+        if (value == null) return null;
+        if (param.isInstance(value)) return value;
+        String s = value.toString();
+        try {
+            if (param == String.class) return s;
+            if (param == int.class || param == Integer.class) return Integer.parseInt(s);
+            if (param == long.class || param == Long.class) return Long.parseLong(s);
+            if (param == boolean.class || param == Boolean.class) {
+                if (value instanceof Boolean) return value;
+                return Boolean.parseBoolean(s);
+            }
+            if (param == List.class || param == java.util.List.class) {
+                if (value instanceof JSONArray) {
+                    // convert JSONArray to List<String> or List<Object>
+                    JSONArray a = (JSONArray) value;
+                    List<Object> lst = new ArrayList<>();
+                    for (Object o : a) lst.add(o);
+                    return lst;
+                }
+            }
+            if (param == Map.class || param == java.util.Map.class) {
+                if (value instanceof JSONObject) {
+                    JSONObject jo = (JSONObject) value;
+                    Map<String,Object> map = new HashMap<>();
+                    for (Object k : jo.keySet()) map.put(k.toString(), jo.get(k));
+                    return map;
+                }
+            }
+            // if param is enum, try valueOf
+            if (param.isEnum()) {
+                @SuppressWarnings({ "unchecked", "rawtypes" })
+                Enum ev = Enum.valueOf((Class<Enum>) param, s);
+                return ev;
+            }
+        } catch (Throwable ignored) {}
+        // Last resort: try common boxed types
+        if ((param == Integer.class || param == int.class) && value instanceof Number) return ((Number) value).intValue();
+        if ((param == Long.class || param == long.class) && value instanceof Number) return ((Number) value).longValue();
+        if ((param == Double.class || param == double.class) && value instanceof Number) return ((Number) value).doubleValue();
+        return null;
+    }
+    
     @SuppressWarnings("unchecked")
     public static ArrayList<Puzzle> loadPuzzles() {
         ArrayList<Puzzle> loaded = new ArrayList<>();
@@ -227,55 +311,203 @@ public class DataLoader extends DataConstants {
                 if (!(obj instanceof JSONObject)) continue;
                 JSONObject pj = (JSONObject) obj;
 
-                Puzzle puzzle = new Puzzle();
+                // Determine puzzle type (check several common keys)
+                String typeStr = null;
+                try {
+                    Object t = pj.get("type");
+                    if (t == null) t = pj.get("puzzleType");
+                    if (t == null) t = pj.get("puzzle_type");
+                    if (t != null) typeStr = t.toString();
+                } catch (Throwable ignored) {}
 
-                // set ID if present (support "id" or "uuid")
-                if (pj.get("id") != null) {
-                    try { puzzle.setID(UUID.fromString(pj.get("id").toString())); } catch (Exception ignored) {}
-                } else if (pj.get("uuid") != null) {
-                    try { puzzle.setID(UUID.fromString(pj.get("uuid").toString())); } catch (Exception ignored) {}
+                // Instantiate a concrete subclass based on type
+                Puzzle puzzle;
+                if (typeStr != null) {
+                    switch (typeStr) {
+                        case "Trivia":
+                            puzzle = new Trivia();
+                            break;
+                        case "Riddle":
+                            puzzle = new Riddle();
+                            break;
+                        case "PixelHunt":
+                            puzzle = new PixelHunt();
+                            break;
+                        case "MultipleChoice":
+                            puzzle = new MultipleChoice();
+                            break;
+                        case "Cipher":
+                            puzzle = new Cipher();
+                            break;
+                        case "ItemPuzzle":
+                            puzzle = new ItemPuzzle();
+                            break;
+                        default:
+                            puzzle = new Puzzle();
+                            break;
+                    }
+                } else {
+                    puzzle = new Puzzle();
                 }
 
-                // hints
+                // set type on object
+                try { puzzle.setType(typeStr == null ? "" : typeStr); } catch (Throwable ignored) {}
+
+                // set ID if present (puzzleID, id, uuid, puzzleID)
+                try {
+                    Object idVal = pj.get("puzzleID");
+                    if (idVal == null) idVal = pj.get("id");
+                    if (idVal == null) idVal = pj.get("uuid");
+                    if (idVal != null) {
+                        try { puzzle.setID(UUID.fromString(idVal.toString())); } catch (Throwable ignored) {}
+                    }
+                } catch (Throwable ignored) {}
+
+                // HINTS: parse to Hint objects
                 ArrayList<Hint> hints = new ArrayList<>();
-                Object hObj = pj.get("hints");
-                if (hObj instanceof JSONArray) {
-                    for (Object h : (JSONArray) hObj) {
-                        if (h instanceof JSONObject) {
-                            JSONObject hj = (JSONObject) h;
+                try {
+                    Object hObj = pj.get("hints");
+                    if (hObj instanceof JSONArray) {
+                        JSONArray hArr = (JSONArray) hObj;
+                        for (Object hh : hArr) {
+                            if (!(hh instanceof JSONObject)) continue;
+                            JSONObject hJ = (JSONObject) hh;
                             Hint hint = new Hint();
-                            try { if (hj.get("text") != null) hint.setText(hj.get("text").toString()); } catch (Throwable ignore) {}
-                            try { if (hj.get("cost") != null) hint.setCost(((Long) hj.get("cost")).intValue()); } catch (Throwable ignore) {}
-                            if (hj.get("used") != null) {
-                                try {
+                            try { if (hJ.get("id") != null) hint.setId(hJ.get("id").toString()); } catch (Throwable ignored) {}
+                            try { if (hJ.get("text") != null) hint.setText(hJ.get("text").toString()); } catch (Throwable ignored) {}
+                            try { if (hJ.get("cost") != null) hint.setCost(((Number) hJ.get("cost")).intValue()); } catch (Throwable ignored) {}
+                            try {
+                                if (hJ.get("used") != null) {
                                     Method setUsed = hint.getClass().getMethod("setUsed", boolean.class);
-                                    setUsed.invoke(hint, ((Boolean) hj.get("used")).booleanValue());
-                                } catch (Exception ignore) { /* optional */ }
-                            }
+                                    setUsed.invoke(hint, ((Boolean) hJ.get("used")).booleanValue());
+                                }
+                            } catch (Throwable ignore) {}
                             hints.add(hint);
                         }
                     }
-                }
-                try { puzzle.getClass().getMethod("setHints", java.util.List.class).invoke(puzzle, hints); }
-                catch (Exception ignore) {
-                    // setHints does not exist: try to add via addHint(Hint)
+                } catch (Throwable ignored) {}
+
+                // Attach hints to puzzle (prefer setHints, else addHint)
+                try {
+                    Method setHints = puzzle.getClass().getMethod("setHints", java.util.List.class);
+                    setHints.invoke(puzzle, hints);
+                } catch (Throwable t) {
                     try {
                         Method addHint = puzzle.getClass().getMethod("addHint", Hint.class);
-                        for (Hint hh : hints) addHint.invoke(puzzle, hh);
-                    } catch (Exception ignore2) { /* unable to populate hints */ }
+                        for (Hint hh : hints) {
+                            try { addHint.invoke(puzzle, hh); } catch (Throwable ignored) {}
+                        }
+                    } catch (Throwable ignored) {}
                 }
 
-                // other puzzle metadata can be read here if needed (prompt, combination, meta fields etc.)
+                // Map common fields from JSON to puzzle via trySet (uses reflection)
+                // define mapping of jsonKey -> candidate setter names (tries each)
+                Map<String, String[]> mapping = new LinkedHashMap<>();
+                mapping.put("question", new String[] {"setQuestion", "setPrompt", "setTriviaText", "setRiddleText"});
+                mapping.put("triviaText", new String[] {"setTriviaText", "setPrompt", "setQuestion"});
+                mapping.put("riddleText", new String[] {"setRiddleText", "setPrompt", "setQuestion"});
+                mapping.put("cipherText", new String[] {"setCipherText", "setPrompt", "setQuestion"});
+                mapping.put("correctAnswer", new String[] {"setCorrectAnswer", "setAnswer", "setSolution"});
+                mapping.put("correctChoice", new String[] {"setCorrectChoice", "setCorrectIndex"});
+                mapping.put("choices", new String[] {"setChoices", "setOptions"});
+                mapping.put("choicesList", new String[] {"setChoices", "setOptions"});
+                mapping.put("meta", new String[] {"setMeta", "setProperties"});
+                mapping.put("correctSound", new String[] {"setCorrectSound"});
+                mapping.put("incorrectSound", new String[] {"setIncorrectSound"});
+                mapping.put("combination", new String[] {"setCombination"});
+                mapping.put("questionText", new String[] {"setQuestion", "setPrompt"});
+                mapping.put("answer", new String[] {"setAnswer", "setCorrectAnswer", "setSolution"});
+                mapping.put("prompt", new String[] {"setPrompt", "setQuestion"});
+                mapping.put("promptText", new String[] {"setPrompt", "setQuestion"});
+                mapping.put("puzzleText", new String[] {"setPrompt", "setQuestion"});
+                mapping.put("correct", new String[] {"setCorrect", "setSolved"});
+                mapping.put("correctAnswer", new String[] {"setCorrectAnswer", "setAnswer"});
+                // Also include 'question' synonyms like 'triviaText' or 'riddleText' above
+
+                // For each json key, try to set using the candidate setter names
+                for (Map.Entry<String,String[]> me : mapping.entrySet()) {
+                    String jsonKey = me.getKey();
+                    Object jsonVal = pj.get(jsonKey);
+                    if (jsonVal == null) continue;
+                    for (String setter : me.getValue()) {
+                        if (trySet(puzzle, setter, jsonVal)) break;
+                    }
+                }
+
+                // special handling for 'choices' to ensure list conversion
+                try {
+                    Object choicesObj = pj.get("choices");
+                    if (choicesObj instanceof JSONArray) {
+                        List<String> choices = new ArrayList<>();
+                        for (Object c : (JSONArray) choicesObj) choices.add(c == null ? null : c.toString());
+                        // try setter names
+                        trySet(puzzle, "setChoices", choices);
+                        trySet(puzzle, "setOptions", choices);
+                    }
+                } catch (Throwable ignored) {}
+
+                // special handling for meta (JSONObject) - try setMeta(Map) or setMethod/setShift etc.
+                try {
+                    Object metaObj = pj.get("meta");
+                    if (metaObj instanceof JSONObject) {
+                        JSONObject metaJ = (JSONObject) metaObj;
+                        // try setMeta(Map)
+                        Map<String,Object> metaMap = new HashMap<>();
+                        for (Object k : metaJ.keySet()) metaMap.put(k.toString(), metaJ.get(k));
+                        trySet(puzzle, "setMeta", metaMap);
+                        // also try specific meta fields
+                        if (metaJ.get("method") != null) trySet(puzzle, "setMethod", metaJ.get("method").toString());
+                        if (metaJ.get("shift") != null) trySet(puzzle, "setShift", metaJ.get("shift"));
+                        if (metaJ.get("note") != null) trySet(puzzle, "setNote", metaJ.get("note").toString());
+                    }
+                } catch (Throwable ignored) {}
+
+                // some puzzles use 'correctAnswer' key vs 'correctChoice' -> attempt to set both
+                try {
+                    Object ca = pj.get("correctAnswer");
+                    if (ca != null) {
+                        trySet(puzzle, "setCorrectAnswer", ca);
+                        trySet(puzzle, "setAnswer", ca);
+                        trySet(puzzle, "setSolution", ca);
+                    }
+                } catch (Throwable ignored) {}
+
+                // attempt to set correctChoice (int) if present
+                try {
+                    Object cc = pj.get("correctChoice");
+                    if (cc != null) {
+                        trySet(puzzle, "setCorrectChoice", cc);
+                        trySet(puzzle, "setCorrectIndex", cc);
+                    }
+                } catch (Throwable ignored) {}
+
+                // attempt to set sound files
+                try {
+                    if (pj.get("correctSound") != null) trySet(puzzle, "setCorrectSound", pj.get("correctSound").toString());
+                    if (pj.get("incorrectSound") != null) trySet(puzzle, "setIncorrectSound", pj.get("incorrectSound").toString());
+                } catch (Throwable ignored) {}
+
+                // Attempt to set other likely fields directly
+                String[] directKeys = new String[] {"question", "triviaText", "riddleText", "cipherText", "prompt", "answer", "combination"};
+                for (String k : directKeys) {
+                    try {
+                        Object val = pj.get(k);
+                        if (val != null) {
+                            trySet(puzzle, "set" + capitalize(k), val);
+                        }
+                    } catch (Throwable ignored) {}
+                }
+
+                // Add puzzle to loaded list
                 loaded.add(puzzle);
 
-                // attempt to register puzzle with PuzzlesManager if available
+                // try to register with PuzzlesManager (best-effort)
                 try {
                     PuzzlesManager pm = PuzzlesManager.getInstance();
                     try {
                         Method addM = pm.getClass().getMethod("addPuzzle", Puzzle.class);
                         addM.invoke(pm, puzzle);
                     } catch (NoSuchMethodException nsme) {
-                        // try getPuzzles() and add to returned list
                         try {
                             Method getList = pm.getClass().getMethod("getPuzzles");
                             Object listObj = getList.invoke(pm);
@@ -283,8 +515,7 @@ public class DataLoader extends DataConstants {
                                 ((java.util.List) listObj).add(puzzle);
                             }
                         } catch (Exception ignore) {
-                            // last resort: try to set currentPuzzle if "current" flag present
-                            if (pj.get("current") != null && (pj.get("current") instanceof Boolean) && ((Boolean) pj.get("current"))) {
+                            if (pj.get("current") instanceof Boolean && ((Boolean) pj.get("current"))) {
                                 try {
                                     Method setCurrent = pm.getClass().getMethod("setCurrentPuzzle", Puzzle.class);
                                     setCurrent.invoke(pm, puzzle);
@@ -293,7 +524,7 @@ public class DataLoader extends DataConstants {
                         }
                     }
                 } catch (Throwable t) {
-                    // if PuzzlesManager is not available or methods differ, ignore quietly
+                    // ignore if PuzzlesManager is not present or incompatible
                 }
             }
 
@@ -302,6 +533,13 @@ public class DataLoader extends DataConstants {
         }
 
         return loaded;
+    }
+
+    // convenience: capitalize first letter
+    private static String capitalize(String s) {
+        if (s == null || s.length() == 0) return s;
+        if (s.length() == 1) return s.toUpperCase();
+        return s.substring(0,1).toUpperCase() + s.substring(1);
     }
 
     // Convenience: loads both players and puzzles and returns players

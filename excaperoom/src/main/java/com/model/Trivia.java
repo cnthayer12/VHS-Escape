@@ -8,6 +8,7 @@ public class Trivia extends Puzzle {
         super();
         this.triviaText = "";
         this.correctAnswer = "";
+        this.type = "Trivia";
     }
 
     public String getTriviaText() {

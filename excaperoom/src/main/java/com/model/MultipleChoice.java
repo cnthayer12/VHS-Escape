@@ -13,6 +13,7 @@ public class MultipleChoice extends Puzzle {
         this.question = "";
         this.options = new ArrayList<>();
         this.correctAnswer = "";
+        this.type = "MultipleChoice";
     }
 
     public void setQuestion(String question) {

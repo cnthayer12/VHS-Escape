@@ -10,6 +10,7 @@ public class PixelHunt extends Puzzle {
         this.correctX = 0;
         this.correctY = 0;
         this.closeness = 5; 
+        this.type = "PixelHunt";
     }
 
     public void setCorrectX(int correctX) {

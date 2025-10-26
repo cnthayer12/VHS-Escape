@@ -121,16 +121,16 @@ public class Progress {
 
     public double calculatePercent() {
         final int PUZZLECOUNT = 3;
-        return completedPuzzles.size() / (double) PUZZLECOUNT;
+        return (completedPuzzles.size() / (double) PUZZLECOUNT) * 100;
     }
 
     public String getPuzzlesInfo() {
         String returnString = "";
         for(Puzzle puzzle : completedPuzzles) {
-            returnString += puzzle;
+            returnString += puzzle.toString();
             for(Hint hint : storedHints) {
                 if(hint.getPuzzle().equals(puzzle))
-                    returnString += "\n     Hint used: " + hint;
+                    returnString += "\n     Hint used: " + hint.toString();
             }
             returnString += "\n"; 
         }

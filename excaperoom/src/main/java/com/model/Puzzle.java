@@ -10,6 +10,7 @@ public class Puzzle {
     private File correctSound;
     private File incorrectSound;
     private UUID puzzleID;
+    protected String type;
     
 
     public Puzzle() {
@@ -17,6 +18,15 @@ public class Puzzle {
         this.correctSound = null;
         this.incorrectSound = null;
         this.puzzleID = UUID.randomUUID();
+        this.type = "";
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
     // Puzzle actions
@@ -67,5 +77,21 @@ public class Puzzle {
 
     public boolean checkAnswer(String answer) {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String returnString = "";
+        if(type.equals("Trivia"))
+            returnString = ((Trivia) this).toString();
+        if(type.equals("Riddle"))
+            returnString = ((Riddle) this).toString();
+        if(type.equals("MultipleChoice"))
+            returnString = ((MultipleChoice) this).toString();
+        if(type.equals("PixelHunt"))
+            returnString = ((PixelHunt) this).toString();
+        if(type.equals("ItemPuzzle"))
+            returnString = ((ItemPuzzle) this).toString();
+        return returnString;
     }
 }

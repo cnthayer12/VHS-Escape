@@ -1,9 +1,7 @@
 package com.model;
 
-import java.util.UUID;
-
 public class Hint {
-    private UUID id;
+    private String id;
     private String text;
     private boolean used;
     private int cost;
@@ -13,7 +11,7 @@ public class Hint {
      * Constructor
      */
     public Hint() {
-        this.id = UUID.randomUUID();
+        this.id = "0";
         this.text = "";
         this.used = false;
         this.cost = 10;
@@ -24,7 +22,7 @@ public class Hint {
      * Constructor with parameters
      */
     public Hint(String text, int cost) {
-        this.id = UUID.randomUUID();
+        this.id = "0";
         this.text = text;
         this.used = false;
         this.cost = cost;
@@ -32,7 +30,7 @@ public class Hint {
     }
 
     public Hint(String text, int cost, Puzzle puzzle) {
-        this.id = UUID.randomUUID();
+        this.id = "0";
         this.text = text;
         this.used = false;
         this.cost = cost;
@@ -66,8 +64,12 @@ public class Hint {
         used = false;
     }
     
-    public UUID getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     
     public String getText() {
@@ -92,6 +94,6 @@ public class Hint {
     
     @Override
     public String toString() {
-        return "[Hint: " + id.toString() + ", used=" + used + ", cost=" + cost + "]";
+        return "[Hint: " + id + ", used=" + used + ", cost=" + cost + "]";
     }
 }

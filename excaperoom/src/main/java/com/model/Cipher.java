@@ -8,6 +8,7 @@ public class Cipher extends Puzzle {
         super();
         this.cipherText = "";
         this.correctAnswer = "";
+        this.type = "Cipher";
     }
 
     public String getCipherText() {

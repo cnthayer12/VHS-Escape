@@ -8,6 +8,7 @@ public class Riddle extends Puzzle {
         super();
         this.riddleText = "";
         this.correctAnswer = "";
+        this.type = "Riddle";
     }
 
     public String getRiddleText() {
