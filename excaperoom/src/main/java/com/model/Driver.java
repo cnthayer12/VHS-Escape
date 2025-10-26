@@ -1,8 +1,7 @@
 package com.model;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,30 +29,56 @@ public class Driver {
 
         if (roomChoice.equalsIgnoreCase("VHS Escape") || roomChoice.equals("1")) {
             System.out.println("\nLeni enters 'VHS Escape'...");
-            facade.startGame(currentPlayer, Game.Difficulty.MEDIUM);
 
-            String storyFile = "story.txt";
-            try {
-                String storyText = new String(Files.readAllBytes(Paths.get(storyFile)));
-                facade.displayStory();
-                System.out.println("\n--- Story ---");
-                System.out.println(storyText);
-                Speak.speak(storyText);
+            // Load story file as a resource
+            String intro = "";
+            String outroWon = "";
+            String outroLost = "";
+            try (InputStream in = Driver.class.getResourceAsStream("story.txt")) {
+                if (in == null) {
+                    System.err.println("Could not find story.txt in package resources.");
+                } else {
+                    String story = new String(in.readAllBytes());
+                    // Split sections by markers
+                    String[] sections = story.split("Outro");
+                    intro = sections[0].replace("Intro:", "").trim();
+                    for (String s : sections) {
+                        if (s.contains("(won):")) outroWon = s.replace("(won):", "").trim();
+                        if (s.contains("(lost):")) outroLost = s.replace("(lost):", "").trim();
+                    }
+                }
             } catch (IOException e) {
                 System.err.println("Error reading story file: " + e.getMessage());
             }
 
+            // Play intro
+            System.out.println("\n--- Intro ---");
+            System.out.println(intro);
+            Speak.speak(intro);
+
+            // Start game
+            facade.startGame(currentPlayer, Game.Difficulty.MEDIUM);
+
+            // Run puzzles
             ArrayList<Puzzle> puzzles = facade.getAllPuzzles();
             for (int i = 0; i < puzzles.size(); i++) {
                 facade.startPuzzle();
-                facade.completePuzzle();
+                facade.completePuzzle(); // auto-complete for now
                 facade.nextPuzzle();
             }
 
-            String outroWon = "Congratulations!!!! You completed all the puzzles and escaped the VHS tape before you were stuck in the story forever!";
+            // Determine outcome
+            String finalOutro;
+            if (facade.getProgressPercent() >= 100.0) {
+                finalOutro = outroWon;
+            } else {
+                finalOutro = outroLost;
+            }
+
+            // Play outro
             System.out.println("\n--- Outro ---");
-            System.out.println(outroWon);
-            Speak.speak(outroWon);
+            System.out.println(finalOutro);
+            Speak.speak(finalOutro);
 
         } else {
             System.out.println("Invalid room. Exiting game.");
@@ -63,5 +88,9 @@ public class Driver {
         scanner.close();
     }
 }
+
+
+
+    
 
 
