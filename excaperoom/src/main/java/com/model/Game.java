@@ -188,6 +188,9 @@ public class Game {
     }
   
     public void completePuzzle() {
+        Progress progress = Players.getCurrentPlayer().getProgress().get(Players.getCurrentPlayer().getProgress().size()-1);
+        PuzzlesManager pman = PuzzlesManager.getInstance();
+        progress.addCompletedPuzzle(pman.getCurrentPuzzle());
         completedCount++;
         calculateScore();
         

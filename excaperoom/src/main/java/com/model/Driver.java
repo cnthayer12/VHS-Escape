@@ -163,6 +163,12 @@ public class Driver {
                 }
             }
 
+            System.out.println("Logging out of Leni's account to show data persistence.");
+            facade.saveProgress();
+            facade.logout();
+            facade.login("lerivers", "password1234");
+            facade.checkProgress();
+
             facade.nextPuzzle(); // Move to next puzzle through facade
             facade.resetStrikes(); // Reset strikes through facade
 
