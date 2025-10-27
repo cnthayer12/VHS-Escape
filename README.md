@@ -2,6 +2,9 @@
 
 A retro 1980s-themed virtual escape room game built in Java.
 
+## Video explaining backend development:
+https://youtu.be/5-HemwyxLeo
+
 ## About
 
 VHS Escape is a point-and-click puzzle game where players solve mysteries in a nostalgic VHS world. Find clues, solve puzzles, and escape the room while enjoying authentic 80s visuals and effects.
