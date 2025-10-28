@@ -3,6 +3,7 @@ module com.excape {
     requires javafx.fxml;
     requires json.simple;
     requires freetts; 
+    requires junit;
     //requires hamcrest.core;
 
     opens com.excape to javafx.fxml;
