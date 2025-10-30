@@ -1,5 +1,5 @@
 package com.model;
 
-public class Database {
+public class TestSpeak {
     
 }
