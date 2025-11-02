@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.model.TestGame" time="0.342" tests="44" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/target/test-classes:/Users/carleighthayer/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/en_us/1.0/en_us-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmu_us_kal/1.0/cmu_us_kal-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmulex/1.0/cmulex-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmudict04/1.0/cmudict04-1.0.jar:"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/target/surefire 2025-11-02T13-21-31_709-jvmRun1 surefire-20251102132131817_1tmp surefire_0-20251102132131817_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/target/test-classes:/Users/carleighthayer/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/en_us/1.0/en_us-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmu_us_kal/1.0/cmu_us_kal-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmulex/1.0/cmulex-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmudict04/1.0/cmudict04-1.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/carleighthayer"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="jdk.module.path" value="/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/target/classes:/Users/carleighthayer/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/carleighthayer/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-mac-aarch64.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-mac-aarch64.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-mac-aarch64.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-mac-aarch64.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/freetts/1.0/freetts-1.0.jar"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/surefire-booter/3.2.5/surefire-booter-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/surefire-api/3.2.5/surefire-api-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/surefire-logger-api/3.2.5/surefire-logger-api-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/surefire-shared-utils/3.2.5/surefire-shared-utils-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/surefire-extensions-spi/3.2.5/surefire-extensions-spi-3.2.5.jar:/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/target/test-classes:/Users/carleighthayer/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/carleighthayer/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/en_us/1.0/en_us-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmu_us_kal/1.0/cmu_us_kal-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmulex/1.0/cmulex-1.0.jar:/Users/carleighthayer/.m2/repository/org/mobicents/external/freetts/cmudict04/1.0/cmudict04-1.0.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/surefire-junit4/3.2.5/surefire-junit4-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/common-java5/3.2.5/common-java5-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/common-junit3/3.2.5/common-junit3-3.2.5.jar:/Users/carleighthayer/.m2/repository/org/apache/maven/surefire/common-junit4/3.2.5/common-junit4-3.2.5.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="25.0.1"/>
+    <property name="user.name" value="carleighthayer"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="15.6.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/carleighthayer/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/dx/3bb8k4rs4f52577qfkq7rvqw0000gn/T/"/>
+    <property name="java.version" value="25.0.1"/>
+    <property name="user.dir" value="/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/carleighthayer/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="25.0.1"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="testDifficultyHardTimeLimit" classname="com.model.TestGame" time="0.003"/>
+  <testcase name="testPauseAndResumeAffectsElapsedTime" classname="com.model.TestGame" time="0.212"/>
+  <testcase name="testSetCurrentPlayer" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGameInitializesWithEmptyPuzzlesList" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testGameInitializesAsNotPaused" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testCalculateScoreNeverNegative" classname="com.model.TestGame" time="0.002"/>
+  <testcase name="testGetElapsedTimeAfterInitialization" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testProgressPercentWithEmptyPuzzleList" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testResumeChangesIsPausedToFalse" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testIsTimeUpInitiallyFalse" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testInitializeGameSetsNotPaused" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testDifficultyMediumTimeLimit" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testPauseWhenAlreadyPaused" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testCalculateScoreWithNoProgress" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGetInstanceReturnsNonNull" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGameInitializesWithZeroCompletedCount" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testInitializeGameSetsNotOver" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testInitializeGameResetsScore" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGetElapsedTimeIncreases" classname="com.model.TestGame" time="0.106"/>
+  <testcase name="testSetDifficulty" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testInitializeGameResetsCompletedCount" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testInitializeGameSetsStartTime" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testProgressPercentWithNoPuzzles" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testInitializeGameSetsDifficulty" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testCalculateScoreUpdatesGameScore" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGetElapsedTimeWithNoStartTime" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testResumeWhenNotPaused" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGetRemainingTimeWithEasyDifficulty" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testDifferentDifficultiesHaveDifferentTimeLimits" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testInitializeGameSetsPlayer" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testPauseAndResumeMultipleTimes" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testDeleteGameResetsInstance" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGameInitializesWithGameID" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testCompleteGameInitializationWorkflow" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGameInitializesWithDefaultScore" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGameInitializesWithDefaultStory" classname="com.model.TestGame" time="0.001"/>
+  <testcase name="testGameInitializesAsNotOver" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGetInstanceReturnsSameInstance" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testDifficultyEasyTimeLimit" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testGetRemainingTimeNeverNegative" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testPauseChangesIsPausedToTrue" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testSetPuzzles" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testSetScore" classname="com.model.TestGame" time="0.0"/>
+  <testcase name="testSetStory" classname="com.model.TestGame" time="0.001"/>
+</testsuite>
