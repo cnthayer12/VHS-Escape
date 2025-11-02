@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.model.TestPlayers
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.031 s <<< FAILURE! -- in com.model.TestPlayers
-com.model.TestPlayers.initializationError -- Time elapsed: 0.006 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.025 s <<< FAILURE! -- in com.model.TestPlayers
+com.model.TestPlayers.initializationError -- Time elapsed: 0.008 s <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestPlayers.tearDown() accessible: module com.excape does not "exports com.model" to module junit
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:388)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:364)
@@ -19,6 +19,7 @@ java.lang.reflect.InaccessibleObjectException: Unable to make public void com.mo
 	at junit@4.13.2/org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
 	at junit@4.13.2/org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
 	at junit@4.13.2/org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at junit@4.13.2/org.junit.internal.requests.FilterRequest.getRunner(FilterRequest.java:36)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:314)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)

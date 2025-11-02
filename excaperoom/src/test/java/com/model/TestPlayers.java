@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,6 +66,12 @@ public class TestPlayers {
     public void testCreateAccountNullPassword() {
         players.createAccount("nullpass_user", null);
         assertTrue("Null password should not create a player", Players.getPlayers().isEmpty());
+    }
+
+    @Test
+    public void testCreateAccountBothNull() {
+        players.createAccount(null, null);
+        assertTrue("Null username and password should not create a player", Players.getPlayers().isEmpty());
     }
 
     @Test

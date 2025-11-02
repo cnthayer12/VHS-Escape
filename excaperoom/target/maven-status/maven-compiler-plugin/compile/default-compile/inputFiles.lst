@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\PuzzleTests.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Speak.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Leaderboard.java
@@ -30,36 +29,3 @@ C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Libra
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataConstants.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Puzzle.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Test.java
-=======
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/SpeakTest.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Trivia.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/DataWriterTester.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/module-info.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/DataWriter.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Puzzle.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/LibraryUI.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Item.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/excape/SecondaryController.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Player.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/EscapeGameFacade.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Hint.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Players.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Leaderboard.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/DataConstants.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/excape/App.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/MultipleChoice.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Driver.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/PuzzlesManager.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/PuzzleTests.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Test.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Progress.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Speak.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/excape/PrimaryController.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/DataLoaderTester.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/ItemPuzzle.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/DataLoader.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/PixelHunt.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Cipher.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Game.java
-/Users/carleighthayer/Desktop/CSCE247/VHS-Escape/excaperoom/src/main/java/com/model/Riddle.java
->>>>>>> cdbae5f2dbee7f93368b2b1d82b6883030065199

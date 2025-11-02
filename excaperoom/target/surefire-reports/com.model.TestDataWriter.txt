@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
-Test set: com.model.TestHint
+Test set: com.model.TestDataWriter
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.023 s <<< FAILURE! -- in com.model.TestHint
-com.model.TestHint.initializationError -- Time elapsed: 0.005 s <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestHint.testDefaultConstructorInitializesId() accessible: module com.excape does not "exports com.model" to module junit
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.027 s <<< FAILURE! -- in com.model.TestDataWriter
+com.model.TestDataWriter.initializationError -- Time elapsed: 0.007 s <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestDataWriter.testSavePlayersCreatesFile() accessible: module com.excape does not "exports com.model" to module junit
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:388)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:364)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:312)
