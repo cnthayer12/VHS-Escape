@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.model.TestGame
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.031 s <<< FAILURE! -- in com.model.TestGame
-com.model.TestGame.initializationError -- Time elapsed: 0.007 s <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestGame.testDifficultyHardTimeLimit() accessible: module com.excape does not "exports com.model" to module junit
-	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:388)
-	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:364)
-	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:312)
-	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:203)
-	at java.base/java.lang.reflect.Method.setAccessible(Method.java:197)
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! -- in com.model.TestGame
+com.model.TestGame.initializationError -- Time elapsed: 0 s <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestGame.testInitialDefaults() accessible: module com.excape does not "exports com.model" to module junit
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:182)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:176)
 	at junit@4.13.2/org.junit.runners.model.FrameworkMethod.<init>(FrameworkMethod.java:35)
 	at junit@4.13.2/org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:66)
 	at junit@4.13.2/org.junit.runners.model.TestClass.<init>(TestClass.java:57)

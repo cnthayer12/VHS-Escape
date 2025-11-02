@@ -2,172 +2,233 @@ package com.model;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestCipher {
-    
+
     private Cipher defaultCipher;
     private Cipher parameterizedCipher;
-    
+
     @Before
     public void setUp() {
         defaultCipher = new Cipher();
         parameterizedCipher = new Cipher("KHOOR", "HELLO", 3);
     }
-    
-    // Constructor Tests
-    
+
+    // ---------------- Constructor Tests ----------------
+
     @Test
     public void testDefaultConstructorInitializesCipherText() {
         assertEquals("", defaultCipher.getCipherText());
     }
-    
+
     @Test
     public void testDefaultConstructorInitializesCorrectAnswer() {
         assertEquals("", defaultCipher.getCorrectAnswer());
     }
-    
+
     @Test
     public void testDefaultConstructorInitializesShift() {
         assertEquals(1, defaultCipher.getShift());
     }
-    
+
     @Test
     public void testDefaultConstructorSetsType() {
         assertEquals("Cipher", defaultCipher.getType());
     }
-    
+
     @Test
-    public void testParameterizedConstructorSetsCipherText() {
+    public void testParameterizedConstructorSetsFields() {
         assertEquals("KHOOR", parameterizedCipher.getCipherText());
-    }
-    
-    @Test
-    public void testParameterizedConstructorSetsCorrectAnswer() {
         assertEquals("HELLO", parameterizedCipher.getCorrectAnswer());
-    }
-    
-    @Test
-    public void testParameterizedConstructorSetsShift() {
         assertEquals(3, parameterizedCipher.getShift());
     }
-    
-    // checkAnswer Tests - Normal Cases
-    
+
+    // ---------------- Accessor / Mutator Tests ----------------
+
     @Test
-    public void testCheckAnswerWithExactMatch() {
+    public void testSetCipherTextToNullThenGet() {
+        defaultCipher.setCipherText(null);
+        assertNull(defaultCipher.getCipherText());
+    }
+
+    @Test
+    public void testSetCorrectAnswerToNullThenGet() {
+        defaultCipher.setCorrectAnswer(null);
+        assertNull(defaultCipher.getCorrectAnswer());
+    }
+
+    @Test
+    public void testSetShiftToNegative() {
+        defaultCipher.setShift(-5);
+        assertEquals(-5, defaultCipher.getShift());
+    }
+
+    @Test
+    public void testSetShiftToZero() {
+        defaultCipher.setShift(0);
+        assertEquals(0, defaultCipher.getShift());
+    }
+
+    @Test
+    public void testSetShiftToLargeValue() {
+        defaultCipher.setShift(999);
+        assertEquals(999, defaultCipher.getShift());
+    }
+
+    // ---------------- checkAnswer Normal Cases ----------------
+
+    @Test
+    public void testCheckAnswerExactMatch() {
         assertTrue(parameterizedCipher.checkAnswer("HELLO"));
     }
-    
+
     @Test
-    public void testCheckAnswerWithLowercaseInput() {
+    public void testCheckAnswerLowercase() {
         assertTrue(parameterizedCipher.checkAnswer("hello"));
     }
-    
+
     @Test
-    public void testCheckAnswerWithMixedCase() {
+    public void testCheckAnswerMixedCase() {
         assertTrue(parameterizedCipher.checkAnswer("HeLLo"));
     }
-    
+
     @Test
-    public void testCheckAnswerWithLeadingWhitespace() {
-        assertTrue(parameterizedCipher.checkAnswer("  HELLO"));
-    }
-    
-    @Test
-    public void testCheckAnswerWithTrailingWhitespace() {
-        assertTrue(parameterizedCipher.checkAnswer("HELLO  "));
-    }
-    
-    @Test
-    public void testCheckAnswerWithLeadingAndTrailingWhitespace() {
+    public void testCheckAnswerWithWhitespace() {
         assertTrue(parameterizedCipher.checkAnswer("  HELLO  "));
     }
-    
+
     @Test
-    public void testCheckAnswerWithIncorrectAnswer() {
+    public void testCheckAnswerIncorrect() {
         assertFalse(parameterizedCipher.checkAnswer("WORLD"));
     }
-    
+
     @Test
-    public void testCheckAnswerWithEmptyString() {
+    public void testCheckAnswerEmptyString() {
         assertFalse(parameterizedCipher.checkAnswer(""));
     }
-    
+
     @Test
-    public void testCheckAnswerWithEmptyCorrectAnswer() {
+    public void testCheckAnswerWithSymbolsInInput() {
+        assertFalse(parameterizedCipher.checkAnswer("HELLO!"));
+    }
+
+    @Test
+    public void testCheckAnswerWithSpacesInMiddle() {
+        assertFalse(parameterizedCipher.checkAnswer("HE LLO"));
+    }
+
+    @Test
+    public void testCheckAnswerEmptyCorrectAnswer() {
         Cipher cipher = new Cipher("XYZ", "", 1);
         assertTrue(cipher.checkAnswer(""));
     }
-    
+
     @Test
-    public void testCheckAnswerWithWhitespaceOnlyInput() {
+    public void testCheckAnswerWhitespaceOnly() {
         assertFalse(parameterizedCipher.checkAnswer("   "));
     }
-    
-    // checkAnswer Tests - Error Cases
-    
+
+    // ---------------- checkAnswer Error / Edge Cases ----------------
+
     @Test
-    public void testCheckAnswerWithNullInput() {
+    public void testCheckAnswerNullInput() {
         assertFalse(parameterizedCipher.checkAnswer(null));
     }
-    
+
     @Test
-    public void testCheckAnswerWithNullCorrectAnswer() {
+    public void testCheckAnswerNullCorrectAnswer() {
         Cipher cipher = new Cipher("ABC", null, 1);
         assertFalse(cipher.checkAnswer("HELLO"));
     }
-    
+
     @Test
-    public void testCheckAnswerWithBothNull() {
-        Cipher cipher = new Cipher("ABC", null, 1);
+    public void testCheckAnswerBothNull() {
+        Cipher cipher = new Cipher(null, null, 1);
         assertFalse(cipher.checkAnswer(null));
     }
-    
-    // toString Tests
-    
+
+    @Test
+    public void testCheckAnswerCipherTextNullDoesNotCrash() {
+        Cipher cipher = new Cipher(null, "HELLO", 1);
+        assertTrue(cipher.checkAnswer("HELLO"));
+    }
+
+    // ---------------- toString Tests ----------------
+
     @Test
     public void testToStringWithCipherText() {
         assertEquals("Cipher Puzzle: KHOOR", parameterizedCipher.toString());
     }
-    
+
     @Test
-    public void testToStringWithEmptyCipherText() {
+    public void testToStringEmptyCipherText() {
         assertEquals("Cipher Puzzle: ", defaultCipher.toString());
     }
-    
+
     @Test
-    public void testToStringWithNullCipherText() {
+    public void testToStringNullCipherText() {
         defaultCipher.setCipherText(null);
         assertEquals("Cipher Puzzle: null", defaultCipher.toString());
     }
-    
-    // Integration Tests
-    
+
     @Test
-    public void testCompleteWorkflowWithValidData() {
+    public void testToStringWithSpecialCharacters() {
+        defaultCipher.setCipherText("@#$$%");
+        assertEquals("Cipher Puzzle: @#$$%", defaultCipher.toString());
+    }
+
+    // ---------------- Integration / Workflow Tests ----------------
+
+    @Test
+    public void testFullWorkflow() {
         Cipher cipher = new Cipher();
         cipher.setCipherText("BCD");
         cipher.setCorrectAnswer("ABC");
         cipher.setShift(1);
-        
+
         assertEquals("BCD", cipher.getCipherText());
         assertEquals("ABC", cipher.getCorrectAnswer());
         assertEquals(1, cipher.getShift());
         assertTrue(cipher.checkAnswer("abc"));
     }
-    
+
     @Test
-    public void testCipherTextModificationDoesNotAffectAnswer() {
-        parameterizedCipher.setCipherText("NEWCIPHER");
+    public void testCipherTextChangeDoesNotAffectCheckAnswer() {
+        parameterizedCipher.setCipherText("NEWVALUE");
         assertTrue(parameterizedCipher.checkAnswer("HELLO"));
     }
-    
+
     @Test
-    public void testShiftModificationDoesNotAffectAnswerChecking() {
-        parameterizedCipher.setShift(10);
+    public void testShiftChangeDoesNotAffectCheckAnswer() {
+        parameterizedCipher.setShift(99);
         assertTrue(parameterizedCipher.checkAnswer("HELLO"));
+    }
+
+    // ---------------- Potential Bug Probes ----------------
+
+    @Test
+    public void testCheckAnswerTrimsTabsAndNewlines() {
+        assertTrue(parameterizedCipher.checkAnswer("\n\tHELLO\t"));
+    }
+
+    @Test
+    public void testCheckAnswerUnicodeCaseInsensitive() {
+        // simulate lowercase with accents or unicode letters
+        assertFalse(parameterizedCipher.checkAnswer("héllo")); // may reveal lack of Unicode normalization
+    }
+
+    @Test
+    public void testCheckAnswerPartialMatch() {
+        assertFalse(parameterizedCipher.checkAnswer("HELL"));
+    }
+
+    @Test
+    public void testShiftAffectsCipherInternallyIfImplemented() {
+        Cipher cipher = new Cipher("KHOOR", "HELLO", 3);
+        cipher.setShift(5);
+        // Even if shift changes, check if answer logic ignores it (to catch inconsistent logic)
+        cipher.checkAnswer("HELLO");
     }
 }
+

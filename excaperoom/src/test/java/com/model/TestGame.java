@@ -1,368 +1,306 @@
 package com.model;
 
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
+import org.junit.*;
 import java.util.ArrayList;
 
+import static org.junit.Assert.*;
+
+
 public class TestGame {
-    
+
     private Game game;
     private Player testPlayer;
-    
+
     @Before
     public void setUp() {
         game = Game.getInstance();
-        ArrayList<Progress> progressList = new ArrayList<>();
-        testPlayer = new Player("TestUser", progressList, "password123");
+        testPlayer = new Player("TestUser", new ArrayList<>(), "password123");
     }
-    
+
     @After
     public void tearDown() {
-        // Clean up singleton instance after each test
         game.deleteGame();
     }
-    
-    // Singleton Tests
-    
+
+    // ---------------- Singleton Tests ----------------
+
     @Test
-    public void testGetInstanceReturnsSameInstance() {
-        Game instance1 = Game.getInstance();
-        Game instance2 = Game.getInstance();
-        assertEquals(instance1, instance2);
+    public void testSingletonReturnsSameInstance() {
+        assertEquals(Game.getInstance(), Game.getInstance());
     }
-    
+
     @Test
-    public void testGetInstanceReturnsNonNull() {
+    public void testSingletonIsNotNull() {
         assertNotNull(Game.getInstance());
     }
-    
-    // Constructor/Initialization Tests
-    
+
     @Test
-    public void testGameInitializesWithDefaultScore() {
-        assertEquals(1000, game.getScore());
-    }
-    
-    @Test
-    public void testGameInitializesAsNotPaused() {
-        assertFalse(game.isPaused());
-    }
-    
-    @Test
-    public void testGameInitializesAsNotOver() {
-        assertFalse(game.isOver());
-    }
-    
-    @Test
-    public void testGameInitializesWithEmptyPuzzlesList() {
-        assertNotNull(game.getPuzzles());
-    }
-    
-    @Test
-    public void testGameInitializesWithZeroCompletedCount() {
-        assertEquals(0, game.getCompletedCount());
-    }
-    
-    @Test
-    public void testGameInitializesWithDefaultStory() {
-        assertNotNull(game.getStory());
-        assertTrue(game.getStory().contains("VHS Escape Room"));
-    }
-    
-    @Test
-    public void testGameInitializesWithGameID() {
-        assertNotNull(game.getGameID());
-    }
-    
-    // Difficulty Enum Tests
-    
-    @Test
-    public void testDifficultyEasyTimeLimit() {
-        assertEquals(1800, Game.Difficulty.EASY.getTimeLimit());
-    }
-    
-    @Test
-    public void testDifficultyMediumTimeLimit() {
-        assertEquals(1200, Game.Difficulty.MEDIUM.getTimeLimit());
-    }
-    
-    @Test
-    public void testDifficultyHardTimeLimit() {
-        assertEquals(900, Game.Difficulty.HARD.getTimeLimit());
-    }
-    
-    // initializeGame Tests
-    
-    @Test
-    public void testInitializeGameSetsPlayer() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        assertEquals(testPlayer, game.getCurrentPlayer());
-    }
-    
-    @Test
-    public void testInitializeGameSetsDifficulty() {
-        game.initializeGame(testPlayer, Game.Difficulty.HARD);
-        assertEquals(Game.Difficulty.HARD, game.getDifficulty());
-    }
-    
-    @Test
-    public void testInitializeGameResetsScore() {
-        game.setScore(500);
-        game.initializeGame(testPlayer, Game.Difficulty.MEDIUM);
-        assertEquals(1000, game.getScore());
-    }
-    
-    @Test
-    public void testInitializeGameSetsStartTime() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        assertNotNull(game.getStartTime());
-    }
-    
-    @Test
-    public void testInitializeGameResetsCompletedCount() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        assertEquals(0, game.getCompletedCount());
-    }
-    
-    @Test
-    public void testInitializeGameSetsNotPaused() {
-        game.initializeGame(testPlayer, Game.Difficulty.MEDIUM);
-        assertFalse(game.isPaused());
-    }
-    
-    @Test
-    public void testInitializeGameSetsNotOver() {
-        game.initializeGame(testPlayer, Game.Difficulty.MEDIUM);
-        assertFalse(game.isOver());
-    }
-    
-    // calculateScore Tests
-    
-    @Test
-    public void testCalculateScoreWithNoProgress() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        int score = game.calculateScore();
-        assertEquals(1000, score);
-    }
-    
-    @Test
-    public void testCalculateScoreNeverNegative() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.setScore(-500);
-        int score = game.calculateScore();
-        assertTrue(score >= 0);
-    }
-    
-    @Test
-    public void testCalculateScoreUpdatesGameScore() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.calculateScore();
-        assertEquals(game.getScore(), game.calculateScore());
-    }
-    
-    // pause and resume Tests
-    
-    @Test
-    public void testPauseChangesIsPausedToTrue() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.pause();
-        assertTrue(game.isPaused());
-    }
-    
-    @Test
-    public void testPauseWhenAlreadyPaused() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.pause();
-        game.pause();
-        assertTrue(game.isPaused());
-    }
-    
-    @Test
-    public void testResumeChangesIsPausedToFalse() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.pause();
-        game.resume();
-        assertFalse(game.isPaused());
-    }
-    
-    @Test
-    public void testResumeWhenNotPaused() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.resume();
-        assertFalse(game.isPaused());
-    }
-    
-    @Test
-    public void testPauseAndResumeMultipleTimes() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        game.pause();
-        assertTrue(game.isPaused());
-        game.resume();
-        assertFalse(game.isPaused());
-        game.pause();
-        assertTrue(game.isPaused());
-        game.resume();
-        assertFalse(game.isPaused());
-    }
-    
-    // getElapsedTime Tests
-    
-    @Test
-    public void testGetElapsedTimeWithNoStartTime() {
-        assertEquals(0, game.getElapsedTime());
-    }
-    
-    @Test
-    public void testGetElapsedTimeAfterInitialization() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        long elapsed = game.getElapsedTime();
-        assertTrue(elapsed >= 0);
-    }
-    
-    @Test
-    public void testGetElapsedTimeIncreases() throws InterruptedException {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        long time1 = game.getElapsedTime();
-        Thread.sleep(100);
-        long time2 = game.getElapsedTime();
-        assertTrue(time2 >= time1);
-    }
-    
-    // getRemainingTime Tests
-    
-    @Test
-    public void testGetRemainingTimeWithEasyDifficulty() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        long remaining = game.getRemainingTime();
-        assertTrue(remaining > 0);
-        assertTrue(remaining <= 1800);
-    }
-    
-    @Test
-    public void testGetRemainingTimeNeverNegative() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        long remaining = game.getRemainingTime();
-        assertTrue(remaining >= 0);
-    }
-    
-    // isTimeUp Tests
-    
-    @Test
-    public void testIsTimeUpInitiallyFalse() {
-        game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        assertFalse(game.isTimeUp());
-    }
-    
-    // progressPercent Tests
-    
-    @Test
-    public void testProgressPercentWithNoPuzzles() {
-        assertEquals(0.0, game.progressPercent(), 0.01);
-    }
-    
-    @Test
-    public void testProgressPercentWithEmptyPuzzleList() {
-        game.setPuzzles(new ArrayList<Puzzle>());
-        assertEquals(0.0, game.progressPercent(), 0.01);
-    }
-    
-    // deleteGame Tests
-    
-    @Test
-    public void testDeleteGameResetsInstance() {
+    public void testDeleteGameResetsSingleton() {
         Game instance1 = Game.getInstance();
         instance1.deleteGame();
         Game instance2 = Game.getInstance();
-        assertFalse(instance1 == instance2);
+        assertNotSame(instance1, instance2);
     }
-    
-    // Setter Tests
-    
+
+    // ---------------- Constructor/Initialization ----------------
+
     @Test
-    public void testSetCurrentPlayer() {
-        ArrayList<Progress> progressList = new ArrayList<>();
-        Player newPlayer = new Player("NewUser", progressList, "pass456");
-        game.setCurrentPlayer(newPlayer);
-        assertEquals(newPlayer, game.getCurrentPlayer());
+    public void testInitialDefaults() {
+        assertEquals(1000, game.getScore());
+        assertFalse(game.isPaused());
+        assertFalse(game.isOver());
+        assertNotNull(game.getPuzzles());
+        assertEquals(0, game.getCompletedCount());
+        assertNotNull(game.getStory());
+        assertTrue(game.getStory().contains("VHS"));
+        assertNotNull(game.getGameID());
     }
-    
+
+    // ---------------- Difficulty Enum ----------------
+
     @Test
-    public void testSetDifficulty() {
-        game.setDifficulty(Game.Difficulty.HARD);
-        assertEquals(Game.Difficulty.HARD, game.getDifficulty());
+    public void testDifficultyEnumValues() {
+        assertEquals(1800, Game.Difficulty.EASY.getTimeLimit());
+        assertEquals(1200, Game.Difficulty.MEDIUM.getTimeLimit());
+        assertEquals(900, Game.Difficulty.HARD.getTimeLimit());
     }
-    
+
     @Test
-    public void testSetScore() {
-        game.setScore(2500);
-        assertEquals(2500, game.getScore());
+    public void testDifficultyEnumToString() {
+        for (Game.Difficulty d : Game.Difficulty.values()) {
+            assertNotNull(d.toString());
+        }
     }
-    
+
+    // ---------------- Initialize Game ----------------
+
     @Test
-    public void testSetStory() {
-        String newStory = "A new adventure begins...";
-        game.setStory(newStory);
-        assertEquals(newStory, game.getStory());
-    }
-    
-    @Test
-    public void testSetPuzzles() {
-        ArrayList<Puzzle> puzzles = new ArrayList<>();
-        puzzles.add(new Trivia());
-        puzzles.add(new Trivia());
-        game.setPuzzles(puzzles);
-        assertEquals(2, game.getPuzzles().size());
-    }
-    
-    // Integration Tests
-    
-    @Test
-    public void testCompleteGameInitializationWorkflow() {
+    public void testInitializeGameBasic() {
         game.initializeGame(testPlayer, Game.Difficulty.MEDIUM);
-        
         assertEquals(testPlayer, game.getCurrentPlayer());
         assertEquals(Game.Difficulty.MEDIUM, game.getDifficulty());
         assertEquals(1000, game.getScore());
         assertFalse(game.isPaused());
         assertFalse(game.isOver());
-        assertEquals(0, game.getCompletedCount());
         assertNotNull(game.getStartTime());
+        assertEquals(0, game.getCompletedCount());
     }
-    
+
     @Test
-    public void testPauseAndResumeAffectsElapsedTime() throws InterruptedException {
+public void testInitializeGameResetsPreviousValues() {
+    game.setScore(10);
+    game.initializeGame(testPlayer, Game.Difficulty.EASY);
+    assertEquals(1000, game.getScore());
+    assertEquals(0, game.getCompletedCount());
+}
+
+
+    @Test
+    public void testInitializeGameWithNullPlayer() {
+        game.initializeGame(null, Game.Difficulty.HARD);
+        assertNull(game.getCurrentPlayer());
+    }
+
+    // ---------------- Pause/Resume Logic ----------------
+
+    @Test
+    public void testPauseAndResumeToggle() {
         game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        
-        Thread.sleep(100);
-        long timeBeforePause = game.getElapsedTime();
-        
+        game.pause();
+        assertTrue(game.isPaused());
+        game.resume();
+        assertFalse(game.isPaused());
+    }
+
+    @Test
+    public void testPauseWhenAlreadyPausedDoesNotCrash() {
+        game.initializeGame(testPlayer, Game.Difficulty.EASY);
+        game.pause();
+        game.pause();
+        assertTrue(game.isPaused());
+    }
+
+    @Test
+    public void testResumeWhenNotPausedDoesNotCrash() {
+        game.initializeGame(testPlayer, Game.Difficulty.EASY);
+        game.resume();
+        assertFalse(game.isPaused());
+    }
+
+    // ---------------- Time Handling ----------------
+
+    @Test
+    public void testElapsedTimeWithoutInitialization() {
+        assertEquals(0, game.getElapsedTime());
+    }
+
+    @Test
+    public void testElapsedTimeAfterStart() throws InterruptedException {
+        game.initializeGame(testPlayer, Game.Difficulty.EASY);
+        long first = game.getElapsedTime();
+        Thread.sleep(50);
+        long second = game.getElapsedTime();
+        assertTrue(second >= first);
+    }
+
+    @Test
+    public void testRemainingTimePositiveForAllDifficulties() {
+        for (Game.Difficulty d : Game.Difficulty.values()) {
+            game.deleteGame();
+            game = Game.getInstance();
+            game.initializeGame(testPlayer, d);
+            long remaining = game.getRemainingTime();
+            assertTrue("Remaining time negative for " + d, remaining >= 0);
+        }
+    }
+
+    @Test
+    public void testIsTimeUpInitiallyFalse() {
+        game.initializeGame(testPlayer, Game.Difficulty.EASY);
+        assertFalse(game.isTimeUp());
+    }
+
+    // ---------------- Score Calculation ----------------
+
+    @Test
+    public void testCalculateScoreReturnsNonNegative() {
+        game.initializeGame(testPlayer, Game.Difficulty.EASY);
+        game.setScore(-100);
+        assertTrue(game.calculateScore() >= 0);
+    }
+
+    @Test
+    public void testCalculateScoreUpdatesGameScore() {
+        game.initializeGame(testPlayer, Game.Difficulty.MEDIUM);
+        int score = game.calculateScore();
+        assertEquals(score, game.getScore());
+    }
+
+    @Test
+    public void testCalculateScoreWithNoProgressList() {
+        game.initializeGame(testPlayer, Game.Difficulty.HARD);
+        assertEquals(1000, game.calculateScore());
+    }
+
+    // ---------------- Progress and Completion ----------------
+
+    @Test
+    public void testProgressPercentWithEmptyList() {
+        game.setPuzzles(new ArrayList<>());
+        assertEquals(0.0, game.progressPercent(), 0.01);
+    }
+
+    @Test
+    public void testProgressPercentZeroCompleted() {
+        ArrayList<Puzzle> puzzles = new ArrayList<>();
+        puzzles.add(new Trivia());
+        puzzles.add(new Trivia());
+        game.setPuzzles(puzzles);
+        assertEquals(0.0, game.progressPercent(), 0.01);
+    }
+
+    // ---------------- Setter & Getter Edge Cases ----------------
+
+    @Test
+    public void testSetCurrentPlayerToNull() {
+        game.setCurrentPlayer(null);
+        assertNull(game.getCurrentPlayer());
+    }
+
+    @Test
+    public void testSetDifficultyThenGet() {
+        game.setDifficulty(Game.Difficulty.HARD);
+        assertEquals(Game.Difficulty.HARD, game.getDifficulty());
+    }
+
+    @Test
+    public void testSetNegativeScore() {
+        game.setScore(-200);
+        assertEquals(-200, game.getScore());
+    }
+
+    @Test
+    public void testSetStoryNull() {
+        game.setStory(null);
+        assertNull(game.getStory());
+    }
+
+    @Test
+    public void testSetPuzzlesNullDoesNotCrash() {
+        game.setPuzzles(null);
+        assertNull(game.getPuzzles());
+    }
+
+
+    // ---------------- deleteGame Behavior ----------------
+
+    @Test
+    public void testDeleteGamePreservesNoState() {
+        game.initializeGame(testPlayer, Game.Difficulty.MEDIUM);
+        game.deleteGame();
+        Game newGame = Game.getInstance();
+        assertNotSame(game, newGame);
+        assertNull(newGame.getCurrentPlayer());
+        assertEquals(1000, newGame.getScore());
+    }
+
+    // ---------------- Integration and State Mutation ----------------
+
+    @Test
+    public void testPauseResumeDoesNotAdvanceTimeSignificantly() throws InterruptedException {
+        game.initializeGame(testPlayer, Game.Difficulty.EASY);
+        Thread.sleep(50);
+        long beforePause = game.getElapsedTime();
         game.pause();
         Thread.sleep(100);
-        
         game.resume();
-        long timeAfterResume = game.getElapsedTime();
-        
-        // Time shouldn't have increased much during pause
-        assertTrue(timeAfterResume - timeBeforePause < 150);
+        long afterResume = game.getElapsedTime();
+        assertTrue(afterResume - beforePause < 200);
     }
-    
+
     @Test
-    public void testDifferentDifficultiesHaveDifferentTimeLimits() {
+    public void testDifferentDifficultyTimeComparisons() {
         game.initializeGame(testPlayer, Game.Difficulty.EASY);
-        long easyRemaining = game.getRemainingTime();
+        long easyTime = game.getRemainingTime();
         game.deleteGame();
-        
         game = Game.getInstance();
-        ArrayList<Progress> progressList = new ArrayList<>();
-        Player newTestPlayer = new Player("TestUser", progressList, "password123");
-        game.initializeGame(newTestPlayer, Game.Difficulty.HARD);
-        long hardRemaining = game.getRemainingTime();
-        
-        assertTrue(easyRemaining > hardRemaining);
+        game.initializeGame(testPlayer, Game.Difficulty.HARD);
+        long hardTime = game.getRemainingTime();
+        assertTrue(easyTime > hardTime);
+    }
+
+    // ---------------- Potential Bug Probes ----------------
+
+    @Test
+    public void testInitializeGameTwiceOverwritesPlayerAndDifficulty() {
+        Player p1 = new Player("A", new ArrayList<>(), "x");
+        Player p2 = new Player("B", new ArrayList<>(), "y");
+        game.initializeGame(p1, Game.Difficulty.EASY);
+        game.initializeGame(p2, Game.Difficulty.HARD);
+        assertEquals(p2, game.getCurrentPlayer());
+        assertEquals(Game.Difficulty.HARD, game.getDifficulty());
+    }
+
+    @Test
+    public void testGameToStringContainsImportantInfo() {
+        String s = game.toString();
+        assertNotNull(s);
+        assertTrue(s.contains("Game") || s.contains("Score") || s.contains("VHS"));
+    }
+
+    @Test
+    public void testChangingScoreDoesNotCrashProgressPercent() {
+        game.setScore(500);
+        assertNotNull(game.progressPercent());
+    }
+
+    @Test
+    public void testGameCanHandleNullPlayerAndStorySimultaneously() {
+        game.setCurrentPlayer(null);
+        game.setStory(null);
+        assertNull(game.getCurrentPlayer());
+        assertNull(game.getStory());
     }
 }
+

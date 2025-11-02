@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
-Test set: com.model.TestTrivia
+Test set: com.model.TestMultipleChoice
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.model.TestTrivia
-com.model.TestTrivia.initializationError -- Time elapsed: 0 s <<< ERROR!
-java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestTrivia.testCustomTriviaInitializationStoresValues() accessible: module com.excape does not "exports com.model" to module junit
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! -- in com.model.TestMultipleChoice
+com.model.TestMultipleChoice.initializationError -- Time elapsed: 0 s <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make public void com.model.TestMultipleChoice.testSetQuestionAffectsOutput() accessible: module com.excape does not "exports com.model" to module junit
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
