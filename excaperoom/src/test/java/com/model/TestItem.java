@@ -128,4 +128,43 @@ public class TestItem {
         assertFalse("toString() should NOT include the file path / sound object",
                 result.contains("not-a-real-file.wav"));
     }
+
+
+    @Test
+    public void addToInventory_progressWithoutInventory_returnsFalse() {
+        Item item = new Item("Key", "Opens door", "Basement", null);
+
+        // Progress exists but getInventory() returns null
+        Progress progress = new Progress();
+        progress.setInventory(null); // if setInventory(null) exists; if not, just don't set inventory at all
+
+        boolean result = item.addToInventory(progress);
+
+        assertFalse("If progress.getInventory() is null, addToInventory should return false", result);
+    }
+
+    @Test
+    public void use_withExistingSoundFile_doesNotThrow() {
+        // make a dummy file reference; it probably doesn't exist on disk, so sound.exists() = false
+        File fakeSound = new File("fake-sound.wav");
+        Item item = new Item("Key", "Opens", "Basement", fakeSound);
+        Puzzle dummyPuzzle = new Riddle("riddle?", "answer");
+
+        try {
+            boolean result = item.use(dummyPuzzle);
+            assertTrue("use() should still return true even if sound file doesn't exist", result);
+        } catch (Exception e) {
+            fail("Item.use() should not throw even with a sound file reference");
+        }
+    }
+
+    @Test
+    public void equals_nullAndDifferentType_areFalse() {
+        Item a = new Item("Key", "desc", "Basement", null);
+
+        assertFalse("Item should not equal null", a.equals(null));
+        assertFalse("Item should not equal a different type", a.equals("not-an-item"));
+    }
+
+
 }

@@ -29,4 +29,15 @@ public class TestSpeak {
             fail("Speak.speak(null) should not throw, but threw: " + e.getClass().getName() + " - " + e.getMessage());
         }
     }
+
+    @Test
+    public void speak_withEmptyString_shouldNotThrow() {
+        try {
+            Speak.speak("");
+            assertTrue("Speak.speak(\"\") should not crash TTS", true);
+        } catch (Exception e) {
+            fail("Speak.speak(\"\") should not throw, but threw: " + e.getClass().getName());
+        }
+    }
+
 }
