@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.model.TestRiddle" time="0.02" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.model.TestItemPuzzle" time="0.024" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,10 +12,10 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/charlottebaker/Desktop/VHS-Escape/excaperoom/target/surefire 2025-11-02T19-26-15_293-jvmRun1 surefire-20251102192615381_1tmp surefire_0-20251102192615381_2tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/charlottebaker/Desktop/VHS-Escape/excaperoom/target/surefire 2025-11-02T19-31-24_262-jvmRun1 surefire-20251102193124378_1tmp surefire_0-20251102193124378_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="com.model.TestRiddle#defaultConstructor_setsTypeToRiddle"/>
+    <property name="test" value="com.model.TestItemPuzzle"/>
     <property name="surefire.test.class.path" value="/Users/charlottebaker/Desktop/VHS-Escape/excaperoom/target/test-classes:/Users/charlottebaker/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/en_us/1.0/en_us-1.0.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/cmu_us_kal/1.0/cmu_us_kal-1.0.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/cmulex/1.0/cmulex-1.0.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/cmudict04/1.0/cmudict04-1.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/charlottebaker"/>
@@ -59,5 +59,7 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="defaultConstructor_setsTypeToRiddle" classname="com.model.TestRiddle" time="0.007"/>
+  <testcase name="defaultConstructor_initializesFields" classname="com.model.TestItemPuzzle" time="0.01"/>
+  <testcase name="constructorWithArgs_setsFields" classname="com.model.TestItemPuzzle" time="0.0"/>
+  <testcase name="checkAnswer_returnsFalseWhenNoPlayerOrNoInventory" classname="com.model.TestItemPuzzle" time="0.0"/>
 </testsuite>

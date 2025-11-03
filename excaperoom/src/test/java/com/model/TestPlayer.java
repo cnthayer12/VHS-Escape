@@ -124,11 +124,27 @@ public class TestPlayer {
         assertNotNull("Player should still be constructed even if progress is null", p);
         assertEquals("Olivia", p.getDisplayName());
         assertEquals("pw123", p.getPassword());
-
-        // This next assert is about design:
-        // Do we EXPECT getProgress() to maybe be null?
-        // If this fails, that's info for a bug report / model contract.
         assertNull("Progress was passed as null; getProgress() should reflect that (or code should defensively create an empty list).",
                 p.getProgress());
     }
+// Extra tests for password
+   @Test
+    public void setPassword_emptyStringDoesNotChangeExistingPassword() {
+        Player p = new Player("Sam", new ArrayList<Progress>(), "startPass");
+        p.setPassword("");
+        assertEquals("startPass", p.getPassword());
+    }
+
+    @Test
+    public void toString_doesNotExposePassword() {
+        Player p = new Player("Taylor", new ArrayList<Progress>(), "superSecret123");
+        String result = p.toString();
+        assertFalse("Password should not appear in toString()", result.contains("superSecret123"));
+    }
+
+ 
+
+
+
 }
+

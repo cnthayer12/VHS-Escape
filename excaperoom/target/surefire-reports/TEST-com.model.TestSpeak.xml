@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.model.TestRiddle" time="0.02" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.model.TestSpeak" time="7.941" tests="2" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,10 +12,10 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/charlottebaker/Desktop/VHS-Escape/excaperoom/target/surefire 2025-11-02T19-26-15_293-jvmRun1 surefire-20251102192615381_1tmp surefire_0-20251102192615381_2tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/charlottebaker/Desktop/VHS-Escape/excaperoom/target/surefire 2025-11-02T19-32-00_584-jvmRun1 surefire-20251102193200674_1tmp surefire_0-20251102193200674_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="com.model.TestRiddle#defaultConstructor_setsTypeToRiddle"/>
+    <property name="test" value="com.model.TestSpeak"/>
     <property name="surefire.test.class.path" value="/Users/charlottebaker/Desktop/VHS-Escape/excaperoom/target/test-classes:/Users/charlottebaker/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/charlottebaker/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/en_us/1.0/en_us-1.0.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/cmu_us_kal/1.0/cmu_us_kal-1.0.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/cmulex/1.0/cmulex-1.0.jar:/Users/charlottebaker/.m2/repository/org/mobicents/external/freetts/cmudict04/1.0/cmudict04-1.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/charlottebaker"/>
@@ -59,5 +59,41 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="defaultConstructor_setsTypeToRiddle" classname="com.model.TestRiddle" time="0.007"/>
+  <testcase name="speak_withNormalText_shouldNotThrow" classname="com.model.TestSpeak" time="1.854"/>
+  <testcase name="speak_withNullText_shouldNotThrowOrCrash" classname="com.model.TestSpeak" time="6.074">
+    <error message="Java heap space" type="java.lang.OutOfMemoryError"><![CDATA[java.lang.OutOfMemoryError: Java heap space
+	at java.base/java.util.Arrays.copyOf(Arrays.java:3537)
+	at java.base/java.lang.AbstractStringBuilder.ensureCapacityInternal(AbstractStringBuilder.java:228)
+	at java.base/java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:802)
+	at java.base/java.lang.StringBuffer.append(StringBuffer.java:425)
+	at com.sun.speech.freetts.en.TokenizerImpl.getTokenByCharClass(TokenizerImpl.java:328)
+	at com.sun.speech.freetts.en.TokenizerImpl.getTokenNotOfCharClass(TokenizerImpl.java:293)
+	at com.sun.speech.freetts.en.TokenizerImpl.getNextToken(TokenizerImpl.java:198)
+	at freetts@1.0/com.sun.speech.freetts.Voice$FreeTTSSpeakableTokenizer$1.next(Voice.java:1480)
+	at freetts@1.0/com.sun.speech.freetts.Voice.speak(Voice.java:282)
+	at freetts@1.0/com.sun.speech.freetts.Voice.speak(Voice.java:232)
+	at com.excape/com.model.Speak.speak(Speak.java:21)
+	at com.excape/com.model.TestSpeak.speak_withNullText_shouldNotThrowOrCrash(TestSpeak.java:23)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit@4.13.2/org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at junit@4.13.2/org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at junit@4.13.2/org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at junit@4.13.2/org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at junit@4.13.2/org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at junit@4.13.2/org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at junit@4.13.2/org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at junit@4.13.2/org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at junit@4.13.2/org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at junit@4.13.2/org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at junit@4.13.2/org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at junit@4.13.2/org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at junit@4.13.2/org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at junit@4.13.2/org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at junit@4.13.2/org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at junit@4.13.2/org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+]]></error>
+  </testcase>
 </testsuite>

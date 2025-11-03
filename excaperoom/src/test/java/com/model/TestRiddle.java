@@ -97,4 +97,11 @@ public class TestRiddle {
         assertTrue("toString() should start with 'Riddle:'",
                 result.startsWith("Riddle:"));
     }
+
+    @Test
+    public void defaultConstructor_setsTypeToRiddle() {
+        Riddle r = new Riddle();
+        assertEquals("Riddle", r.type);
+}
+
 }
