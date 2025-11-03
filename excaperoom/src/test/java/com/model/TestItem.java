@@ -166,5 +166,24 @@ public class TestItem {
         assertFalse("Item should not equal a different type", a.equals("not-an-item"));
     }
 
+    @Test
+    public void equals_withNullFieldsShouldNotThrow() {
+        Item a = new Item(null, "desc", null, null);
+        Item b = new Item(null, "desc2", null, null);
+
+        try {
+            boolean eq = a.equals(b);
+            // We don't actually care what "eq" is, we care that it didn't explode.
+            assertTrue(
+                "Item.equals() should not throw when name/location are null. " +
+                "It should handle nulls safely.",
+                true
+            );
+        } catch (NullPointerException npe) {
+            fail("Item.equals() threw NullPointerException when comparing items with null fields");
+        }
+    }
+
+
 
 }

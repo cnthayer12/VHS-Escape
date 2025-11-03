@@ -149,6 +149,44 @@ public class TestPlayer {
         assertNull("If Player was constructed with null progress, getProgress() should return null (or be handled in code)", p.getProgress());
     }
 
+    @Test
+    public void setId_nullShouldNotBeAllowed() {
+        Player p = new Player("Taylor", new ArrayList<Progress>(), "pw");
+        p.setId(null);
+
+        assertNotNull(
+            "Player ID should never be allowed to become null after calling setId(null)",
+            p.getId()
+        );
+    }
+
+    @Test
+    public void setDisplayName_nullShouldNotBeAllowed() {
+        Player p = new Player("Jordan", new ArrayList<Progress>(), "pw");
+        p.setDisplayName(null);
+
+        assertNotNull(
+            "Display name should not become null; Player should reject null display names",
+            p.getDisplayName()
+        );
+    }
+
+    @Test
+    public void checkPassword_storedPasswordNullShouldNotCrash() {
+        Player p = new Player("Chris", new ArrayList<Progress>(), null); // password is null on purpose
+
+        try {
+            Boolean result = p.checkPassword("anything");
+            assertFalse(
+                "If the stored password is null, checkPassword(...) should return false, not crash",
+                result
+            );
+        } catch (NullPointerException npe) {
+            fail("checkPassword should not throw when the player's password is null");
+        }
+    }
+
+
 
 
 
