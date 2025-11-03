@@ -17,6 +17,19 @@ public class TestCipher {
 
     // ---------------- Constructor Tests ----------------
 
+     @Test
+    public void testParameterizedConstructorWithNullValues() {
+        Cipher cipher = new Cipher(null, null, 0);
+        assertNull(cipher.getCipherText());
+        assertNull(cipher.getCorrectAnswer());
+        assertEquals(0, cipher.getShift());
+    }
+    @Test
+    public void testParameterizedConstructorSetsType() {
+        Cipher cipher = new Cipher("KHOOR", "HELLO", 3);
+        assertEquals("Cipher", cipher.getType());
+    }
+    
     @Test
     public void testDefaultConstructorInitializesCipherText() {
         assertEquals("", defaultCipher.getCipherText());
