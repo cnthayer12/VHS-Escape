@@ -102,6 +102,23 @@ public class TestRiddle {
     public void defaultConstructor_setsTypeToRiddle() {
         Riddle r = new Riddle();
         assertEquals("Riddle", r.type);
-}
+    }
+
+    @Test
+    public void checkAnswer_trimsWhitespaceAroundCorrectAnswerToo() {
+        Riddle r = new Riddle("Speak friend and enter", "  mellon ");
+        assertTrue("checkAnswer should trim both stored correctAnswer and user input",
+                r.checkAnswer("mellon"));
+    }
+
+    @Test
+    public void toString_startsWithRiddlePrefix() {
+        Riddle r = new Riddle("What am I?", "an egg");
+        assertTrue("Riddle.toString() should start with the word 'Riddle:' so UI can style it",
+                r.toString().startsWith("Riddle:"));
+    }
+
+
+
 
 }

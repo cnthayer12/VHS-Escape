@@ -142,7 +142,13 @@ public class TestPlayer {
         assertFalse("Password should not appear in toString()", result.contains("superSecret123"));
     }
 
- 
+    @Test
+    public void getProgress_afterConstructingWithNullProgress_returnsNullSafely() {
+        Player p = new Player("Avery", null, "pw123");
+        // Just calling getProgress() should not crash
+        assertNull("If Player was constructed with null progress, getProgress() should return null (or be handled in code)", p.getProgress());
+    }
+
 
 
 
