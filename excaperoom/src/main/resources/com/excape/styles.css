@@ -1,0 +1,7 @@
+.titleLabel {
+    -fx-text-fill: #ffffff;
+}
+
+.button {
+    -fx-text-fill: red;
+}
