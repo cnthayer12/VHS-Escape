@@ -1,30 +1,23 @@
-.bgLanding {
+.bgLanding{
     -fx-background-color: black;
 }
 
-.lblTitle {
+.label {
     -fx-text-fill: #D95BAD;
     -fx-font-size: 90px;
+    -fx-font-family: "Averia Serif Libre";
+    -fx-font-weight: bold;
+
 }
+
 .lblWelcome {
     -fx-text-fill: white;
     -fx-font-size: 36px;
+    -fx-font-style: italic;
 }
 
-.btnLogin {
-    -fx-background-color: white;
+.button {
     -fx-text-fill: black;
     -fx-font-size: 20px;
-}
-
-.btnCreateAcc {
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-font-size: 20px;
-}
-
-.btnLeaderboard {
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-font-size: 20px;
+    -fx-font-family: "Averia Serif Libre";
 }

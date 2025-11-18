@@ -6,13 +6,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="bgLanding" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.excape.LandingController">
+<VBox fx:id="bgLanding" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" styleClass="bgLanding" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.excape.LandingController">
    <children>
-      <Label fx:id="lblWelcome" prefHeight="29.0" prefWidth="74.0" text="Welcome to..." />
-      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="74.0" prefWidth="206.0" text="VHS ESCAPE" />
-      <Button id="btnLogin" fx:id="btnLogin" onAction="#switchToLogin" prefHeight="26.0" prefWidth="101.0" text="Login" />
-      <Button fx:id="btnCreateAcc" onAction="#switchToCreateAcc" prefHeight="26.0" prefWidth="103.0" text="Create Account" />
-      <Button fx:id="btnLeaderboard" onAction="#switchToLeaderboard" prefHeight="26.0" prefWidth="103.0" text="Leaderboard" />
+      <Label fx:id="lblWelcome" alignment="CENTER" prefHeight="36.0" prefWidth="555.0" styleClass="lblWelcome" text="Welcome to..." />
+      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="119.0" prefWidth="830.0" text="V H S  E S C A P E" />
+      <Button id="btnLogin" fx:id="btnLogin" onAction="#switchToLogin" prefHeight="57.0" prefWidth="177.0" text="Login" />
+      <Button fx:id="btnCreateAcc" onAction="#switchToCreateAcc" prefHeight="58.0" prefWidth="180.0" text="Create Account" />
+      <Button fx:id="btnLeaderboard" onAction="#switchToLeaderboard" prefHeight="55.0" prefWidth="183.0" text="Leaderboard" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
