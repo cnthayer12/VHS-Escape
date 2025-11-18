@@ -1,7 +1,30 @@
-.titleLabel {
-    -fx-text-fill: #ffffff;
+.bgLanding {
+    -fx-background-color: black;
 }
 
-.button {
-    -fx-text-fill: red;
+.lblTitle {
+    -fx-text-fill: #D95BAD;
+    -fx-font-size: 90px;
+}
+.lblWelcome {
+    -fx-text-fill: white;
+    -fx-font-size: 36px;
+}
+
+.btnLogin {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
+.btnCreateAcc {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
+.btnLeaderboard {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
 }
