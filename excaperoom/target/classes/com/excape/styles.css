@@ -3,6 +3,24 @@
 }
 
 .label {
+    -fx-text-fill: white;
+    -fx-font-family: "Averia Serif Libre";
+    -fx-font-size: 57;
+}
+
+.lblSmall {
+    -fx-font-size: 28;
+}
+
+.lblVerySmall {
+    -fx-font-size: 15;
+}
+
+.lblLink {
+    -fx-text-fill: #CBFDFF;
+}
+
+.lblTitle {
     -fx-text-fill: #D95BAD;
     -fx-font-size: 90px;
     -fx-font-family: "Averia Serif Libre";
@@ -16,8 +34,13 @@
     -fx-font-style: italic;
 }
 
+
 .button {
     -fx-text-fill: black;
     -fx-font-size: 20px;
+    -fx-font-family: "Averia Serif Libre";
+}
+
+.textField {
     -fx-font-family: "Averia Serif Libre";
 }
