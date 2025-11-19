@@ -67,15 +67,20 @@ public class EscapeGameFacade {
         return game.progressPercent();
     }
 
-    public void createPlayer(String username, String pass) {
-        players.createAccount(username, pass);
+    public int createPlayer(String username, String pass) {
+        int returnVal = players.createAccount(username, pass);
         saveProgress();
+        return returnVal;
     }
 
     public boolean login(String username, String pass) {
         players.login(username, pass);
         saveProgress();
         return false;
+    }
+
+    public Player getCurrentPlayer() {
+        return Players.getCurrentPlayer();
     }
 
     public void logout() {

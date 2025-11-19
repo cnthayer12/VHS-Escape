@@ -2,6 +2,8 @@ package com.excape;
 
 import java.io.IOException;
 
+import com.model.EscapeGameFacade;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,8 +47,23 @@ public class LoginController {
     private Label unLabel;
 
     @FXML
-    void attemptLogin(MouseEvent event) throws IOException {
+    private Label errorLabel;
 
+    @FXML
+    void attemptLogin(MouseEvent event) throws IOException {
+        String username = unInput.getText();
+        String password = pwInput.getText();
+
+        EscapeGameFacade facade = EscapeGameFacade.getInstance();
+
+        facade.loadProgress();
+        facade.login(username, password);
+        if(facade.getCurrentPlayer() == null) {
+            errorLabel.setText("Invalid login credentials.");
+            return;
+        }
+
+        App.setRoot("gameEntry");
     }
 
     @FXML

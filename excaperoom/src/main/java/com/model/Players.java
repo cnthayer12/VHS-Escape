@@ -84,19 +84,19 @@ public class Players {
         }
     }
 
-    public void createAccount(String displayName, String pass) {
+    public int createAccount(String displayName, String pass) {
         if(currentPlayer != null) {
             System.out.println("Could not create account, a user is already logged in.");
-            return;
+            return 0;
         }
         if(pass.equals("")) {
             System.out.println("Could not create account, password cannot be empty.");
-            return;
+            return 1;
         }
         for(Player player : players) {
             if(player.getDisplayName().equals(displayName)) {
                 System.out.println("Could not create account, one with this name already exists.");
-                return;
+                return 2;
             }
         }
         Progress progressInstance = new Progress();
@@ -106,6 +106,7 @@ public class Players {
         players.add(newPlayer);
         System.out.println("Account created successfully! Logging in now.");
         Players.getInstance().login(displayName, pass);
+        return 3;
     }
 
     public boolean loadProgress() {

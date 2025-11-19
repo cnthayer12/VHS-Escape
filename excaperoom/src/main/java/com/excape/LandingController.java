@@ -30,7 +30,7 @@ public class LandingController {
 
     @FXML
     void switchToCreateAcc(ActionEvent event) throws IOException {
-        App.setRoot("createAcc");
+        App.setRoot("createAccount");
     }
 
     @FXML
