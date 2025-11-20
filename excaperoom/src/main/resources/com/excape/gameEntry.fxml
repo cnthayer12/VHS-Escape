@@ -14,7 +14,7 @@
    <children>
       <ImageView blendMode="SRC_ATOP" fitHeight="1221.0" fitWidth="1691.0" layoutX="-374.0" layoutY="-163.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../Fall%202025%20Documents/1-884fab6d.jpeg" />
+            <Image url="@images/wp4585522.jpg"/>
          </image>
          <viewport>
             <Rectangle2D />
