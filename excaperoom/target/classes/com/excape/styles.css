@@ -12,6 +12,10 @@
     -fx-font-size: 28;
 }
 
+.lblMedium {
+    -fx-font-size: 50;
+}
+
 .lblVerySmall {
     -fx-font-size: 15;
 }
@@ -48,4 +52,6 @@
 
 .textField {
     -fx-font-family: "Averia Serif Libre";
+
 }
+
