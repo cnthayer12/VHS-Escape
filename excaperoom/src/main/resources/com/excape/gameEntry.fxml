@@ -50,9 +50,9 @@
                   <Insets bottom="505.0" />
                </StackPane.margin>
             </Label>
-            <Label fx:id="lblEntry" prefHeight="110.0" prefWidth="1219.0" styleClass="lblMedium" stylesheets="@styles.css" text="     You have come across a mysterious VHS tape..." textFill="WHITE">
+            <Label fx:id="lblEntry" prefHeight="110.0" prefWidth="1219.0" stylesheets="@styles.css" text="     You have come across a mysterious VHS tape..." textFill="WHITE">
                <StackPane.margin>
-                  <Insets bottom="630.0" left="99.0" />
+                  <Insets bottom="630.0" left="79.0" />
                </StackPane.margin>
                <font>
                   <Font size="16.0" />
