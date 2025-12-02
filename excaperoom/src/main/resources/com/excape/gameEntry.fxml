@@ -45,15 +45,18 @@
                   <Insets top="550.0" />
                </StackPane.margin>
             </Button>
-            <Label fx:id="lblEntry" prefHeight="110.0" prefWidth="1219.0" stylesheets="@styles.css" text="     You have come across a mysterious VHS tape..." textFill="WHITE">
-               <StackPane.margin>
-                  <Insets bottom="630.0" />
-               </StackPane.margin>
-            </Label>
             <Label styleClass="lblMedium" stylesheets="@styles.css" text="Your fate awates. Press Enter Game to step inside.">
                <StackPane.margin>
                   <Insets bottom="505.0" />
                </StackPane.margin>
+            </Label>
+            <Label fx:id="lblEntry" prefHeight="110.0" prefWidth="1219.0" stylesheets="@styles.css" text="     You have come across a mysterious VHS tape..." textFill="WHITE">
+               <StackPane.margin>
+                  <Insets bottom="630.0" left="79.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Label>
          </children>
       </StackPane>

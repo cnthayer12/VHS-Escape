@@ -5,7 +5,7 @@
 .label {
     -fx-text-fill: white;
     -fx-font-family: "Averia Serif Libre";
-    -fx-font-size: 57;
+    -fx-font-size: 55;
 }
 
 .lblSmall {
@@ -13,7 +13,7 @@
 }
 
 .lblMedium {
-    -fx-font-size: 50;
+    -fx-font-size: 45;
 }
 
 .lblVerySmall {
