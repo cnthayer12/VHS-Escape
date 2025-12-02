@@ -11,7 +11,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0">
@@ -21,7 +20,7 @@
                   <Image url="@images/arcadebackground.jpg" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="20.0" arcWidth="5.0" fill="#ffffffda" height="222.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="727.0" StackPane.alignment="TOP_CENTER">
+            <Rectangle arcHeight="20.0" arcWidth="5.0" fill="#ffffffda" height="222.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="726.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="50.0" />
                </StackPane.margin>
@@ -40,14 +39,6 @@
                </font>
                <StackPane.margin>
                   <Insets top="130.0" />
-               </StackPane.margin>
-            </Label>
-            <Label prefHeight="51.0" prefWidth="469.0" text="The game begins now-- there's no turning back." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
-               <font>
-                  <Font name="Charter Bold" size="21.0" />
-               </font>
-               <StackPane.margin>
-                  <Insets top="165.0" />
                </StackPane.margin>
             </Label>
             <Rectangle arcHeight="20.0" arcWidth="5.0" fill="#ffffffda" height="119.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="890.0" />
@@ -77,7 +68,7 @@
                   <Image url="@images/flashlighticon.png" />
                </image>
                <StackPane.margin>
-                  <Insets right="500.0" top="550.0" />
+                  <Insets right="700.0" top="500.0" />
                </StackPane.margin>
             </ImageView>
             <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="109.0" text="vhsbutton" visible="false">
@@ -121,12 +112,12 @@
                   <Insets right="21.0" top="22.0" />
                </StackPane.margin>
             </ImageView>
-            <ImageView fitHeight="44.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+            <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                <image>
                   <Image url="@images/exit.png" />
                </image>
                <StackPane.margin>
-                  <Insets right="19.0" top="114.0" />
+                  <Insets right="23.0" top="116.0" />
                </StackPane.margin>
             </ImageView>
             <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="71.0" text="inventorybutton" visible="false" StackPane.alignment="TOP_RIGHT">
@@ -139,6 +130,14 @@
                   <Insets right="10.0" top="100.0" />
                </StackPane.margin>
             </Button>
+            <Label prefHeight="51.0" prefWidth="469.0" text="The game begins now-- there's no turning back." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+               <font>
+                  <Font name="Charter Bold" size="21.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="165.0" />
+               </StackPane.margin>
+            </Label>
          </children>
       </StackPane>
    </children>
