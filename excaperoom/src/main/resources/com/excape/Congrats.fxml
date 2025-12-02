@@ -10,14 +10,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
             <ImageView fitHeight="412.0" fitWidth="737.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Screenshot%202025-11-11%20at%202.14.45%E2%80%AFPM.png" />
+                  <Image url="@images/Screenshot%202025-11-11%20at%202.14.45%E2%80%AFPM.png" />
                </image>
             </ImageView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="96.0" opacity="0.78" stroke="TRANSPARENT" strokeType="INSIDE" width="283.0" />
@@ -41,7 +40,7 @@
             </Button>
             <ImageView fitHeight="101.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                <image>
-                  <Image url="@../CSCE247/VHS-Escape/excaperoom/src/main/resources/com/excape/images/coinsicon.png" />
+                  <Image url="@images/coinsicon.png" />
                </image>
                <StackPane.margin>
                   <Insets bottom="100.0" left="7.0" />
