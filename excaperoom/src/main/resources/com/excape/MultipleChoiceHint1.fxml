@@ -20,7 +20,7 @@
                   <Image url="@images/Screenshot%202025-11-11%20at%202.14.45%E2%80%AFPM.png" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" opacity="0.78" stroke="TRANSPARENT" strokeType="INSIDE" width="374.0" StackPane.alignment="TOP_CENTER">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="105.0" opacity="0.78" stroke="TRANSPARENT" strokeType="INSIDE" width="374.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="70.0" />
                </StackPane.margin></Rectangle>
@@ -71,7 +71,7 @@
                   <Insets right="-20.0" top="300.0" />
                </StackPane.margin>
             </Button>
-            <Circle fill="#ffffffa0" radius="31.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="TOP_RIGHT">
+            <Circle fill="#ffffffb4" radius="31.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="13.0" top="20.0" />
                </StackPane.margin>
@@ -84,7 +84,12 @@
                   <Insets right="11.0" top="17.0" />
                </StackPane.margin>
             </ImageView>
-            <Label text="Answer the Question below:" StackPane.alignment="CENTER">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffffd4" height="37.0" stroke="BLACK" strokeType="INSIDE" width="316.0" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="80.0" top="20.0" />
+               </StackPane.margin>
+            </Rectangle>
+            <Label text="Answer the Question Below:" StackPane.alignment="CENTER">
                <StackPane.margin>
                   <Insets top="-200.0" />
                </StackPane.margin>
@@ -92,14 +97,19 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
+            <Label text="It is the same year the first Apple Computer was released" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="83.0" top="30.0" />
+               </StackPane.margin>
+            </Label>
+            <ImageView fitHeight="55.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
                <image>
                   <Image url="@images/arrow-icon-direction-icon-left-icon-pointing-icon-white-black-text-logo-line-png-clipart-Picsart-BackgroundRemover.jpg" />
                </image>
             </ImageView>
-            <Label text="13:30" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
+            <Label text="10:45" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
                <font>
-                  <Font size="29.0" />
+                  <Font size="27.0" />
                </font>
             </Label>
          </children>

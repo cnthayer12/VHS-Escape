@@ -20,18 +20,10 @@
                   <Image url="@images/Screenshot%202025-11-11%20at%202.14.45%E2%80%AFPM.png" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="138.0" opacity="0.78" stroke="TRANSPARENT" strokeType="INSIDE" width="374.0" StackPane.alignment="TOP_CENTER">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="103.0" opacity="0.78" stroke="TRANSPARENT" strokeType="INSIDE" width="374.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
-                  <Insets top="25.0" />
+                  <Insets top="70.0" />
                </StackPane.margin></Rectangle>
-            <Label text="Welcome to Question!" StackPane.alignment="CENTER">
-               <StackPane.margin>
-                  <Insets top="-290.0" />
-               </StackPane.margin>
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="51.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
                <image>
                   <Image url="@images/Button.jpg" />
@@ -56,16 +48,6 @@
                   <Insets right="100.0" top="150.0" />
                </StackPane.margin>
             </ImageView>
-            <Label text="Choose the correct answer to the question below." StackPane.alignment="CENTER">
-               <StackPane.margin>
-                  <Insets top="-250.0" />
-               </StackPane.margin>
-            </Label>
-            <Label text="But be careful. I wouldnt want to get it wrong if I were you.." StackPane.alignment="CENTER">
-               <StackPane.margin>
-                  <Insets top="-210.0" />
-               </StackPane.margin>
-            </Label>
             <Label text="What year was the VHS tape made?" StackPane.alignment="CENTER">
                <StackPane.margin>
                   <Insets top="-120.0" />
@@ -89,7 +71,7 @@
                   <Insets right="-20.0" top="300.0" />
                </StackPane.margin>
             </Button>
-            <Circle fill="#ffffff5b" radius="31.0" stroke="#00000006" strokeType="INSIDE" StackPane.alignment="TOP_RIGHT">
+            <Circle fill="#ffffffa0" radius="31.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="13.0" top="20.0" />
                </StackPane.margin>
@@ -102,6 +84,24 @@
                   <Insets right="11.0" top="17.0" />
                </StackPane.margin>
             </ImageView>
+            <Label text="Answer the Question below:" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets top="-200.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
+               <image>
+                  <Image url="@images/arrow-icon-direction-icon-left-icon-pointing-icon-white-black-text-logo-line-png-clipart-Picsart-BackgroundRemover.jpg" />
+               </image>
+            </ImageView>
+            <Label text="13:30" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
          </children>
       </StackPane>
    </children>
