@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEntryController">
    <children>
       <StackPane>
          <children>
@@ -37,7 +37,7 @@
                   <Insets top="400.0" />
                </StackPane.margin>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="128.0" text="Enter Game">
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#switchToDifficulty" prefHeight="32.0" prefWidth="128.0" text="Enter Game">
                <font>
                   <Font size="19.0" />
                </font>
@@ -50,9 +50,9 @@
                   <Insets bottom="505.0" />
                </StackPane.margin>
             </Label>
-            <Label fx:id="lblEntry" prefHeight="110.0" prefWidth="1219.0" stylesheets="@styles.css" text="     You have come across a mysterious VHS tape..." textFill="WHITE">
+            <Label fx:id="lblEntry" prefHeight="110.0" prefWidth="1219.0" stylesheets="@styles.css" text="You have come across a mysterious VHS tape..." textFill="WHITE">
                <StackPane.margin>
-                  <Insets bottom="630.0" left="79.0" />
+                  <Insets bottom="630.0" left="30.0" />
                </StackPane.margin>
                <font>
                   <Font size="16.0" />
