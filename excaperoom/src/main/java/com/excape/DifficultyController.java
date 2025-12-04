@@ -25,7 +25,7 @@ public class DifficultyController {
         EscapeGameFacade facade = EscapeGameFacade.getInstance();
         facade.loadProgress();
         facade.startGame(facade.getCurrentPlayer(), Difficulty.EASY);
-        App.setRoot("difficulty");
+        App.setRoot("roomscreen");
     }
 
     @FXML
@@ -33,7 +33,7 @@ public class DifficultyController {
         EscapeGameFacade facade = EscapeGameFacade.getInstance();
         facade.loadProgress();
         facade.startGame(facade.getCurrentPlayer(), Difficulty.MEDIUM);
-        App.setRoot("difficulty");
+        App.setRoot("roomscreen");
     }
 
     @FXML
@@ -41,6 +41,6 @@ public class DifficultyController {
         EscapeGameFacade facade = EscapeGameFacade.getInstance();
         facade.loadProgress();
         facade.startGame(facade.getCurrentPlayer(), Difficulty.HARD);
-        App.setRoot("difficulty");
+        App.setRoot("roomscreen");
     }
 }

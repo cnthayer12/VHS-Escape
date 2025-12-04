@@ -12,12 +12,20 @@
     -fx-font-size: 28;
 }
 
+.lblSmaller {
+    -fx-font-size: 24;
+}
+
 .lblMedium {
     -fx-font-size: 45;
 }
 
 .lblVerySmall {
     -fx-font-size: 15;
+}
+
+.lblBlackTxt {
+    -fx-text-fill: black;
 }
 
 .lblLink {
