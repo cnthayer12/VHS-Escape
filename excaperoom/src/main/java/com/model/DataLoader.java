@@ -14,8 +14,35 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * Utility class responsible for loading persistent game data from JSON files.
+ * <p>
+ * This loader reads:
+ * <ul>
+ *     <li>{@code players.json} – player accounts, progress, inventory, hints, etc.</li>
+ *     <li>{@code rooms.json} – puzzle definitions and metadata.</li>
+ * </ul>
+ * The class is designed to be tolerant of multiple JSON schemas and legacy shapes,
+ * using reflection to populate model objects when possible.
+ */
 public class DataLoader extends DataConstants {
 
+    /**
+     * Loads all {@link Player} objects from the {@code players.json} file.
+     * <p>
+     * Behavior:
+     * <ul>
+     *     <li>If the file does not exist, returns an empty list.</li>
+     *     <li>Supports root being either a JSON array, a wrapper object with
+     *         {@code users} or {@code players}, or a single player object.</li>
+     *     <li>Attempts to read UUID, display name, password, progress, inventory,
+     *         stored hints, strikes, and score, while being robust to missing
+     *         or legacy fields.</li>
+     * </ul>
+     *
+     * @return a list of loaded {@link Player} instances, or an empty list if none
+     *         can be loaded
+     */
     @SuppressWarnings("unchecked")
     public static ArrayList<Player> getPlayers() {
         ArrayList<Player> players = new ArrayList<Player>();
@@ -204,9 +231,20 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Helper: attempt to call a setter on target object.
-     * Tries the declared setter name with argument type matching value when possible.
-     * Returns true if a setter was invoked.
+     * Attempts to invoke a setter method on the target object using reflection.
+     * <p>
+     * This method:
+     * <ul>
+     *     <li>Searches for a public method with the given name and a single parameter.</li>
+     *     <li>Converts the provided value to the required parameter type when possible.</li>
+     *     <li>Invokes the method if a suitable conversion is found.</li>
+     * </ul>
+     *
+     * @param target     the object on which to invoke the setter
+     * @param setterName the name of the setter method to call
+     * @param value      the value to pass to the setter
+     * @return {@code true} if a setter was found and invoked successfully;
+     *         {@code false} otherwise
      */
     private static boolean trySet(Object target, String setterName, Object value) {
         if (target == null || setterName == null || value == null) return false;
@@ -238,7 +276,19 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Convert value (primitive wrapper / String / JSONArray / JSONObject / Number) to an instance of param class when possible.
+     * Attempts to convert a raw JSON value into an instance of the desired parameter type.
+     * <p>
+     * Supported conversions include:
+     * <ul>
+     *     <li>Strings, integers, longs, booleans</li>
+     *     <li>Lists from {@link JSONArray}</li>
+     *     <li>Maps from {@link JSONObject}</li>
+     *     <li>Enum types via {@code Enum.valueOf}</li>
+     * </ul>
+     *
+     * @param param the target parameter type
+     * @param value the raw value parsed from JSON
+     * @return an object of type {@code param}, or {@code null} if conversion is not possible
      */
     private static Object convertArg(Class<?> param, Object value) {
         if (value == null) return null;
@@ -282,7 +332,23 @@ public class DataLoader extends DataConstants {
         if ((param == Double.class || param == double.class) && value instanceof Number) return ((Number) value).doubleValue();
         return null;
     }
-    
+
+    /**
+     * Loads all {@link Puzzle} objects from the {@code rooms.json} file.
+     * <p>
+     * Behavior:
+     * <ul>
+     *     <li>If the file does not exist, returns an empty list.</li>
+     *     <li>Supports root being a JSON array, a wrapper object with {@code puzzles},
+     *         or a single puzzle object.</li>
+     *     <li>Instantiates concrete puzzle subclasses based on the {@code type} field
+     *         (e.g., Trivia, Riddle, PixelHunt, MultipleChoice, Cipher, ItemPuzzle).</li>
+     *     <li>Loads hints, metadata, and common puzzle fields using reflection where possible.</li>
+     *     <li>Attempts to register loaded puzzles with {@link PuzzlesManager} if available.</li>
+     * </ul>
+     *
+     * @return a list of loaded {@link Puzzle} instances; never {@code null}
+     */
     @SuppressWarnings("unchecked")
     public static ArrayList<Puzzle> loadPuzzles() {
         ArrayList<Puzzle> loaded = new ArrayList<>();
@@ -535,14 +601,33 @@ public class DataLoader extends DataConstants {
         return loaded;
     }
 
-    // convenience: capitalize first letter
+    /**
+     * Capitalizes the first character of the given string.
+     * <p>
+     * If the string is {@code null} or empty, it is returned unchanged.
+     *
+     * @param s the string to capitalize
+     * @return the input string with its first character uppercased, or the
+     *         original value if {@code s} is {@code null} or empty
+     */
     private static String capitalize(String s) {
         if (s == null || s.length() == 0) return s;
         if (s.length() == 1) return s.toUpperCase();
         return s.substring(0,1).toUpperCase() + s.substring(1);
     }
 
-    // Convenience: loads both players and puzzles and returns players
+    /**
+     * Convenience method that loads both players and puzzles.
+     * <p>
+     * This method:
+     * <ul>
+     *     <li>Calls {@link #getPlayers()} to load all players.</li>
+     *     <li>Calls {@link #loadPuzzles()} to load all puzzles, allowing them
+     *         to be registered in {@link PuzzlesManager} if supported.</li>
+     * </ul>
+     *
+     * @return the list of loaded players (the same as {@link #getPlayers()})
+     */
     public static ArrayList<Player> loadAllWithPuzzles() {
         ArrayList<Player> players = getPlayers();
         loadPuzzles(); // populates PuzzlesManager if possible
