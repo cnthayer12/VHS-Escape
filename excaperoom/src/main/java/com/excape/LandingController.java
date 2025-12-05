@@ -42,5 +42,9 @@ public class LandingController {
     void switchToLogin(ActionEvent event) throws IOException {
         App.setRoot("login");
     }
+    public void initialize() {
+        AudioManager.playBgm("/audio/bgm.mp3");
+    }
+
 
 }
