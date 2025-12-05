@@ -84,8 +84,12 @@ public class CongratsController {
         if(facade.getCurrentPlayer().getProgress().get(facade.getCurrentPlayer().getProgress().size()-1).getInventory().size() < 3)
             App.setRoot("roomscreen");
         else {
-            System.out.println("About to save. Inventory size: " + facade.getCurrentPlayer().getProgress().get(0).getInventory().size());
             facade.saveProgress();
+            try {
+                Thread.sleep(100); // Give it time to write
+            } catch (InterruptedException ex) {
+            }
+            System.out.println("Save completed, inventory: " + facade.getCurrentPlayer().getProgress().get(0).getInventory().size());
             facade.endGame();
             App.setRoot("YouWinScreen");
         }

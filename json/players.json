@@ -87,9 +87,9 @@
         },
         {
             "password": "1234",
-            "displayName": "testAcc",
+            "displayName": "Phil",
             "progress": {
-                "currentScore": 1300,
+                "currentScore": 1180,
                 "strikes": 0,
                 "completedPuzzles": [],
                 "hintsUsed": 0,
