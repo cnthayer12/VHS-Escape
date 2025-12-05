@@ -52,6 +52,7 @@ public class RoomScreenController {
 
     @FXML
     public void initialize() {
+        Sfx.play("/audio/teleport.wav");
         startTimer((int) facade.getRemainingTime());
     }
 
