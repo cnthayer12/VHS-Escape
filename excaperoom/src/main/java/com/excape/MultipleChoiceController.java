@@ -2,9 +2,8 @@ package com.excape;
 
 import java.io.IOException;
 
-import com.model.Cipher;
 import com.model.EscapeGameFacade;
-import com.model.Hint;
+import com.model.MultipleChoice;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,24 +11,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class CipherController {
-
-    @FXML
-    private TextField answerBox;
+public class MultipleChoiceController {
 
     @FXML
     private Button backButton;
 
     @FXML
-    private Button enterButton;
+    private Button optionA;
 
     @FXML
-    private Button hintButton;
+    private Button optionB;
+
+    @FXML
+    private Button optionC;
 
     @FXML
     private Label timer;
@@ -38,18 +34,7 @@ public class CipherController {
     private Label incorrectLabel;
 
     @FXML
-    private Rectangle hintBox;
-
-    @FXML
-    private Label hintText;
-
-    @FXML
-    private TextArea hintText2;
-
-    @FXML
-    private Label cipherText;
-
-    Boolean hintUsed = false;
+    private Label question;
     
     EscapeGameFacade facade = EscapeGameFacade.getInstance();
 
@@ -58,8 +43,11 @@ public class CipherController {
 
     @FXML
     public void initialize() {
-        Cipher puzzle = (Cipher) facade.getCurrentPuzzle();
-        cipherText.setText(puzzle.getCipherText());
+        MultipleChoice puzzle = (MultipleChoice) facade.getCurrentPuzzle();
+        question.setText(puzzle.getQuestion());
+        optionA.setText(puzzle.getOptions().get(0));
+        optionB.setText(puzzle.getOptions().get(1));
+        optionC.setText(puzzle.getOptions().get(2));
         startTimer((int) facade.getRemainingTime());
     }
 
@@ -122,22 +110,36 @@ public class CipherController {
     }
 
     @FXML
-    void giveHint(ActionEvent event) throws IOException {
-        if(!hintUsed) {
-            Hint hint = facade.revealHint();
-            if(hint != null) {
-                hintBox.setOpacity(0.76);
-                hintText.setOpacity(1);
-                hintText2.setOpacity(1);
-                hintText2.setText(hint.getText());
-            }
-            hintUsed = true;
+    void tryAnswerA(ActionEvent event) throws IOException {
+        String answer = optionA.getText();
+        if(facade.submitAnswer(answer)) {
+            facade.completePuzzle();
+            if(facade.getCurrentItem().equals("Coins"))
+                App.setRoot("Congrats");
+            if(facade.getCurrentItem().equals("VHS"))
+                App.setRoot("CongratsVHS");
+        } else {
+            incorrectLabel.setOpacity(1);
         }
     }
 
     @FXML
-    void tryAnswer(ActionEvent event) throws IOException {
-        String answer = answerBox.getText();
+    void tryAnswerB(ActionEvent event) throws IOException {
+        String answer = optionB.getText();
+        if(facade.submitAnswer(answer)) {
+            facade.completePuzzle();
+            if(facade.getCurrentItem().equals("Coins"))
+                App.setRoot("Congrats");
+            if(facade.getCurrentItem().equals("VHS"))
+                App.setRoot("CongratsVHS");
+        } else {
+            incorrectLabel.setOpacity(1);
+        }
+    }
+
+    @FXML
+    void tryAnswerC(ActionEvent event) throws IOException {
+        String answer = optionC.getText();
         if(facade.submitAnswer(answer)) {
             facade.completePuzzle();
             if(facade.getCurrentItem().equals("Coins"))

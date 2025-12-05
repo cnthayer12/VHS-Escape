@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -57,7 +58,7 @@
                </StackPane.margin>
             </ImageView>
             <Button fx:id="hintButton" mnemonicParsing="false" onAction="#giveHint" opacity="0.0" prefHeight="114.0" prefWidth="115.0" text="Button" StackPane.alignment="TOP_RIGHT" />
-            <Label prefHeight="80.0" prefWidth="366.0" stylesheets="@styles.css" text="JOTFSU   DPJO   UP   DPOUJOVF">
+            <Label fx:id="cipherText" prefHeight="80.0" prefWidth="366.0" stylesheets="@styles.css" text="JOTFSU   DPJO   UP   DPOUJOVF">
                <font>
                   <Font name="Charter Bold" size="21.0" />
                </font>
@@ -107,6 +108,28 @@
                   <Insets left="300.0" top="10.0" />
                </StackPane.margin>
             </Label>
+            <Rectangle fx:id="hintBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
+               <StackPane.margin>
+                  <Insets bottom="600.0" left="825.0" />
+               </StackPane.margin>
+            </Rectangle>
+            <Label fx:id="hintText" opacity="0.0" prefHeight="80.0" prefWidth="320.0" stylesheets="@styles.css" text="HINT:" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Charter Bold" size="32.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="lblBlackTxt" />
+                  <String fx:value="lblVerySmall" />
+               </styleClass>
+               <StackPane.margin>
+                  <Insets bottom="660.0" left="960.0" />
+               </StackPane.margin>
+            </Label>
+            <TextArea fx:id="hintText2" editable="false" maxHeight="60.0" maxWidth="175.0" opacity="0.0">
+               <StackPane.margin>
+                  <Insets bottom="575.0" left="820.0" />
+               </StackPane.margin>
+            </TextArea>
          </children>
       </StackPane>
    </children>

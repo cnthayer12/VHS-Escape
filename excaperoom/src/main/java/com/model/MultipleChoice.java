@@ -1,7 +1,6 @@
 package com.model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MultipleChoice extends Puzzle {
     private String question;
@@ -28,6 +27,14 @@ public class MultipleChoice extends Puzzle {
         this.correctAnswer = correctAnswer;
     }
 
+    public ArrayList<String> getOptions(){
+        return options;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
     @Override
     public void startPuzzle() {
         super.startPuzzle();
@@ -35,19 +42,17 @@ public class MultipleChoice extends Puzzle {
         for (int i = 0; i < options.size(); i++) {
             System.out.println((i + 1) + ". " + options.get(i));
         }
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Choose 1-4: ");
-        int choice = scanner.nextInt();
-        String answer = options.get(choice - 1);
-
+    @Override
+    public boolean checkAnswer(String answer) {
         if (answer.equalsIgnoreCase(correctAnswer)) {
             playSound(true);
             completePuzzle();
-            System.out.println("Correct!");
+            return true;
         } else {
             playSound(false);
-            System.out.println("Incorrect. The correct answer was: " + correctAnswer);
+            return false;
         }
     }
 

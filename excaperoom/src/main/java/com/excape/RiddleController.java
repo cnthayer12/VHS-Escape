@@ -2,9 +2,9 @@ package com.excape;
 
 import java.io.IOException;
 
-import com.model.Cipher;
 import com.model.EscapeGameFacade;
 import com.model.Hint;
+import com.model.Riddle;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class CipherController {
+public class RiddleController {
 
     @FXML
     private TextField answerBox;
@@ -47,7 +47,7 @@ public class CipherController {
     private TextArea hintText2;
 
     @FXML
-    private Label cipherText;
+    private Label question;
 
     Boolean hintUsed = false;
     
@@ -58,8 +58,8 @@ public class CipherController {
 
     @FXML
     public void initialize() {
-        Cipher puzzle = (Cipher) facade.getCurrentPuzzle();
-        cipherText.setText(puzzle.getCipherText());
+        Riddle puzzle = (Riddle) facade.getCurrentPuzzle();
+        question.setText(puzzle.getRiddleText());
         startTimer((int) facade.getRemainingTime());
     }
 

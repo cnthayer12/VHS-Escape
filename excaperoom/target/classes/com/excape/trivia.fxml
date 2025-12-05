@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.excape.TriviaController">
    <children>
       <StackPane prefHeight="388.0" prefWidth="829.0">
          <children>
@@ -21,6 +23,7 @@
                   <Image url="@images/arcadebackground.jpg" />
                </image>
             </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="193.0" opacity="0.76" stroke="BLACK" strokeType="INSIDE" width="566.0" />
             <ImageView fitHeight="116.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
                <image>
                   <Image url="@images/arrow-icon-direction-icon-left-icon-pointing-icon-white-black-text-logo-line-png-clipart-Picsart-BackgroundRemover.jpg" />
@@ -29,9 +32,9 @@
                   <Insets bottom="400.0" />
                </StackPane.margin>
             </ImageView>
-            <Button mnemonicParsing="false" opacity="0.0" prefHeight="89.0" prefWidth="105.0" StackPane.alignment="TOP_LEFT" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" opacity="0.0" prefHeight="89.0" prefWidth="105.0" StackPane.alignment="TOP_LEFT" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="88.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="187.0" StackPane.alignment="BOTTOM_LEFT" />
-            <Label prefHeight="105.0" prefWidth="198.0" text="12:45" textAlignment="CENTER" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
+            <Label fx:id="timer" prefHeight="105.0" prefWidth="198.0" text="12:45" textAlignment="CENTER" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
                <font>
                   <Font name="Charter Bold" size="65.0" />
                </font>
@@ -54,29 +57,67 @@
                   <Insets right="14.0" top="8.0" />
                </StackPane.margin>
             </ImageView>
-            <Button mnemonicParsing="false" opacity="0.0" prefHeight="114.0" prefWidth="115.0" text="Button" StackPane.alignment="TOP_RIGHT" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="186.0" opacity="0.76" stroke="BLACK" strokeType="INSIDE" width="566.0" />
-            <Label prefHeight="262.0" prefWidth="438.0" text="What classic arcade game involves shooting descending aliens before they reach the ground?" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Charter Bold" size="24.0" />
-               </font>
-               <StackPane.margin>
-                  <Insets bottom="85.0" />
-               </StackPane.margin>
-            </Label>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="162.0" text="Enter">
+            <Button fx:id="hintButton" mnemonicParsing="false" onAction="#giveHint" opacity="0.0" prefHeight="114.0" prefWidth="115.0" text="Button" StackPane.alignment="TOP_RIGHT" />
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#tryAnswer" prefHeight="30.0" prefWidth="162.0" text="Enter">
                <font>
                   <Font name="Charter Bold" size="19.0" />
                </font>
                <StackPane.margin>
-                  <Insets left="300.0" top="100.0" />
+                  <Insets left="300.0" top="80.0" />
                </StackPane.margin>
             </Button>
-            <TextField prefHeight="37.0" prefWidth="1280.0">
+            <TextField fx:id="answerBox" maxHeight="40.0" maxWidth="300.0" prefHeight="46.0" prefWidth="712.0" scaleShape="false" StackPane.alignment="CENTER">
                <StackPane.margin>
-                  <Insets top="100.0" />
+                  <Insets right="200.0" top="80.0" />
                </StackPane.margin>
             </TextField>
+            <Label fx:id="incorrectLabel" opacity="0.0" prefHeight="64.0" prefWidth="438.0" stylesheets="@styles.css" text="Incorrect! Try again." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Charter Bold" size="32.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="lblBlackTxt" />
+                  <String fx:value="lblVerySmall" />
+                  <String fx:value="lblError" />
+               </styleClass>
+               <StackPane.margin>
+                  <Insets left="300.0" top="10.0" />
+               </StackPane.margin>
+            </Label>
+            <Rectangle fx:id="hintBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="100.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
+               <StackPane.margin>
+                  <Insets bottom="600.0" left="825.0" />
+               </StackPane.margin>
+            </Rectangle>
+            <Label fx:id="hintText" opacity="0.0" prefHeight="80.0" prefWidth="320.0" stylesheets="@styles.css" text="HINT:" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Charter Bold" size="32.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="lblBlackTxt" />
+                  <String fx:value="lblVerySmall" />
+               </styleClass>
+               <StackPane.margin>
+                  <Insets bottom="660.0" left="960.0" />
+               </StackPane.margin>
+            </Label>
+            <TextArea fx:id="hintText2" editable="false" maxHeight="60.0" maxWidth="175.0" opacity="0.0">
+               <StackPane.margin>
+                  <Insets bottom="575.0" left="820.0" />
+               </StackPane.margin>
+            </TextArea>
+            <Label fx:id="question" prefHeight="115.0" prefWidth="515.0" stylesheets="@styles.css" text="trivia question trivia question trivia question trivia question trivia question" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Charter Bold" size="32.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets bottom="100.0" />
+               </StackPane.margin>
+               <styleClass>
+                  <String fx:value="lblBlackTxt" />
+                  <String fx:value="lblSmall" />
+               </styleClass>
+            </Label>
          </children>
       </StackPane>
    </children>

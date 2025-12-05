@@ -56,7 +56,7 @@
       "puzzleID": "aad80841-18e1-4625-9337-572645bd149e",
       "type": "MultipleChoice",
       "question": "What is the chemical formula for water?",
-      "choices": ["H2O", "CO2", "NaCl", "O2"],
+      "choices": ["H2O", "CO2", "NaCl"],
       "correctChoice": 1,
       "hints": [
         { "id": "hint_001", "text": "It's what you drink every day", "used": false, "cost": 10 },
