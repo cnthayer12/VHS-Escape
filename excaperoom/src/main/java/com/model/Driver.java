@@ -5,9 +5,44 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Demonstration driver for the VHS Escape game.
+ * <p>
+ * This class:
+ * <ul>
+ *     <li>Loads saved progress and pre-populates the leaderboard.</li>
+ *     <li>Creates a new player account and logs in as that player.</li>
+ *     <li>Loads story content from a {@code story.txt} resource.</li>
+ *     <li>Sets up a small custom set of puzzles (cipher, riddle, item puzzle).</li>
+ *     <li>Walks through a full game session using the {@link EscapeGameFacade}.</li>
+ *     <li>Displays results, leaderboard, and generates a completion certificate.</li>
+ * </ul>
+ */
 public class Driver {
+
+    /**
+     * Shared instance of the game facade used to interact with the game
+     * subsystems (players, puzzles, leaderboard, etc.).
+     */
     static EscapeGameFacade facade = EscapeGameFacade.getInstance();
 
+    /**
+     * Entry point for the VHS Escape demo.
+     * <p>
+     * High-level flow:
+     * <ol>
+     *     <li>Load player progress and pre-populate the leaderboard.</li>
+     *     <li>Create a new account for Leni, then log in as {@code lerivers}.</li>
+     *     <li>Prompt the user to select a room (currently supports VHS Escape).</li>
+     *     <li>Read intro/outro story text from {@code story.txt}.</li>
+     *     <li>Create and register three puzzles (Cipher, Riddle, ItemPuzzle).</li>
+     *     <li>Run through each puzzle using user input from {@link Scanner}.</li>
+     *     <li>Compute final score and display/update the leaderboard.</li>
+     *     <li>Generate a completion certificate if the player escapes.</li>
+     * </ol>
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         facade.loadProgress();
         
@@ -336,7 +371,10 @@ public class Driver {
     }
     
     /**
-     * Pre-populate leaderboard with existing players
+     * Pre-populates the {@link Leaderboard} with a few example players and scores.
+     * <p>
+     * This ensures that when the demo runs, the leaderboard has at least
+     * three existing entries to compare against the current player's score.
      */
     private static void setupLeaderboard() {
         Leaderboard leaderboard = Leaderboard.getInstance();

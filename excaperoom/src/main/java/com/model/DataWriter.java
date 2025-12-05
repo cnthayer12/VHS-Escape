@@ -8,10 +8,60 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * Utility class responsible for serializing {@link Player} data to disk.
+ * <p>
+ * This writer converts players and their associated progress, inventory,
+ * hints, and puzzle state into a JSON structure and saves it to
+ * {@code json/players.json}. The output format is:
+ * <pre>
+ * {
+ *   "schemaVersion": 1,
+ *   "users": [
+ *     { ... player object ... },
+ *     ...
+ *   ]
+ * }
+ * </pre>
+ */
 public class DataWriter {
 
+    /** Path to the JSON file where player data is stored. */
     private static final String USER_FILE_NAME = "json/players.json";
 
+    /**
+     * Saves the given list of players to the {@code players.json} file.
+     * <p>
+     * Behavior:
+     * <ul>
+     *     <li>Writes a top-level object with {@code schemaVersion} and
+     *         a {@code users} array.</li>
+     *     <li>Each user entry contains:
+     *         <ul>
+     *             <li>{@code uuid} – player ID, if available</li>
+     *             <li>{@code displayName}</li>
+     *             <li>{@code password} – top-level password string</li>
+     *             <li>{@code progress} – sub-object containing:
+     *                 <ul>
+     *                     <li>{@code hintsUsed}</li>
+     *                     <li>{@code inventory}</li>
+     *                     <li>{@code storedHints}</li>
+     *                     <li>{@code completedPuzzles}</li>
+     *                     <li>{@code currentPuzzle}</li>
+     *                     <li>{@code strikes}</li>
+     *                     <li>{@code currentScore}</li>
+     *                 </ul>
+     *             </li>
+     *         </ul>
+     *     </li>
+     *     <li>Is tolerant of missing getters and null values, filling
+     *         in reasonable defaults.</li>
+     * </ul>
+     *
+     * @param players the list of players to be saved; may be {@code null}
+     * @return {@code true} if the data was written successfully;
+     *         {@code false} if an error occurred
+     */
     @SuppressWarnings("unchecked")
     public static boolean savePlayers(ArrayList<Player> players) {
         JSONArray out = new JSONArray();
@@ -20,6 +70,7 @@ public class DataWriter {
                 for (Player p : players) {
                     JSONObject jo = new JSONObject();
 
+                    // --- uuid ---
                     try {
                         UUID id = null;
                         try { id = p.getId(); } catch (Throwable ignored) {}
@@ -171,3 +222,4 @@ public class DataWriter {
         }
     }
 }
+
