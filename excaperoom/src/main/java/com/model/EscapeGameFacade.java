@@ -41,6 +41,7 @@ public class EscapeGameFacade {
     }       
 
     public void endGame() {
+        game.endGame(true);
         game.exitMain();
     }
 

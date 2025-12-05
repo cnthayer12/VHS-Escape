@@ -17,6 +17,9 @@ public class CongratsController {
     private Button nextButton;
 
     @FXML
+    private Button inventory;
+
+    @FXML
     private ImageView iconCoins;
 
     @FXML
@@ -73,6 +76,17 @@ public class CongratsController {
         }
         facade.addItem(item);
         facade.setCurrentItem("");
-        App.setRoot("roomscreen");
+
+        for(Item i : facade.getCurrentPlayer().getProgress().get(0).getInventory()) {
+            System.out.println(i);
+        }
+        
+        if(facade.getCurrentPlayer().getProgress().get(facade.getCurrentPlayer().getProgress().size()-1).getInventory().size() < 3)
+            App.setRoot("roomscreen");
+        else {
+            facade.saveProgress();
+            facade.endGame();
+            App.setRoot("YouWinScreen");
+        }
     }
 }

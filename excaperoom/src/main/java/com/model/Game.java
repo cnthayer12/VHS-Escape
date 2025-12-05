@@ -199,7 +199,7 @@ public class Game {
         }
     }
 
-    private void endGame(boolean successful) {
+    public void endGame(boolean successful) {
         isOver = true;
         endTime = Instant.now();
         calculateScore();
@@ -207,7 +207,6 @@ public class Game {
 
     public void exitMain() {
         pause();
-        System.out.println("Exiting to main menu...");
     }
     public void displayStory() {
         System.out.println("=".repeat(60));

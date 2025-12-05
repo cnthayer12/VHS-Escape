@@ -120,7 +120,7 @@
                   <Insets right="10.0" top="100.0" />
                </StackPane.margin>
             </Circle>
-            <ImageView fx:id="inventory" fitHeight="50.0" fitWidth="48.0" onMouseClicked="#openInventory" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+            <ImageView fitHeight="50.0" fitWidth="48.0" onMouseClicked="#openInventory" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                <image>
                   <Image url="@images/backpackicon.png" />
                </image>
@@ -136,7 +136,7 @@
                   <Insets right="23.0" top="116.0" />
                </StackPane.margin>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="71.0" text="inventorybutton" visible="false" StackPane.alignment="TOP_RIGHT">
+            <Button fx:id="inventory" mnemonicParsing="false" onAction="#openInventory" prefHeight="71.0" prefWidth="71.0" text="inventorybutton" visible="false" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="10.0" top="10.0" />
                </StackPane.margin>
@@ -157,6 +157,53 @@
                   <String fx:value="lblBlackTxt" />
                   <String fx:value="lblSmall" />
                </styleClass>
+            </Label>
+            <Rectangle fx:id="invBox" arcHeight="20.0" arcWidth="5.0" fill="#8e8e8e" height="200.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="300.0">
+               <StackPane.margin>
+                  <Insets bottom="490.0" left="800.0" />
+               </StackPane.margin>
+            </Rectangle>
+            <Label fx:id="lightLabel" styleClass="lblSmall" stylesheets="@styles.css" text="Flashlight" visible="false">
+               <StackPane.margin>
+                  <Insets bottom="620.0" left="730.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="vhsLabel" styleClass="lblSmall" stylesheets="@styles.css" text="VHS" visible="false">
+               <StackPane.margin>
+                  <Insets bottom="500.0" left="660.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="coinsLabel" styleClass="lblSmall" stylesheets="@styles.css" text="Coins" visible="false">
+               <StackPane.margin>
+                  <Insets bottom="380.0" left="675.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="lightCheck" stylesheets="@styles.css" text="x" visible="false">
+               <StackPane.margin>
+                  <Insets bottom="626.0" left="570.0" />
+               </StackPane.margin>
+               <styleClass>
+                  <String fx:value="lblSmall" />
+                  <String fx:value="lblError" />
+               </styleClass>
+            </Label>
+            <Label fx:id="vhsCheck" stylesheets="@styles.css" text="x" visible="false">
+               <styleClass>
+                  <String fx:value="lblSmall" />
+                  <String fx:value="lblError" />
+               </styleClass>
+               <StackPane.margin>
+                  <Insets bottom="505.0" left="570.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="coinsCheck" stylesheets="@styles.css" text="x" visible="false">
+               <styleClass>
+                  <String fx:value="lblSmall" />
+                  <String fx:value="lblError" />
+               </styleClass>
+               <StackPane.margin>
+                  <Insets bottom="385.0" left="570.0" />
+               </StackPane.margin>
             </Label>
          </children>
       </StackPane>
