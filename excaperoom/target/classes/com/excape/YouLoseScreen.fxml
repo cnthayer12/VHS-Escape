@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.excape.WinController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.excape.LoseController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -20,12 +20,12 @@
                   <Image url="@images/congratspage.png" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="20.0" arcWidth="5.0" fill="#ffffffda" height="394.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="693.0" StackPane.alignment="TOP_CENTER">
+            <Rectangle arcHeight="20.0" arcWidth="5.0" fill="#ffffffda" height="216.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="684.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="50.0" />
                </StackPane.margin>
             </Rectangle>
-            <Label prefHeight="51.0" prefWidth="566.0" stylesheets="@styles.css" text="Congratulations, You Won!" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label prefHeight="51.0" prefWidth="418.0" stylesheets="@styles.css" text="So Close, Try Again!" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="90.0" />
                </StackPane.margin>
@@ -37,7 +37,7 @@
                   <String fx:value="lblMedium" />
                </styleClass>
             </Label>
-            <Label prefHeight="51.0" prefWidth="564.0" stylesheets="@styles.css" text="You completed all the puzzles and escaped the VHS" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label prefHeight="51.0" prefWidth="587.0" stylesheets="@styles.css" text="You didn’t escape this time… but the game isn’t over. " textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Charter Bold" size="21.0" />
                </font>
@@ -49,19 +49,7 @@
                   <String fx:value="lblSmaller" />
                </styleClass>
             </Label>
-            <Label fx:id="score" prefHeight="72.0" prefWidth="236.0" stylesheets="@styles.css" text="Score: 1789" textAlignment="CENTER" StackPane.alignment="CENTER">
-               <font>
-                  <Font name="Charter Bold" size="36.0" />
-               </font>
-               <StackPane.margin>
-                  <Insets bottom="130.0" />
-               </StackPane.margin>
-               <styleClass>
-                  <String fx:value="lblBlackTxt" />
-                  <String fx:value="lblMedium" />
-               </styleClass>
-            </Label>
-            <Label prefHeight="51.0" prefWidth="526.0" stylesheets="@styles.css" text="tape before you were stuck in the story forever!" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label prefHeight="51.0" prefWidth="463.0" stylesheets="@styles.css" text="Try again and see if you can beat the tape!" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Charter Bold" size="21.0" />
                </font>
@@ -73,21 +61,12 @@
                   <String fx:value="lblSmaller" />
                </styleClass>
             </Label>
-            <Label fx:id="time" prefHeight="72.0" prefWidth="237.0" stylesheets="@styles.css" text="Time: 13:57" textAlignment="CENTER">
-               <font>
-                  <Font name="Charter Bold" size="36.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="lblBlackTxt" />
-                  <String fx:value="lblMedium" />
-               </styleClass>
-            </Label>
             <Button fx:id="playAgain" mnemonicParsing="false" onAction="#backToMain" prefHeight="59.0" prefWidth="217.0" stylesheets="@styles.css" text="Play Again" StackPane.alignment="BOTTOM_CENTER">
                <font>
                   <Font size="23.0" />
                </font>
                <StackPane.margin>
-                  <Insets bottom="150.0" right="350.0" />
+                  <Insets bottom="250.0" right="350.0" />
                </StackPane.margin>
             </Button>
             <Button fx:id="leaderboardButton" mnemonicParsing="false" onAction="#toLeaderboard" prefHeight="59.0" prefWidth="217.0" stylesheets="@styles.css" text="Leaderboard" StackPane.alignment="BOTTOM_CENTER">
@@ -95,7 +74,7 @@
                   <Font size="23.0" />
                </font>
                <StackPane.margin>
-                  <Insets bottom="150.0" left="350.0" />
+                  <Insets bottom="250.0" left="350.0" />
                </StackPane.margin>
             </Button>
          </children>
