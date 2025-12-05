@@ -9,6 +9,7 @@ public class EscapeGameFacade {
     private PuzzlesManager puzzlesManager;
     private Players players;
     private static EscapeGameFacade instance;
+    private String item = "";
     
     private EscapeGameFacade() {
         this.game = Game.getInstance();
@@ -41,6 +42,14 @@ public class EscapeGameFacade {
 
     public void endGame() {
         game.exitMain();
+    }
+
+    public long getRemainingTime() {
+        return game.getRemainingTime();
+    }
+
+    public long getElapsedTime() {
+        return game.getElapsedTime();
     }
     
     public void startPuzzle() {
@@ -149,6 +158,14 @@ public class EscapeGameFacade {
     }
     public void addItem(Item item) {
         players.addItem(item);
+    }
+
+    public void setCurrentItem(String item) {
+        this.item = item;
+    }
+
+    public String getCurrentItem() {
+        return item;
     }
 
     public void generateCompletionCertificate() {

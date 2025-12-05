@@ -11,7 +11,9 @@ C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Ciphe
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Item.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\PuzzlesManager.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Driver.java
+C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\excape\CreateAccController.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Game.java
+C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\excape\GameEntryController.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataLoader.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\EscapeGameFacade.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Progress.java
@@ -19,10 +21,12 @@ C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\ItemP
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\module-info.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\excape\LandingController.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\PixelHunt.java
+C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\excape\RoomScreenController.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\DataLoaderTester.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Riddle.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Player.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Trivia.java
+C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\excape\DifficultyController.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\excape\App.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\Hint.java
 C:\JavaProjects\CSCE247\BUTZ\VHS-Escape\excaperoom\src\main\java\com\model\LibraryUI.java

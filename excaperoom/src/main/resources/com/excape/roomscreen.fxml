@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.excape.RoomScreenController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
@@ -25,29 +26,44 @@
                   <Insets top="50.0" />
                </StackPane.margin>
             </Rectangle>
-            <Label prefHeight="51.0" prefWidth="386.0" text="WELCOME PLAYER..." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label prefHeight="51.0" prefWidth="466.0" stylesheets="@styles.css" text="WELCOME PLAYER..." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
                   <Insets top="80.0" />
                </StackPane.margin>
                <font>
                   <Font name="Charter Bold" size="36.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lblMedium" />
+                  <String fx:value="lblBlackTxt" />
+               </styleClass>
             </Label>
-            <Label prefHeight="51.0" prefWidth="305.0" text="You've crossed the threshhold." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label prefHeight="51.0" prefWidth="401.0" stylesheets="@styles.css" text="You've crossed the threshhold." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Charter Bold" size="21.0" />
                </font>
                <StackPane.margin>
-                  <Insets top="130.0" />
+                  <Insets top="150.0" />
                </StackPane.margin>
+               <styleClass>
+                  <String fx:value="lblSmall" />
+                  <String fx:value="lblBlackTxt" />
+               </styleClass>
             </Label>
             <Rectangle arcHeight="20.0" arcWidth="5.0" fill="#ffffffda" height="119.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="890.0" />
-            <Label prefHeight="158.0" prefWidth="689.0" text="Find and click the icons to complete the puzzles and collect each item." textAlignment="CENTER">
+            <Label prefHeight="158.0" prefWidth="893.0" stylesheets="@styles.css" text="Find and click the icons to complete the puzzles and collect each item." textAlignment="CENTER">
                <font>
                   <Font name="Charter Bold" size="21.0" />
                </font>
+               <styleClass>
+                  <String fx:value="lblBlackTxt" />
+                  <String fx:value="lblSmaller" />
+               </styleClass>
+               <StackPane.margin>
+                  <Insets left="125.0" />
+               </StackPane.margin>
             </Label>
-            <ImageView fitHeight="72.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="72.0" fitWidth="100.0" onMouseClicked="#giveRandomPuzzleVHS" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/vhsIcon.png" />
                </image>
@@ -55,7 +71,7 @@
                   <Insets right="20.0" top="450.0" />
                </StackPane.margin>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="100.0" onMouseClicked="#giveRandomPuzzleCoins" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/coinsicon.png" />
                </image>
@@ -63,7 +79,7 @@
                   <Insets left="610.0" top="550.0" />
                </StackPane.margin>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="100.0" onMouseClicked="#switchToLightPuzzle" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/flashlighticon.png" />
                </image>
@@ -86,7 +102,7 @@
                   <Insets left="610.0" top="550.0" />
                </StackPane.margin>
             </Button>
-            <Label text="TIME" textFill="WHITE">
+            <Label fx:id="timerLabel" text="TIME" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="48.0" />
                </font>
@@ -104,7 +120,7 @@
                   <Insets right="10.0" top="100.0" />
                </StackPane.margin>
             </Circle>
-            <ImageView fitHeight="50.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+            <ImageView fx:id="inventory" fitHeight="50.0" fitWidth="48.0" onMouseClicked="#openInventory" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                <image>
                   <Image url="@images/backpackicon.png" />
                </image>
@@ -112,7 +128,7 @@
                   <Insets right="21.0" top="22.0" />
                </StackPane.margin>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+            <ImageView fitHeight="41.0" fitWidth="44.0" onMouseClicked="#exitGame" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                <image>
                   <Image url="@images/exit.png" />
                </image>
@@ -130,13 +146,17 @@
                   <Insets right="10.0" top="100.0" />
                </StackPane.margin>
             </Button>
-            <Label prefHeight="51.0" prefWidth="469.0" text="The game begins now-- there's no turning back." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
+            <Label prefHeight="51.0" prefWidth="617.0" stylesheets="@styles.css" text="The game begins now-- there's no turning back." textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="Charter Bold" size="21.0" />
                </font>
                <StackPane.margin>
-                  <Insets top="165.0" />
+                  <Insets top="190.0" />
                </StackPane.margin>
+               <styleClass>
+                  <String fx:value="lblBlackTxt" />
+                  <String fx:value="lblSmall" />
+               </styleClass>
             </Label>
          </children>
       </StackPane>
