@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-{"schemaVersion":1,"users":[{"password":"1234","displayName":"Carleigh","progress":{"currentScore":0,"strikes":0,"completedPuzzles":[],"hintsUsed":0,"inventory":[],"storedHints":[],"currentPuzzle":null},"uuid":"0c84e4ca-e25d-4f21-a409-c78a8543556a"},{"password":"1234","displayName":"Lukin","progress":{"currentScore":0,"strikes":0,"completedPuzzles":[],"hintsUsed":0,"inventory":[],"storedHints":[],"currentPuzzle":null},"uuid":"9a7411d6-45a7-4964-aefd-43f79b6a6fe7"},{"password":"1234","displayName":"Bianca","progress":{"currentScore":200,"strikes":1,"completedPuzzles":[],"hintsUsed":0,"inventory":[],"storedHints":[],"currentPuzzle":null},"uuid":"17731615-a3ae-49a9-a77e-a578166e01da"},{"password":"1234","displayName":"Charlotte","progress":{"currentScore":0,"strikes":0,"completedPuzzles":[],"hintsUsed":0,"inventory":[],"storedHints":[],"currentPuzzle":null},"uuid":"045cb7de-25af-4bde-a0b6-f4aa91517154"},{"password":"password1234","displayName":"lrivers","progress":{"currentScore":0,"strikes":0,"completedPuzzles":[],"hintsUsed":0,"inventory":[],"storedHints":[],"currentPuzzle":null},"uuid":"674c5b22-2a22-4cd2-bf44-9afaaa668928"},{"password":"h","displayName":"h","progress":{"currentScore":0,"strikes":0,"completedPuzzles":[],"hintsUsed":0,"inventory":[],"storedHints":[],"currentPuzzle":null},"uuid":"dbceb308-af01-487f-982c-190927f01761"}]}
-=======
 {
     "schemaVersion": 1,
     "users": [
@@ -8,7 +5,7 @@
             "password": "1234",
             "displayName": "Carleigh",
             "progress": {
-                "currentScore": 0,
+                "currentScore": 400,
                 "strikes": 0,
                 "completedPuzzles": [],
                 "hintsUsed": 0,
@@ -22,12 +19,9 @@
             "password": "1234",
             "displayName": "Lukin",
             "progress": {
-                "currentScore": 1200,
+                "currentScore": 0,
                 "strikes": 0,
-                "completedPuzzles": [
-                    "404a3eae-acea-476c-a442-36b9b9699892",
-                    "6526b2e2-16de-4223-8a25-2f6e150996d6"
-                ],
+                "completedPuzzles": [],
                 "hintsUsed": 0,
                 "inventory": [
                     {
@@ -72,7 +66,7 @@
             "password": "1234",
             "displayName": "Charlotte",
             "progress": {
-                "currentScore": 0,
+                "currentScore": 100,
                 "strikes": 0,
                 "completedPuzzles": [],
                 "hintsUsed": 0,
@@ -86,7 +80,7 @@
             "password": "password1234",
             "displayName": "lrivers",
             "progress": {
-                "currentScore": 0,
+                "currentScore": 500,
                 "strikes": 0,
                 "completedPuzzles": [],
                 "hintsUsed": 0,
@@ -95,7 +89,53 @@
                 "currentPuzzle": null
             },
             "uuid": "674c5b22-2a22-4cd2-bf44-9afaaa668928"
+        },
+        {
+            "password": "h",
+            "displayName": "h",
+            "progress": {
+                "currentScore": 250,
+                "strikes": 0,
+                "completedPuzzles": [],
+                "hintsUsed": 0,
+                "inventory": [],
+                "storedHints": [],
+                "currentPuzzle": null
+            },
+            "uuid": "dbceb308-af01-487f-982c-190927f01761"
+        },
+        {
+            "password": "1234",
+            "displayName": "testAcc",
+            "progress": {
+                "currentScore": 1300,
+                "strikes": 0,
+                "completedPuzzles": [],
+                "hintsUsed": 0,
+                "inventory": [
+                    {
+                        "name": "Flashlight",
+                        "description": "Gives light",
+                        "location": "Ground",
+                        "uuid": ""
+                    },
+                    {
+                        "name": "VHS Tape",
+                        "description": "Contains a video",
+                        "location": "Ground",
+                        "uuid": ""
+                    },
+                    {
+                        "name": "Coins",
+                        "description": "For an arcade machine",
+                        "location": "Ground",
+                        "uuid": ""
+                    }
+                ],
+                "storedHints": [],
+                "currentPuzzle": null
+            },
+            "uuid": "ecd00113-ab22-4a48-a777-ecc8420ab852"
         }
     ]
 }
->>>>>>> 8a715b8a03511b0da730450e142df06975c2936c

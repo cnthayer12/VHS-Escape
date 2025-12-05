@@ -47,15 +47,20 @@ public class LeaderboardController {
     public void initialize() {
         facade.loadProgress();
         Leaderboard leaderboard = Leaderboard.getInstance();
-        ArrayList<LeaderboardEntry> top4 = leaderboard.getTopEntries(4);
-        player1.setText(top4.get(0).getPlayerName());
-        score1.setText("" + top4.get(0).getScore());
-        player2.setText(top4.get(1).getPlayerName());
-        score2.setText("" + top4.get(1).getScore());
-        player3.setText(top4.get(2).getPlayerName());
-        score3.setText("" + top4.get(2).getScore());
-        player4.setText(top4.get(3).getPlayerName());
-        score4.setText("" + top4.get(3).getScore());
+        ArrayList<LeaderboardEntry> allEntries = leaderboard.getAllEntries();
+        if(allEntries.size() >= 4){
+            ArrayList<LeaderboardEntry> top4 = leaderboard.getTopEntries(4);
+            player1.setText(top4.get(0).getPlayerName());
+            score1.setText("" + top4.get(0).getScore());
+            player2.setText(top4.get(1).getPlayerName());
+            score2.setText("" + top4.get(1).getScore());
+            player3.setText(top4.get(2).getPlayerName());
+            score3.setText("" + top4.get(2).getScore());
+            player4.setText(top4.get(3).getPlayerName());
+            score4.setText("" + top4.get(3).getScore());
+        } else {
+            System.out.println(allEntries.size());
+        }
     }
 
     @FXML
