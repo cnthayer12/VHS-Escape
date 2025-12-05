@@ -62,6 +62,9 @@ public class DataWriter {
 
                         // inventory
                         JSONArray invArr = new JSONArray();
+                        System.out.println("Saving player: " + p.getDisplayName()); //
+                        System.out.println("Progress object: " + prog); //
+                        System.out.println("Inventory size: " + (prog != null && prog.getInventory() != null ? prog.getInventory().size() : "null")); //
                         try {
                             if (prog != null && prog.getInventory() != null) {
                                 for (Item it : prog.getInventory()) {
