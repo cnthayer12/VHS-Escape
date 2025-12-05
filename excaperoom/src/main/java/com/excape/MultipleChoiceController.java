@@ -114,10 +114,7 @@ public class MultipleChoiceController {
         String answer = optionA.getText();
         if(facade.submitAnswer(answer)) {
             facade.completePuzzle();
-            if(facade.getCurrentItem().equals("Coins"))
-                App.setRoot("Congrats");
-            if(facade.getCurrentItem().equals("VHS"))
-                App.setRoot("CongratsVHS");
+            App.setRoot("Congrats");
         } else {
             incorrectLabel.setOpacity(1);
         }
@@ -128,10 +125,7 @@ public class MultipleChoiceController {
         String answer = optionB.getText();
         if(facade.submitAnswer(answer)) {
             facade.completePuzzle();
-            if(facade.getCurrentItem().equals("Coins"))
-                App.setRoot("Congrats");
-            if(facade.getCurrentItem().equals("VHS"))
-                App.setRoot("CongratsVHS");
+            App.setRoot("Congrats");
         } else {
             incorrectLabel.setOpacity(1);
         }
@@ -142,10 +136,7 @@ public class MultipleChoiceController {
         String answer = optionC.getText();
         if(facade.submitAnswer(answer)) {
             facade.completePuzzle();
-            if(facade.getCurrentItem().equals("Coins"))
-                App.setRoot("Congrats");
-            if(facade.getCurrentItem().equals("VHS"))
-                App.setRoot("CongratsVHS");
+            App.setRoot("Congrats");
         } else {
             incorrectLabel.setOpacity(1);
         }

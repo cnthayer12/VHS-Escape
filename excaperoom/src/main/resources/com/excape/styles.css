@@ -40,6 +40,10 @@
 
 }
 
+.lblGreen {
+    -fx-text-fill: #167520;
+}
+
 .lblWelcome {
     -fx-text-fill: white;
     -fx-font-size: 36px;

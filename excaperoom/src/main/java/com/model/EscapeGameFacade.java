@@ -176,4 +176,8 @@ public class EscapeGameFacade {
         players.checkProgress();
     }
 
+    public void giveItem(Item item) {
+        players.addItem(item);
+    }
+
 }

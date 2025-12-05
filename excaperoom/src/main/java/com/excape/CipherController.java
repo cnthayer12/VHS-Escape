@@ -140,10 +140,7 @@ public class CipherController {
         String answer = answerBox.getText();
         if(facade.submitAnswer(answer)) {
             facade.completePuzzle();
-            if(facade.getCurrentItem().equals("Coins"))
-                App.setRoot("Congrats");
-            if(facade.getCurrentItem().equals("VHS"))
-                App.setRoot("CongratsVHS");
+            App.setRoot("Congrats");
         } else {
             incorrectLabel.setOpacity(1);
         }
