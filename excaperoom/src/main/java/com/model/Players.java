@@ -142,8 +142,17 @@ public class Players {
     }
 }
   public void saveProgress() {
-      DataWriter.savePlayers(players);
-  }
+    // Make sure currentPlayer is synced with the players list
+    if (currentPlayer != null) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getId().equals(currentPlayer.getId())) {
+                players.set(i, currentPlayer);  // Update the reference
+                break;
+            }
+        }
+    }
+    DataWriter.savePlayers(players);
+}
 
   public void checkProgress() {
     System.out.println(currentPlayer.getProgress().get(currentPlayer.getProgress().size()-1));

@@ -44,6 +44,7 @@ public class WinController {
 
     @FXML
     void toLeaderboard(ActionEvent event) throws IOException {
+        facade.getCurrentPlayer().getProgress().get(facade.getCurrentPlayer().getProgress().size()-1).setScore(facade.getScore());
         facade.saveProgress();
         facade.logout();
         App.setRoot("leaderboard");

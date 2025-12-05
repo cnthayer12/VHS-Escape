@@ -84,6 +84,7 @@ public class CongratsController {
         if(facade.getCurrentPlayer().getProgress().get(facade.getCurrentPlayer().getProgress().size()-1).getInventory().size() < 3)
             App.setRoot("roomscreen");
         else {
+            System.out.println("About to save. Inventory size: " + facade.getCurrentPlayer().getProgress().get(0).getInventory().size());
             facade.saveProgress();
             facade.endGame();
             App.setRoot("YouWinScreen");
