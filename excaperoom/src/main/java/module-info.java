@@ -4,6 +4,7 @@ module com.excape {
     requires json.simple;
     requires freetts;
     requires junit;
+    requires javafx.media;
     // requires hamcrest.core; // leave commented if it caused problems compiling
 
     // You already had this: JavaFX needs reflection access to your UI/controller package.
