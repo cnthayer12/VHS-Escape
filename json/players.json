@@ -23,26 +23,7 @@
                 "strikes": 0,
                 "completedPuzzles": [],
                 "hintsUsed": 0,
-                "inventory": [
-                    {
-                        "name": "Flashlight",
-                        "description": "Gives light",
-                        "location": "Ground",
-                        "uuid": ""
-                    },
-                    {
-                        "name": "VHS Tape",
-                        "description": "Contains a video",
-                        "location": "Ground",
-                        "uuid": ""
-                    },
-                    {
-                        "name": "Coins",
-                        "description": "For an arcade machine",
-                        "location": "Ground",
-                        "uuid": ""
-                    }
-                ],
+                "inventory": [],
                 "storedHints": [],
                 "currentPuzzle": null
             },
