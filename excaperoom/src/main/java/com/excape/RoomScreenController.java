@@ -157,6 +157,7 @@ public class RoomScreenController {
                 return;
             }
         }
+        Sfx.play("/audio/pickup.wav"); 
         facade.setCurrentItem("Flashlight");
         App.setRoot("lightswitch");
     }
@@ -168,6 +169,7 @@ public class RoomScreenController {
             if(i.equals(vhs))
                 return;
         }
+        Sfx.play("/audio/pickup.wav"); 
         facade.nextPuzzle();
         facade.setCurrentItem("VHS");
         facade.startPuzzle();
@@ -188,6 +190,8 @@ public class RoomScreenController {
             if(i.equals(coins))
                 return;
         }
+
+        Sfx.play("/audio/pickup.wav");
         facade.nextPuzzle();
         facade.setCurrentItem("Coins");
         facade.startPuzzle();
@@ -207,4 +211,7 @@ public class RoomScreenController {
         facade.logout();
         App.setRoot("landing");
     }
+
+ 
+
 }
