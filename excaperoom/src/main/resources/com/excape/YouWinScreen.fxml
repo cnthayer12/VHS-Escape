@@ -73,7 +73,7 @@
                   <String fx:value="lblSmaller" />
                </styleClass>
             </Label>
-            <Label fx:id="time" prefHeight="72.0" prefWidth="237.0" stylesheets="@styles.css" text="Time: 13:57" textAlignment="CENTER">
+            <Label fx:id="time" prefHeight="72.0" prefWidth="258.0" stylesheets="@styles.css" text="Time: 13:57" textAlignment="CENTER">
                <font>
                   <Font name="Charter Bold" size="36.0" />
                </font>
