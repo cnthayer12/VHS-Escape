@@ -5,7 +5,7 @@ A retro 1980s-themed virtual escape room game built in Java.
 ## Video explaining backend development:
 https://youtu.be/5-HemwyxLeo
 
-## Vidoe walking through frontend:
+## Video walking through frontend:
 https://youtu.be/xS0gmyi05Sc
 
 ## About
